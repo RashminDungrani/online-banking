@@ -212,25 +212,7 @@
                     
                   </div>
 
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text bg-secondary text-white"
-                        id="basic-addon2"
-                        ><i class="ti-info"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="text"
-                      name = "txt_aadhaar"
-                      class="form-control form-control-lg"
-                      placeholder="Aadhaar"
-                      aria-label="Password"
-                      aria-describedby="basic-addon1"
-                      required
-                    />
-                    
-                  </div>
+  
 
                   <!-- End -->
                 </div>
@@ -293,43 +275,31 @@
 <?php
   include('connect.php');
 
-  $query = "INSERT INTO customer_tbl (username, password, full_name, mobile, email, address, pincode, aadhaar) VALUES ('dawd',   'dawd', 'Rashmin D', 99, 'rashmin8248@gmail.com', '65 PAtel Park', 395004, 10)";
-
-   if(mysqli_query($con, $query))
-   {
-    echo "Records inserted successfully.";
-  } 
-  else
-  {
-    echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
-  }
-
 
   if(isset($_REQUEST['btn_submit']))
   {
 
-  $username = $_REQUEST['txt_username'];
-  $password = $_REQUEST['txt_password'];
-  // $account_no = $_REQUEST[''];
-  // $account_bal = $_REQUEST[''];
-  $full_name = $_REQUEST['txt_fullname'];
-  $mobile = $_REQUEST['txt_mobile'];
-  $email = $_REQUEST['txt_email'];
-  $address = $_REQUEST['txt_address'];
-  $pincode = $_REQUEST['txt_pincode'];
-  $aadhaar = $_REQUEST['txt_address'];
+    $username = $_REQUEST['txt_username'];
+    $password = $_REQUEST['txt_password'];
+    // $account_no = $_REQUEST[''];
+    // $account_bal = $_REQUEST[''];
+    $full_name = $_REQUEST['txt_fullname'];
+    $mobile = $_REQUEST['txt_mobile'];
+    $email = $_REQUEST['txt_email'];
+    $address = $_REQUEST['txt_address'];
+    $pincode = $_REQUEST['txt_pincode'];
 
-    // $query = "INSERT INTO customer_tbl (username, password, full_name, mobile, email, address, pincode, aadhaar) VALUES ('$username',   '$password', '$full_name', $mobile, '$email', '$address', $pincode, $aadhaar)";
+      $query = "INSERT INTO tbl_customer (username, password, full_name, mobile, email, address, pincode) VALUES ('$username',    '$password', '$full_name', '$mobile', '$email', '$address', $pincode)";
 
-     $query = "INSERT INTO customer_tbl (username, password, full_name, mobile, email, address, pincode, aadhaar) VALUES ('dawd',   'dawd', 'Rashmin D', 8155045384, 'rashmin8248@gmail.com', '65 PAtel Park', 395004, 45848655465)";
+    if(mysqli_query($con, $query))
+    {
+      header("location:http://localhost/Online_Banking_Website/html/ltr/authentication-login.php");
+      // header("location:https://www.sitepoint.com/community/t/php-header-location-not-working/8395/10");
 
-   if(mysqli_query($con, $query))
-   {
-    echo "Records inserted successfully.";
-  } 
-  else
-  {
-    echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
-  }
+    } 
+    else
+    {
+      echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
+    }
 }
 ?>

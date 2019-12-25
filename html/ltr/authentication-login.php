@@ -1,7 +1,3 @@
-<?php
-    
-  
-?>
 
 <!DOCTYPE html>
 <html dir="ltr">
@@ -61,7 +57,7 @@
             <form
               class="form-horizontal m-t-20"
               id="loginform"
-              action="index.html"
+              <
             >
               <div class="row p-b-30">
                 <div class="col-12">
@@ -75,6 +71,7 @@
                     </div>
                     <input
                       type="text"
+                      name = "txt_username"
                       class="form-control form-control-lg"
                       placeholder="Username"
                       aria-label="Username"
@@ -92,6 +89,7 @@
                     </div>
                     <input
                       type="text"
+                      name = "txt_password"
                       class="form-control form-control-lg"
                       placeholder="Password"
                       aria-label="Password"
@@ -119,6 +117,7 @@
                   </div>
                 </div>
               </div>
+              <a href="authentication-register.php">I don't have any Account</a>
             </form>
           </div>
           <div id="recoverform">
@@ -167,6 +166,7 @@
                     </button>
                   </div>
                 </div>
+                
               </form>
             </div>
           </div>
@@ -215,3 +215,29 @@
     </script>
   </body>
 </html>
+
+
+<?php
+  include('connect.php');
+
+  if(isset($_POST["txt_username"], $_POST["txt_password"])) 
+  {     
+
+    $user = $_POST["txt_username"]; 
+    $password = $_POST["txt_password"]; 
+    $result1 = mysql_query("SELECT username, password FROM tbl_customer WHERE username = '".$name."' AND  password='".$password."'");
+    if(mysql_num_rows($result1) > 0 )
+    { 
+        $_SESSION["logged_in"] = true; 
+        $_SESSION["naam"] = $name;
+        echo("<script>location.href = 'http://localhost/Online_Banking_Website/html/ltr/index.php';</script>");
+    }
+    else
+    {
+        echo 'The username or password are incorrect!';
+        echo "ERROR: Could not able to execute $result1. " . mysqli_error($con);
+    }
+  }
+
+?>
+
