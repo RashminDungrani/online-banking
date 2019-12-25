@@ -1,3 +1,34 @@
+<?php
+  include('connect.php');
+
+
+  if(isset($_REQUEST['btn_submit']))
+  {
+
+    $username = $_REQUEST['txt_username'];
+    $password = $_REQUEST['txt_password'];
+    $full_name = $_REQUEST['txt_fullname'];
+    $mobile = $_REQUEST['txt_mobile'];
+    $email = $_REQUEST['txt_email'];
+    $address = $_REQUEST['txt_address'];
+    $pincode = $_REQUEST['txt_pincode'];
+
+      $query = "INSERT INTO tbl_customer (username, password, full_name, mobile, email, address, pincode) VALUES ('$username',    '$password', '$full_name', '$mobile', '$email', '$address', $pincode)";
+
+    $result = mysqli_query($con, $query);
+     echo $result;
+    if($result)
+    {
+      header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_login.php');
+      // header("location:https://www.sitepoint.com/community/t/php-header-location-not-working/8395/10");
+
+    } 
+    else
+    {
+      echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
+    }
+}
+?>
 <!DOCTYPE html>
 <html dir="ltr">
   <head>
@@ -232,7 +263,7 @@
                   </div>
                 </div>
               </div>
-              <a href="authentication-login.php">Already have account</a>
+              <a href="authentication_login.php">Already have account</a>
             </form>
           </div>
           
@@ -271,35 +302,3 @@
   </body>
 </html>
 
-
-<?php
-  include('connect.php');
-
-
-  if(isset($_REQUEST['btn_submit']))
-  {
-
-    $username = $_REQUEST['txt_username'];
-    $password = $_REQUEST['txt_password'];
-    // $account_no = $_REQUEST[''];
-    // $account_bal = $_REQUEST[''];
-    $full_name = $_REQUEST['txt_fullname'];
-    $mobile = $_REQUEST['txt_mobile'];
-    $email = $_REQUEST['txt_email'];
-    $address = $_REQUEST['txt_address'];
-    $pincode = $_REQUEST['txt_pincode'];
-
-      $query = "INSERT INTO tbl_customer (username, password, full_name, mobile, email, address, pincode) VALUES ('$username',    '$password', '$full_name', '$mobile', '$email', '$address', $pincode)";
-
-    if(mysqli_query($con, $query))
-    {
-      header("location:http://localhost/Online_Banking_Website/html/ltr/authentication-login.php");
-      // header("location:https://www.sitepoint.com/community/t/php-header-location-not-working/8395/10");
-
-    } 
-    else
-    {
-      echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
-    }
-}
-?>

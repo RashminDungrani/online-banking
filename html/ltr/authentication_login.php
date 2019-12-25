@@ -1,4 +1,29 @@
+<?php
 
+  include('connect.php');
+
+  if(isset($_REQUEST['btn_submit']))
+  { 
+
+    $username = $_REQUEST["txt_username"]; 
+    $password = $_REQUEST["txt_password"]; 
+    $query = "SELECT username, password FROM tbl_customer WHERE username = '$username' AND  password='$password' ";
+    $result1 = mysqli_query($con,$query);
+    
+    if(mysqli_num_rows($result1) > 0 )
+    { 
+        $_SESSION["logged_in"] = true;
+        $_SESSION["naam"] = $username;
+        header("location:http://localhost/Online_Banking_Website/html/ltr/index.php");
+    }
+    else
+    {
+        echo 'The username or password are incorrect!';
+        echo "ERROR: Could not able to execute $result1. " . mysqli_error($con);
+    }
+  
+}
+?>
 <!DOCTYPE html>
 <html dir="ltr">
   <head>
@@ -110,14 +135,14 @@
                       >
                         <i class="fa fa-lock m-r-5"></i> Lost password?
                       </button>
-                      <button class="btn btn-success float-right" type="submit">
+                      <button class="btn btn-success float-right" name="btn_submit" type="submit">
                         Login
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
-              <a href="authentication-register.php">I don't have any Account</a>
+              <a href="authentication_register.php">I don't have any Account</a>
             </form>
           </div>
           <div id="recoverform">
@@ -215,29 +240,4 @@
     </script>
   </body>
 </html>
-
-
-<?php
-  include('connect.php');
-
-  if(isset($_POST["txt_username"], $_POST["txt_password"])) 
-  {     
-
-    $user = $_POST["txt_username"]; 
-    $password = $_POST["txt_password"]; 
-    $result1 = mysql_query("SELECT username, password FROM tbl_customer WHERE username = '".$name."' AND  password='".$password."'");
-    if(mysql_num_rows($result1) > 0 )
-    { 
-        $_SESSION["logged_in"] = true; 
-        $_SESSION["naam"] = $name;
-        echo("<script>location.href = 'http://localhost/Online_Banking_Website/html/ltr/index.php';</script>");
-    }
-    else
-    {
-        echo 'The username or password are incorrect!';
-        echo "ERROR: Could not able to execute $result1. " . mysqli_error($con);
-    }
-  }
-
-?>
 
