@@ -1,22 +1,22 @@
 <?php
-
   include('connect.php');
   session_start();
-  
-  $value_username = $_SESSION['value_username'];
-  $query = "SELECT account_no FROM tbl_customer WHERE username='$value_username'";
-  $result = mysqli_query($con,$query);
+  $value_username = $_SESSION["value_username"];
+  $query = "SELECT * FROM tbl_customer WHERE username='$value_username'";
+  $result1 = mysqli_query($con, $query);
+  $row = mysqli_fetch_array($result1);
+  $account_no = $row['account_no'];
+
   if(isset($_REQUEST['btn_AccountType']))
   {
-    $account_no = $result;
-    $account_type = $_REQUEST['txt_account_no'];
+    $account_type = $_REQUEST['txt_account_type'];
     $query = "INSERT INTO tbl_account_type (account_no,account_type) VALUES ($account_no,'$account_type')";
     $result2 = mysqli_query($con, $query);
-    
     session_unset();
     session_destroy();
-
-    if ($result2){
+  
+    if ($result2)
+    {
       header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_login.php');
     }
     else
@@ -75,9 +75,9 @@
       >
         
             <!-- Form -->
-            <form
+            <form>
               
-              <!-- Account Type -->
+            
                 
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -90,11 +90,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label class="control-label">Your Account Number</label>
-                                            <input class="form-control form-white" type="text" name="txt_account_no" value="<?php echo $result ?>" disabled/>
+                                            <input class="form-control form-white" type="text" name="txt_account_no" value="<?php
+                                              echo $account_no;
+                                            ?>" disabled/>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="control-label">Choose Account Type</label>
-                                            <select class="form-control form-white" data-placeholder="Choose a color..." name="txt_account_type">
+                                            <select class="form-control form-white" name="txt_account_type">
                                                 <option value="SAVING">Saving</option>
                                                 <option value="CURRENT">Current</option>
                                             </select>
@@ -103,8 +105,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button name="btn_AccountType" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Goto login Page</button>
-                                <!-- <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button> -->
+                                <button name="btn_AccountType" type="submit" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Goto login Page</button>
                             </div>
                         </div>
                     </div>
@@ -128,14 +129,29 @@
       <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
-    <!-- All Required js -->
+   <!-- All Required js -->
     <!-- ============================================================== -->
     <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../../assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- ============================================================== -->
-
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script>
+      $('[data-toggle="tooltip"]').tooltip();
+      $(".preloader").fadeOut();
+      // ==============================================================
+      // Login and Recover Password
+      // ==============================================================
+      $("#to-recover").on("click", function() {
+        $("#loginform").slideUp();
+        $("#recoverform").fadeIn();
+      });
+      $("#to-login").click(function() {
+        $("#recoverform").hide();
+        $("#loginform").fadeIn();
+      });
+    </script>
   </body>
 </html>
-
