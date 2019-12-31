@@ -1,6 +1,9 @@
+<!DOCTYPE html>
+<html dir="ltr">
+
+
 <?php
   include('connect.php');
-
 
   if(isset($_REQUEST['btn_submit']))
   {
@@ -13,24 +16,27 @@
     $address = $_REQUEST['txt_address'];
     $pincode = $_REQUEST['txt_pincode'];
 
-      $query = "INSERT INTO tbl_customer (username, password, full_name, mobile, email, address, pincode) VALUES ('$username',    '$password', '$full_name', '$mobile', '$email', '$address', $pincode)";
+    $query = "INSERT INTO tbl_customer (username, password, full_name, mobile, email, address, pincode) VALUES ('$username',    '$password', '$full_name', '$mobile', '$email', '$address', $pincode)";
 
     $result = mysqli_query($con, $query);
-     echo $result;
+
+     
+     
     if($result)
     {
-      header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_login.php');
-      // header("location:https://www.sitepoint.com/community/t/php-header-location-not-working/8395/10");
-
+     session_start();
+     $_SESSION['value_username'] = $username;
+     header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_account_type.php');
     } 
     else
     {
       echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
     }
 }
+
 ?>
-<!DOCTYPE html>
-<html dir="ltr">
+
+
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -259,11 +265,52 @@
                       >
                         Sign Up
                       </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <a href="authentication_login.php">Already have account</a>
+
+              <!-- <a href="javascript:void(0)" data-toggle="modal" data-target="#add-new-event">Sign Up</a> -->
+
+              
+              <!-- Account Type -->
+                <div class="modal fade none-border" id="add-new-event">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <h4 class="modal-title"><strong>Add</strong> a category</h4> -->
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="authentication_login.php">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label">Your Account Number</label>
+                                            <input class="form-control form-white" type="text" name="txt_account_no" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label">Choose Account Type</label>
+                                            <select class="form-control form-white" data-placeholder="Choose a color..." name="txt_account_type">
+                                                <option value="saving">Saving</option>
+                                                <option value="current">Current</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button name="btn_AccountType" type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
+                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </form>
           </div>
           
