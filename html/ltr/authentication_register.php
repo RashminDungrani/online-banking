@@ -25,7 +25,7 @@
     if($result)
     {
      session_start();
-     $_SESSION['value_username'] = $username;
+     $_SESSION["value_username"] = $username;
      header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_account_type.php');
     } 
     else
