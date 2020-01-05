@@ -26,7 +26,7 @@
     {
      session_start();
      $_SESSION["value_username"] = $username;
-     header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_account_type.php');
+     header('location:http://localhost/Online_Banking_Website/html/ltr/chooseAccountType.php');
     } 
     else
     {
