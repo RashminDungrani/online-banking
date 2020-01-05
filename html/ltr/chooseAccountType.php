@@ -12,12 +12,24 @@
     $account_type = $_REQUEST['txt_account_type'];
     $query = "INSERT INTO tbl_account_type (account_no,account_type) VALUES ($account_no,'$account_type')";
     $result2 = mysqli_query($con, $query);
+
+    // Query for inserting account bal
+    $query = "INSERT INTO tbl_balance (account_no,account_type,account_bal) VALUES ($account_no,'$account_type',0)";
+    $result3 = mysqli_query($con, $query);
+
     session_unset();
     session_destroy();
   
     if ($result2)
     {
-      header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_login.php');
+      if ($result3)
+      {
+        header('location:http://localhost/Online_Banking_Website/html/ltr/authentication_login.php');
+      }
+      else
+      {
+        echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
+      }
     }
     else
     {
@@ -105,7 +117,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button name="btn_AccountType" type="submit" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Goto login Page</button>
+                                <button name="btn_AccountType" type="submit" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Submit</button>
                             </div>
                         </div>
                     </div>
