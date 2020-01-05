@@ -2,7 +2,12 @@
 
   include('connect.php');
   session_start();
+  session_unset();
+  session_destroy();
 
+  
+  session_start();
+  
   if(isset($_REQUEST['btn_submit']))
   { 
 
