@@ -1,19 +1,19 @@
 <?php
 
   include('connect.php');
+  session_start();
 
   if(isset($_REQUEST['btn_submit']))
   { 
 
-    $username = $_REQUEST["txt_username"]; 
-    $password = $_REQUEST["txt_password"]; 
+    $username = $_REQUEST["txt_username"];
+    $password = $_REQUEST["txt_password"];
     $query = "SELECT username, password FROM tbl_customer WHERE username = '$username' AND  password='$password' ";
     $result1 = mysqli_query($con,$query);
     
     if(mysqli_num_rows($result1) > 0 )
-    { 
-        $_SESSION["logged_in"] = true;
-        $_SESSION["naam"] = $username;
+    {
+        $_SESSION["Username"] = $username;
         header("location:http://localhost/Online_Banking_Website/html/ltr/index.php");
     }
     else
