@@ -227,8 +227,8 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
@@ -307,37 +307,119 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+
+        <!-- Money Transfer -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Form Elements</h5>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span>Beneficial Account Number</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <input type="text" title="Account Number" class="form-control" id="validationDefault05" placeholder="Account Number" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span>Re-Type Beneficial Account Number</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <input type="text" class="form-control" placeholder="Re-Type Account Number" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span>IFSC code</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">#</span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="IFSC code" aria-label="Username" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span>Amount</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="10,000" aria-label="Recipient 's username" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2">₹</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Purpose to Transfer Money -->
+                                <div class="row mb-4 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span>Purpose</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <select class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                                            <option>Select</option>
+                                                <option value="Payment towords loan repayment">Payment towords loan repayment</option>
+                                                <option value="Deposite / Investment">Deposite / Investment</option>
+                                                <option value="Gift to relative / Friends">Gift to relative / Friends</option>
+                                                <option value="Donation">Donation</option>
+                                                <option value="Payment of Education Fee">Payment of Education Fee</option>
+                                                <option value="Rent">Rent</option>
+                                                <option value="Others">Others</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!-- Submit and Cancel Buttons -->
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-secondary">Cancel</button>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span class="text-success">Input with Sccess</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <input type="text" class="form-control is-valid" id="validationServer01">
+                                        <div class="valid-feedback">
+                                            Woohoo!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 align-items-center">
+                                    <div class="col-lg-4 col-md-12 text-right">
+                                        <span class="text-danger">Input with Error</span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <input type="text" class="form-control is-invalid" id="validationServer01">
+                                        <div class="invalid-feedback">
+                                            Please correct the error
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- End of the money Transfer-->
+
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <!-- Chart-1 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Real Time Chart</h5>
-                                 <div id="real-time" style="height:400px;"></div>
-                                <p>Time between updates:
-                                    <input id="updateInterval" type="text" value="" style="text-align: right; width:5em"> milliseconds
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ENd chart-1 -->
-                <!-- Chart-2 -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Turning-series chart</h5>
-                                <div id="placeholder" style="height: 400px;"></div>
-                                <p id="choices" class="m-t-20"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Chart-2 -->
+               
                 <!-- Cards -->
                 <div class="row">
                     <div class="col-md-3">
