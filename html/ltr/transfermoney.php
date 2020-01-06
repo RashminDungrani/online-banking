@@ -1,3 +1,71 @@
+<?php
+include('connect.php');
+session_start();
+$Username = $_SESSION["Username"];
+if(isset($_REQUEST['btn_submit']))
+{
+    // Steps to do in quick transfer
+    // 1. Reduce amount in loggin in customer
+        // if account_bal is not sufficient then display message and stop exicution
+        // else Make All Exicution of code
+    // 2. add amount in to_account customer
+    // 3. insert transaction debit record for logged_in user in tbl_transaction
+    // 4. insert transaction credit record for to_account user in tbl_transaction
+
+
+    // 2. add amount in to_account customer
+    $To_account = $_REQUEST['txt_ben_account_no'];
+    $query_for_Ben_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$To_account";
+    $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
+    $row = mysqli_fetch_assoc($result);
+    $Acount_bal = $row['account_bal'];
+    $Amount = $_REQUEST['txt_amount'];
+
+    $Account_bal = $Acount_bal + $Amount;
+    $query_for_update_Ben_Account_bal = "UPDATE tbl_balance SET account_bal=$Account_bal WHERE account_no=$To_account";
+    $result = mysqli_query($con, $query_for_update_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
+
+
+
+    $Trans_date = date("Y-m-d H:i:s");
+    $Amount = $_REQUEST['txt_amount'];
+    $Trans_type = "DEBIT";
+    $Purpose = $_REQUEST['txt_purpose'];
+    $To_account = $_REQUEST['txt_ben_account_no'];
+
+    $query_for_Account_no = "SELECT account_no FROM tbl_customer WHERE username='$Username'";
+    $result = mysqli_query($con, $query_for_Account_no) or die('SQL Error :: '.mysqli_error());
+    $row = mysqli_fetch_assoc($result);
+    $Account_no = $row['account_no'];
+
+    $query_for_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$Account_no";
+    $result = mysqli_query($con, $query_for_Account_bal) or die('SQL Error :: '.mysqli_error());
+    $row = mysqli_fetch_assoc($result);
+    $Acount_bal = $row['account_bal'];
+
+    // 3. insert transaction debit record for logged_in user in tbl_transaction
+    $query_debit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,to_account,account_no,account_bal) 
+    VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $To_account, $Account_no, $Acount_bal)";
+    $result = mysqli_query($con, $query_debit_record) or die('SQL Error :: '.mysqli_error());
+
+
+    $Trans_type = "CREDIT";
+    $query_for_Ben_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$To_account";
+    $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
+    $row = mysqli_fetch_assoc($result);
+    $Acount_bal = $row['account_bal'];
+
+    // 4. insert transaction credit record for to_account user in tbl_transaction
+    $query_credit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,to_account,account_no,account_bal) 
+    VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $Account_no, $To_account, $Acount_bal)";
+    $result = mysqli_query($con, $query_credit_record) or die('SQL Error :: '.mysqli_error());
+    
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -228,7 +296,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Charts</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="transfermoney.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Transfer Money</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="widgets.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Widgets</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Tables</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="grid.html" aria-expanded="false"><i class="mdi mdi-blur-linear"></i><span class="hide-menu">Full Width</span></a></li>
@@ -308,7 +376,8 @@
             <!-- ============================================================== -->
             <div class="container-fluid">
 
-        <!-- Money Transfer -->
+				<!-- Money Transfer -->
+											<form method="get">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Form Elements</h5>
@@ -317,7 +386,7 @@
                                         <span>Beneficial Account Number</span>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
-                                        <input type="text" title="Account Number" class="form-control" id="validationDefault05" placeholder="Account Number" required>
+                                        <input type="text" name="txt_ben_account_no" title="Account Number" class="form-control" id="validationDefault05" placeholder="Account Number" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3 align-items-center">
@@ -325,7 +394,7 @@
                                         <span>Re-Type Beneficial Account Number</span>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
-                                        <input type="text" class="form-control" placeholder="Re-Type Account Number" required>
+                                        <input type="text" name="txt_re_ben_account_no" class="form-control" placeholder="Re-Type Account Number" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3 align-items-center">
@@ -337,7 +406,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="basic-addon1">#</span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="IFSC code" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" name="txt_ifsc" class="form-control" placeholder="IFSC code" aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                 </div>
@@ -347,7 +416,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="10,000" aria-label="Recipient 's username" aria-describedby="basic-addon2">
+                                            <input type="text" name="txt_amount" class="form-control" placeholder="10,000" aria-label="Recipient 's username" aria-describedby="basic-addon2" required>
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="basic-addon2">₹</span>
                                             </div>
@@ -362,8 +431,8 @@
                                         <span>Purpose</span>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
-                                        <select class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                                            <option>Select</option>
+																				<select name="txt_purpose" class="select2 form-control custom-select" style="width: 100%; height:36px; "required>
+                                            		<option value="">Select</option>
                                                 <option value="Payment towords loan repayment">Payment towords loan repayment</option>
                                                 <option value="Deposite / Investment">Deposite / Investment</option>
                                                 <option value="Gift to relative / Friends">Gift to relative / Friends</option>
@@ -382,8 +451,8 @@
                                         
                                     </div>
                                     <div class="col-lg-4 col-md-12">
-                                        <button type="button" class="btn btn-primary">Submit</button>
-                                        <button type="button" class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" name="btn_submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-secondary">Cancel</button>
                                     </div>
                                 </div>
 
@@ -411,7 +480,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+												</div>
+											</form>
 
 
                         <!-- End of the money Transfer-->
