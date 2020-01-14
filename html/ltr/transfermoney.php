@@ -13,53 +13,88 @@ if(isset($_REQUEST['btn_submit']))
     // 4. insert transaction credit record for to_account user in tbl_transaction
 
 
-    // 2. add amount in to_account customer
-    $To_account = $_REQUEST['txt_ben_account_no'];
-    $query_for_Ben_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$To_account";
-    $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
-    $row = mysqli_fetch_assoc($result);
-    $Acount_bal = $row['account_bal'];
-    $Amount = $_REQUEST['txt_amount'];
-
-    $Account_bal = $Acount_bal + $Amount;
-    $query_for_update_Ben_Account_bal = "UPDATE tbl_balance SET account_bal=$Account_bal WHERE account_no=$To_account";
-    $result = mysqli_query($con, $query_for_update_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
-
-
-
-    $Trans_date = date("Y-m-d H:i:s");
-    $Amount = $_REQUEST['txt_amount'];
-    $Trans_type = "DEBIT";
-    $Purpose = $_REQUEST['txt_purpose'];
-    $To_account = $_REQUEST['txt_ben_account_no'];
 
     $query_for_Account_no = "SELECT account_no FROM tbl_customer WHERE username='$Username'";
     $result = mysqli_query($con, $query_for_Account_no) or die('SQL Error :: '.mysqli_error());
     $row = mysqli_fetch_assoc($result);
+
     $Account_no = $row['account_no'];
 
     $query_for_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$Account_no";
     $result = mysqli_query($con, $query_for_Account_bal) or die('SQL Error :: '.mysqli_error());
     $row = mysqli_fetch_assoc($result);
+
     $Acount_bal = $row['account_bal'];
+    $Amount = $_REQUEST['txt_amount'];
+    $To_account = $_REQUEST['txt_ben_account_no'];
 
-    // 3. insert transaction debit record for logged_in user in tbl_transaction
-    $query_debit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,to_account,account_no,account_bal) 
-    VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $To_account, $Account_no, $Acount_bal)";
-    $result = mysqli_query($con, $query_debit_record) or die('SQL Error :: '.mysqli_error());
-
-
-    $Trans_type = "CREDIT";
-    $query_for_Ben_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$To_account";
-    $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
-    $row = mysqli_fetch_assoc($result);
-    $Acount_bal = $row['account_bal'];
-
-    // 4. insert transaction credit record for to_account user in tbl_transaction
-    $query_credit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,to_account,account_no,account_bal) 
-    VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $Account_no, $To_account, $Acount_bal)";
-    $result = mysqli_query($con, $query_credit_record) or die('SQL Error :: '.mysqli_error());
+    // if Account_bal is not Sufficient then Run This block Of code That disply You have not Sufficient bal or ben_account_no == logged_in usee then Display You can not set Your Account Number
+    // else Run  Below Code
+    if ($Amount > $Account_bal)
+    {
+        echo "You Have Not Sufficient Balance To Transfer";
+    }
+    elseif ($To_account == $Account_no)
+    {
+        echo "Beneficial Account Number Should Be Different From Your Account Number";
+    }
+    else
+    {
     
+        // 1. Reduce amount in loggin in customer
+        $Acount_bal = $Acount_bal - $Amount;
+        $query_for_update_from_Account_bal = "UPDATE tbl_balance SET account_bal=$Acount_bal WHERE  account_no=$Account_no";
+        $result = mysqli_query($con, $query_for_update_from_Account_bal) or die('SQL Error ::   '.mysqli_error());
+
+
+
+        // 2. add amount in to_account customer
+        $To_account = $_REQUEST['txt_ben_account_no'];
+        $query_for_Ben_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$To_account";
+        $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
+        $row = mysqli_fetch_assoc($result);
+        $Acount_bal = $row['account_bal'];
+        $Amount = $_REQUEST['txt_amount'];
+
+        $Account_bal = $Acount_bal + $Amount;
+        $query_for_update_Ben_Account_bal = "UPDATE tbl_balance SET account_bal=$Account_bal WHERE  account_no=$To_account";
+        $result = mysqli_query($con, $query_for_update_Ben_Account_bal) or die('SQL Error ::    '.mysqli_error());
+
+
+
+        $Trans_date = date("Y-m-d H:i:s");
+        $Amount = $_REQUEST['txt_amount'];
+        $Trans_type = "DEBIT";
+        $Purpose = $_REQUEST['txt_purpose'];
+        $To_account = $_REQUEST['txt_ben_account_no'];
+
+        $query_for_Account_no = "SELECT account_no FROM tbl_customer WHERE username='$Username'";
+        $result = mysqli_query($con, $query_for_Account_no) or die('SQL Error :: '.mysqli_error());
+        $row = mysqli_fetch_assoc($result);
+        $Account_no = $row['account_no'];
+
+        $query_for_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$Account_no";
+        $result = mysqli_query($con, $query_for_Account_bal) or die('SQL Error :: '.mysqli_error());
+        $row = mysqli_fetch_assoc($result);
+        $Acount_bal = $row['account_bal'];
+
+        // 3. insert transaction debit record for logged_in user in tbl_transaction
+        $query_debit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,   to_account,account_no,account_bal) 
+        VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $To_account, $Account_no,    $Acount_bal)";
+        $result = mysqli_query($con, $query_debit_record) or die('SQL Error :: '.mysqli_error());
+
+
+        $Trans_type = "CREDIT";
+        $query_for_Ben_Account_bal = "SELECT account_bal FROM tbl_balance WHERE account_no=$To_account";
+        $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
+        $row = mysqli_fetch_assoc($result);
+        $Acount_bal = $row['account_bal'];
+
+        // 4. insert transaction credit record for to_account user in tbl_transaction
+        $query_credit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,  to_account,account_no,account_bal) 
+        VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $Account_no, $To_account,    $Acount_bal)";
+        $result = mysqli_query($con, $query_credit_record) or die('SQL Error :: '.mysqli_error());
+    }
 }
 
 
