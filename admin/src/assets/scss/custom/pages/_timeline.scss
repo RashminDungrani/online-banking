@@ -1,0 +1,103 @@
+// 
+// timeline.scss
+//
+
+/************** Horizontal timeline **************/     
+
+.slick-slide {
+    margin: 10px 12px;
+    transition: all ease-in-out .3s;
+    opacity: .2;
+    padding: 7px;
+    border-radius: 4px;
+    &:focus{
+        outline: none;
+    }
+}
+
+.slick-prev, .slick-next {
+    &:before{
+        color: $dark;
+    }  
+}
+
+.slick-active {
+    opacity: 1;
+}
+
+
+.slick-slider {
+    &.hori-timeline-desc{
+        padding: 12px 24px 0;
+        text-align: center;
+        border-radius: 7px;
+    }
+
+    &.hori-timeline-nav{
+
+        .slick-active {
+            opacity: 0.5;
+        }   
+        
+        .slick-current {
+            opacity: 1;
+            background-color: rgba($primary, 0.2);
+            .nav-title{
+                color: $primary;
+            }
+        }
+        
+        .slider-nav-item{
+            text-align: center;
+        }
+       
+    }
+
+    &.fade{
+        &:not(slow) {
+            opacity: 1;
+        }
+    }
+}
+
+
+
+/************** vertical timeline **************/ 
+
+.verti-timeline{
+    border-left: 2px solid $gray-300;
+    margin: 0 5px;
+
+    .event-list{
+        position: relative;
+        padding: 0px 0px 25px 30px;
+
+        &:before{
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: -2px;
+            top: 8px;
+            border-top: 6px double $gray-300;
+            border-left: 2px solid $gray-300;
+            border-top-left-radius: 15px;
+        }
+
+        .event-content{
+            position: relative;
+            border: 2px solid $border-color;
+            border-radius: 7px;
+        }
+
+        &.active{
+            .event-timeline-dot{
+                color: $primary;
+            }
+        }
+
+        &:last-child{
+            padding-bottom: 0px;
+        }
+    }
+}

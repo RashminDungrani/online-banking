@@ -1,0 +1,56 @@
+// 
+// _nav.scss
+// 
+
+.nav-tabs,.nav-pills {
+  > li {
+      > a {
+          color: $gray-600;
+      }
+  }
+}
+
+.nav-pills {
+  > a {
+      color: $gray-600;  
+  }
+}
+
+
+// Nav tab custom
+
+.nav-tabs-custom{
+  .nav-item{
+    margin: 0px 7px;
+    position: relative;
+
+    &:first-child{
+      margin-left: 0px;
+    }
+    &:last-child{
+      margin-right: 0px;
+    }
+
+    .nav-link{
+      background-color: $gray-300;
+      &.active{
+        color: $primary;
+        &:after{
+          transform: scale(1);
+        }
+      }
+
+      &:after {
+        content: "";
+        background: $primary;
+        height: 2px;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: -1px;
+        transition: all 250ms ease 0s;
+        transform: scale(0);
+      }
+    }
+  }
+}

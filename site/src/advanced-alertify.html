@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Alertify | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- alertifyjs Css -->
+        <link href="assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- alertifyjs default themes  Css -->
+        <link href="assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark" data-layout="horizontal">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            @@include("partials/horizontal.html")
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Alertify</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Advanced UI</a></li>
+                                            <li class="breadcrumb-item active">Alertify</li>
+                                        </ol>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="header-title mb-4">Default Dialogs</h4>
+
+                                        <div class="row text-center">
+                                            <div class="col-sm-4">
+                                                <div class="my-4">
+                                                    <h5 class="mb-4">Alert</h5>
+
+                                                    <a href="javascript: void(0);"  id="alert" class="btn btn-primary waves-effect waves-light">Click me</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="my-4">
+                                                    <h5 class="mb-4">Confirm</h5>
+
+                                                    <a href="javascript: void(0);"  id="alert-confirm" class="btn btn-primary waves-effect waves-light">Click me</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="my-4">
+                                                    <h5 class="mb-4">Prompt</h5>
+
+                                                    <a href="javascript: void(0);"  id="alert-prompt" class="btn btn-primary waves-effect waves-light">Click me</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <h4 class="header-title mt-5 mb-3">Default Notifications</h4>
+
+                                        <div class="table-responsive">
+                                            <table class="table mb-0">
+                                                
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Default alert</td>
+                                                        <td><a href="javascript: void(0);"  id="alert-message" class="btn btn-primary btn-sm waves-effect waves-light">Click me</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Success alert</td>
+                                                        <td><a href="javascript: void(0);"  id="alert-success" class="btn btn-primary btn-sm waves-effect waves-light">Click me</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Error alert</td>
+                                                        <td><a href="javascript: void(0);"  id="alert-error" class="btn btn-primary btn-sm waves-effect waves-light">Click me</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Warning alert</td>
+                                                        <td><a href="javascript: void(0);"  id="alert-warning" class="btn btn-primary btn-sm waves-effect waves-light">Click me</a></td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                @@include("partials/footer.html")
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        @@include("partials/right-sidebar.html")
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- alertifyjs js -->
+        <script src="assets/libs/alertifyjs/build/alertify.min.js"></script>
+
+        <script src="assets/js/pages/alertifyjs.init.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+    </body>
+</html>

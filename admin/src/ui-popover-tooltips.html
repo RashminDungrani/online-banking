@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Popover & Tooltips | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-sidebar="dark">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            @@include("partials/topbar.html")
+
+            @@include("partials/sidebar.html")
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Popover & Tooltips</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Bootstrap UI</a></li>
+                                            <li class="breadcrumb-item active">Popover & Tooltips</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="header-title">Popovers</h4>
+                                        <p class="card-title-desc">Add small overlay content, like those found in iOS, to any element for housing secondary information.</p>
+                                        <div class="button-items">
+                                            <button type="button" class="btn btn-primary waves-effect" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                Popover on top
+                                            </button>
+            
+                                            <button type="button" class="btn btn-primary waves-effect" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                Popover on right
+                                            </button>
+            
+                                            <button type="button" class="btn btn-primary waves-effect"
+                                                    data-container="body" data-toggle="popover" data-placement="bottom"
+                                                    data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                Popover on bottom
+                                            </button>
+            
+                                            <button type="button" class="btn btn-primary waves-effect" data-container="body" data-toggle="popover" data-placement="left" title="Popover Title" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                Popover on left
+                                            </button>
+            
+                                            <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+        
+        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="header-title">Tooltips</h4>
+                                        <p class="card-title-desc">Hover over the links below to see tooltips:</p>
+        
+                                        <div class="button-items">
+                                            <button type="button" class="btn btn-secondary mo-mb-2" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                Tooltip on top
+                                            </button>
+            
+                                            <button type="button" class="btn btn-secondary mo-mb-2" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+                                                Tooltip on right
+                                            </button>
+            
+                                            <button type="button" class="btn btn-secondary mo-mb-2" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
+                                                Tooltip on bottom
+                                            </button>
+            
+                                            <button type="button" class="btn btn-secondary mo-mb-2" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
+                                                Tooltip on left
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                @@include("partials/footer.html")
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        @@include("partials/right-sidebar.html")
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+
+    </body>
+</html>

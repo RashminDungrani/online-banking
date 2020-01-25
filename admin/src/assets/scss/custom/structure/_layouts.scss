@@ -1,0 +1,29 @@
+// 
+// _layouts.scss
+// 
+
+body[data-layout-size="boxed"] {
+    background-color: $boxed-body-bg;
+    #layout-wrapper {
+        background-color: $body-bg;
+        max-width: $boxed-layout-width;
+        margin: 0 auto;
+        box-shadow: $box-shadow;
+    }
+
+    #page-topbar {
+        max-width: $boxed-layout-width;
+        margin: 0 auto;
+    }
+
+    .footer {
+        margin: 0 auto;
+        max-width: calc(#{$boxed-layout-width} - #{$sidebar-width});
+    }
+
+    &.vertical-collpsed {
+        .footer {
+            max-width: calc(#{$boxed-layout-width} - #{$sidebar-collapsed-width});
+        }
+    }
+}

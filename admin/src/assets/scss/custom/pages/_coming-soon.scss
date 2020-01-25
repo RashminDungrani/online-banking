@@ -1,0 +1,31 @@
+// 
+// coming-soon.scss
+//
+
+.counter-number {
+    font-size: 32px;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    span {
+        font-size: 16px;
+        font-weight: $font-weight-normal;
+        display: block;
+        padding-top: 7px;
+    }
+}
+
+.coming-box {
+    float: left;
+    width: 21%;
+    padding: 14px 7px;
+    margin: 0px $grid-gutter-width/2 $grid-gutter-width $grid-gutter-width/2;
+    background-color: $card-bg;
+    border-radius: $card-inner-border-radius;
+    box-shadow: $box-shadow;
+}
+
+@media (max-width: 991.98px) { 
+    .coming-box {
+        width: 40%;
+    }
+ }

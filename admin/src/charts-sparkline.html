@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Sparkline Charts | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-sidebar="dark">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            @@include("partials/topbar.html")
+
+            @@include("partials/sidebar.html")
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Sparkline</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Charts</a></li>
+                                            <li class="breadcrumb-item active">Sparkline</li>
+                                        </ol>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                        
+                                        <h4 class="header-title">Line Charts</h4>
+                                        <p class="card-title-desc">Example of line sparkline chart.</p>
+    
+                                        <div id="sparkline1"></div>
+                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                        
+                                        <h4 class="header-title">Bar Chart</h4>
+                                        <p class="card-title-desc">Example of bar sparkline chart.</p>
+    
+                                        <div id="sparkline2" class="text-center"></div>
+                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+    
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                        
+                                        <h4 class="header-title">Pie Chart</h4>
+                                        <p class="card-title-desc">Example of pie sparkline chart.</p>
+    
+                                        <div id="sparkline3" class="text-center"></div>
+                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                        
+                                        <h4 class="header-title">Mouse Speed Chart</h4>
+                                        <p class="card-title-desc">Example of mouse speed sparkline chart.</p>
+    
+                                        <div id="sparkline4" class="text-center"></div>
+                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+    
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                        
+                                        <h4 class="header-title">Composite Bar Chart</h4>
+                                        <p class="card-title-desc">Example of composite bar sparkline chart.</p>
+                                        
+                                        <div id="sparkline5" class="text-center"></div>
+    
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        
+                            <div class="col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                        
+                                        <h4 class="header-title">Discrete Chart</h4>
+                                        <p class="card-title-desc">Example of discrete sparkline chart.</p>
+    
+                                        <div id="sparkline6" class="text-center"></div>
+                        
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row-->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                @@include("partials/footer.html")
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        @@include("partials/right-sidebar.html")
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <script src="assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+        
+        <script src="assets/js/pages/sparklines.init.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,67 @@
+// 
+// _progress.scss
+// 
+
+// Progress height small
+.progress-sm {
+  height: 5px;
+}
+
+
+// Progress height medium
+.progress-md {
+  height: 8px;
+}
+
+
+// Progress height large
+.progress-lg {
+  height: 12px;
+}
+
+
+.progress-animate {
+  position: relative;
+  overflow: visible;
+  .progress-bar {
+    position: relative;
+    border-radius: 6px;
+    animation: animate-positive 2s;
+  }
+
+  .progress-value {
+    display: block;
+    position: absolute;
+    top: -26px;
+    right: -14px;
+  }
+
+
+}
+
+.progress-label{
+  display: inline-block;
+  position: relative;
+  padding: 1px 8px;
+  background-color: $card-bg;
+  border: 1px solid;
+ border-radius: $border-radius;
+ &::after{
+   content: "";
+    position: absolute;
+    height: 10px;
+    width: 3px;
+    background: $gray-500;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    bottom: -11px;
+ }
+}
+
+
+@keyframes animate-positive {
+  0% {
+      width: 0;
+  }
+}

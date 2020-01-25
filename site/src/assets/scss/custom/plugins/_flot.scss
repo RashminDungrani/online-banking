@@ -1,0 +1,55 @@
+//
+// flot.scss
+//
+
+.flotTip {
+    padding: 8px 12px !important;
+    background-color: $gray-800 !important;
+    border: $border-width solid $gray-800 !important;
+    box-shadow: $box-shadow;
+    z-index: 100;
+    color: $gray-200;
+    opacity: 1;
+    border-radius: 3px !important;
+    font-size: 14px !important;
+}
+
+.legend {
+    div {
+        background-color: transparent !important;
+    }
+    tr {
+        height: 30px;
+    }
+}
+
+.legendLabel {
+    padding-left: 5px;
+    line-height: 10px;
+    padding-right: 10px;
+    font-size: 13px;
+    font-weight: $font-weight-medium;
+    color: $gray-500;
+}
+
+.legendColorBox {
+    div {
+        border-radius: 3px;
+        div {
+            border-radius: 3px;
+        }
+    }
+}
+
+.float-lable-box {
+    table {
+        margin: 0 auto;
+    }
+}
+
+
+@include media-breakpoint-down(sm) {
+    .legendLabel {
+        display: none;
+    }
+}

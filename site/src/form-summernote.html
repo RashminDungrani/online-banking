@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Summernote | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- Summernote css -->
+        <link href="assets/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark" data-layout="horizontal">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            @@include("partials/horizontal.html")
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Summernote</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                            <li class="breadcrumb-item active">Summernote</li>
+                                        </ol>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <h4 class="header-title">Default Editor</h4>
+                                        <p class="card-title-desc">Super simple wysiwyg editor on bootstrap</p>
+        
+                                        <div class="summernote">Hello Summernote</div>
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title">Inline Editor</h4>
+                                        <p class="card-title-desc">Air-mode give an interface without the Toolbar. To reveal popover Toolbar, select a text where you want to modify. Simply turn on <code>airMode</code> and just focus on text.</p>
+                                        <div class="summernote-inline">
+                                            <h5>This is an air-mode editable area.</h5>
+                                            <ul class="pl-5">
+                                                <li>
+                                                    Select a text to reveal the toolbar.
+                                                </li>
+                                                <li>
+                                                    Edit rich document on-the-fly, so elastic!
+                                                </li>
+                                            </ul>
+                                            <p>
+                                                End of air-mode area
+                                            </p>
+                                        </div> <!-- end summernote-inline-->
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+                            </div><!-- end col -->
+                        </div>
+                        <!-- end row --> 
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                @@include("partials/footer.html")
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        @@include("partials/right-sidebar.html")
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- Summernote js -->
+        <script src="assets/libs/summernote/summernote-bs4.min.js"></script>
+
+        <!-- init js -->
+        <script src="assets/js/pages/summernote.init.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,52 @@
+
+//
+// Datepicker
+//
+
+.datepicker {
+  border: 1px solid lighten($gray-200, 4%);
+  padding: 8px;
+  z-index: 999 !important;
+  table{
+    tr{
+      th{
+        font-weight: 500;
+      }
+      td{
+        &.active, &.active:hover, .active.disabled, &.active.disabled:hover,
+        &.today,  &.today:hover, &.today.disabled, &.today.disabled:hover, 
+        &.selected, &.selected:hover, &.selected.disabled, &.selected.disabled:hover{
+          background-color: $primary !important;
+          background-image: none;
+          box-shadow: none;
+          color: $white !important;
+        }
+
+        &.day.focused,
+        &.day:hover,
+        span.focused,
+        span:hover {
+            background: $gray-200;
+        }
+
+        &.new,
+        &.old,
+        span.new,
+        span.old {
+            color: $gray-500;
+            opacity: 0.6;
+        }
+
+        &.range, &.range.disabled, &.range.disabled:hover, &.range:hover{
+            background-color: $gray-300;
+        }
+      }
+    }
+  }
+}
+
+.table-condensed{
+  >thead>tr>th, >tbody>tr>td {
+    padding: 7px;
+  }
+}

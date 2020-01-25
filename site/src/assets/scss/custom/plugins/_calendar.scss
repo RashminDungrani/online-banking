@@ -1,0 +1,76 @@
+// 
+// calendar.scss
+//
+
+.fc-toolbar {
+    h2 {
+        font-size: 16px;
+        line-height: 30px;
+        text-transform: uppercase;
+    }
+}
+
+.fc {
+    th.fc-widget-header {
+        background: $gray-300;
+        font-size: 13px;
+        line-height: 20px;
+        padding: 10px 0;
+        text-transform: uppercase;
+        font-weight: $font-weight-semibold;
+    }
+}
+
+.fc-unthemed{
+    .fc-content, 
+    .fc-divider, 
+    .fc-list-heading td, 
+    .fc-list-view, 
+    .fc-popover, 
+    .fc-row, 
+    tbody, 
+    td, 
+    th, 
+    thead{
+        border-color: $gray-300;
+    }
+    td.fc-today {
+        background: $gray-300;
+    }
+}
+
+.fc-button {
+    background: $card-bg;
+    border-color: $border-color;
+    color: $gray-700;
+    text-transform: capitalize;
+    box-shadow: none;
+    padding: 6px 12px !important;
+    height: auto !important;
+}
+
+.fc-state-down,
+.fc-state-active,
+.fc-state-disabled {
+    background-color: $primary;
+    color: $white;
+    text-shadow: none;
+}
+
+.fc-event {
+    border-radius: 2px;
+    border: none;
+    cursor: move;
+    font-size: 0.8125rem;
+    margin: 5px 7px;
+    padding: 5px 5px;
+    text-align: center;
+}
+
+.fc-event, .fc-event-dot{
+    background-color: $primary;
+}
+
+.fc-event .fc-content{
+    color: $white;
+}

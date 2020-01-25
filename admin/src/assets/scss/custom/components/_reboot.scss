@@ -1,0 +1,36 @@
+/* =============
+   General
+============= */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.h1,.h2,.h3,.h4,.h5,.h6,
+h1,h2,h3,h4,h5,h6 {
+  color: $gray-700;
+  font-weight: $font-weight-medium;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+label {
+  font-weight: $font-weight-medium;
+}
+
+// blockquote
+
+.blockquote {
+  padding: 10px 20px;
+  border-left: 4px solid $gray-300;
+  font-size: 16px;
+}
+
+.blockquote-reverse {
+  border-left: 0;
+  border-right: 4px solid $gray-300;
+  text-align: right;
+}

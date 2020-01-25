@@ -1,0 +1,106 @@
+// 
+// plugins-rtl.scss
+//
+
+
+// FLOT CHART
+
+.legendLabel {
+    padding-right: 5px!important;
+    padding-left: 20px;
+}
+
+// Select 2
+
+.select2-container {
+    .select2-selection--single {
+        .select2-selection__rendered {
+            padding-right: 12px;
+        }
+
+        .select2-selection__arrow {
+            left: 3px;
+            right: auto;
+        }
+    }
+
+    .select2-selection--multiple {
+        .select2-selection__choice {
+            float: right;
+            margin-left: 5px;
+            margin-right: 0;
+        }
+
+        .select2-search__field{
+            text-align: right;
+        }
+    }
+
+    .select2-search--inline {
+        float: right;
+    }
+}
+
+
+// datatable
+
+.dataTables_wrapper {
+    .dataTables_filter{
+        text-align: left !important;
+        input{
+            margin-left: 0px !important;
+            margin-right: 0.5em;
+        }
+    }
+}
+
+
+
+// tablesaw
+.tablesaw-columntoggle-popup {
+    .tablesaw-btn-group {
+        > label {
+            input{
+                margin-right: 0;
+                margin-left: .8em;
+            }
+        }
+    }
+}
+
+.tablesaw-bar {
+    .tablesaw-bar-section {
+        .tablesaw-btn{
+            margin-left: 0;
+            margin-right: .4em;
+        }
+    }
+}
+// Responsive Table
+
+.table-rep-plugin {
+    .btn-group.pull-right {
+        float: left;
+    }
+    .checkbox-row {
+        label{
+            &:after{
+                margin-left: -22px;
+                top: -2px;
+            }
+        }
+    }
+}
+
+// Parsley
+.parsley-errors-list {
+    >li {
+        padding-left: 0;
+        padding-right: 20px;
+
+        &:before {
+            left: auto;
+            right: 2px;
+        }
+    }
+}

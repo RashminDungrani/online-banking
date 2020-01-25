@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Flot Charts | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body data-sidebar="dark">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        @@include("partials/topbar.html")
+
+        @@include("partials/sidebar.html")
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Flot Charts</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Charts</a></li>
+                                        <li class="breadcrumb-item active">Flot</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Bar Chart</h4>
+                                    <p class="card-title-desc">Below is the basic bar chart example.</p>
+
+                                    <div id="flot-bar-1" style="height: 320px"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Multi Bar Chart</h4>
+                                    <p class="card-title-desc">Below is the multi bar chart example.</p>
+
+                                    <div id="flot-bar-2" style="height: 320px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Line Chart</h4>
+                                    <p class="card-title-desc">Below is the basic line chart example.</p>
+
+                                    <div id="flot-line-1" style="height: 320px"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Multi Line Chart</h4>
+                                    <p class="card-title-desc">Below is the multi line chart example.</p>
+
+                                    <div id="flot-line-2" style="height: 320px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Line Chart with Dots</h4>
+                                    <p class="card-title-desc">Below is the line chart with dots example.</p>
+
+                                    <div id="flot-line-3" style="height: 320px"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Line Chart with Dots - Rounded</h4>
+                                    <p class="card-title-desc">Below is the line chart rounded with dots example.</p>
+
+                                    <div id="flot-line-4" style="height: 320px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Area Chart</h4>
+                                    <p class="card-title-desc">Below is the basic area chart example.</p>
+
+                                    <div id="flot-area-1" style="height: 320px"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Area Chart - Rounded</h4>
+                                    <p class="card-title-desc">Below is the rounded area chart example.</p>
+
+                                    <div id="flot-area-2" style="height: 320px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Real Time Updates - Line</h4>
+                                    <p class="card-title-desc">Below is the real time line chart example.</p>
+
+                                    <div id="flot-realtime-1" style="height: 320px"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Real Time Updates - Area</h4>
+                                    <p class="card-title-desc">Below is the real time area chart example.</p>
+
+                                    <div id="flot-realtime-2" style="height: 320px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Pie Chart</h4>
+                                    <p class="card-title-desc">Below is the pie chart example.</p>
+
+                                    <div id="flot-pie" style="height: 320px"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card" dir="ltr">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Donut Chart</h4>
+                                    <p class="card-title-desc">Below is the donut chart example.</p>
+
+                                    <div id="flot-donut" style="height: 320px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Combine Chart</h4>
+                                    <p class="card-title-desc">Below is the combine chart example.</p>
+
+                                    <div id="combine-chart">
+                                        <div id="combine-chartContainer"
+                                            style="height:300px;">
+                                        </div>
+                                        <div id="combine-chart-labels" class="mt-4 float-lable-box"> </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Toggling Series</h4>
+                                    <p class="card-title-desc">Below is the toggling series chart example.</p>
+
+                                    <div id="toggle-chart">
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-4">
+                                                <h6>Chart Type :</h6>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="chartType1" name="custominlineRadio" value="line" class="custom-control-input" checked>
+                                                    <label class="custom-control-label" for="chartType1">Line Chart</label>
+                                                </div>
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" id="chartType2" name="custominlineRadio" value="bar" class="custom-control-input">
+                                                    <label class="custom-control-label" for="chartType2">Bar Chart</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 mb-4">
+                                                <h6>Toggle Series :</h6>
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" id="cbdata1" checked>
+                                                    <label class="custom-control-label" for="cbdata1">Data 1</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" id="cbdata2" checked>
+                                                    <label class="custom-control-label" for="cbdata2">Data 2</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    <input type="checkbox" class="custom-control-input" id="cbdata3" checked>
+                                                    <label class="custom-control-label" for="cbdata3">Data 3</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="toggle-chartContainer" style="height:270px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+
+            @@include("partials/footer.html")
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    @@include("partials/right-sidebar.html")
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- flot plugins -->
+    <script src="assets/libs/flot-charts/jquery.flot.js"></script>
+    <script src="assets/libs/flot-charts/jquery.flot.time.js"></script>
+    <script src="assets/libs/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="assets/libs/flot-charts/jquery.flot.resize.js"></script>
+    <script src="assets/libs/flot-charts/jquery.flot.pie.js"></script>
+    <script src="assets/libs/flot-charts/jquery.flot.selection.js"></script>
+    <script src="assets/libs/flot-charts/jquery.flot.stack.js"></script>
+    <script src="assets/libs/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="assets/libs/flot-charts/jquery.flot.crosshair.js"></script>
+
+    <!-- flot init -->
+    <script src="assets/js/pages/flot.init.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

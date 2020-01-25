@@ -1,0 +1,77 @@
+// 
+// _demos.scss
+// 
+
+// Demo Only
+.button-items {
+    margin-left: -8px;
+    margin-bottom: -12px;
+    
+    .btn {
+        margin-bottom: 12px;
+        margin-left: 8px;
+    }
+}
+
+// Lightbox 
+
+.mfp-popup-form {
+    max-width: 1140px;
+}
+
+// Modals
+
+.bs-example-modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+  }
+
+
+// Icon demo ( Demo only )
+.icon-demo-content {
+    text-align: center;
+    color: $gray-500;
+  
+    i{
+      display: block;
+      font-size: 24px;
+      color: $gray-600;
+      width: 48px;
+      height: 48px;
+      line-height: 46px;
+      margin: 0px auto;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      border: 1px solid $border-color;
+      transition: all 0.4s;
+    }
+  
+    .col-lg-4 {
+      margin-top: 24px;
+  
+      &:hover {
+        i {
+          background-color: $primary;
+          color: $white;
+        }
+      }
+    }
+}
+
+
+// Grid
+
+.grid-structure {
+    .grid-container {
+        background-color: $gray-100;
+        margin-top: 10px;
+        font-size: .8rem;
+        font-weight: $font-weight-medium;
+        padding: 10px 20px;
+    }
+}

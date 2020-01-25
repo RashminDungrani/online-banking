@@ -1,0 +1,42 @@
+
+//
+// alertify.scss
+//
+
+
+.alertify {
+    .ajs-dialog{
+        box-shadow: $box-shadow;
+    }
+
+    .ajs-footer {
+        .ajs-buttons {
+            .ajs-button{
+                &.ajs-ok{
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
+
+.alertify-notifier {
+    .ajs-message{
+        background-color: $primary;
+        border-color: $primary;
+        color: $white;
+        text-shadow: none !important;
+        &.ajs-success{
+            background-color: $success;
+            border-color: $success;
+        }
+        &.ajs-error{
+            background-color: $danger;
+            border-color: $danger;
+        }
+        &.ajs-warning{
+            background-color: $warning;
+            border-color: $warning;
+        }
+    }
+}

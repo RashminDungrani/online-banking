@@ -1,0 +1,149 @@
+//
+// chartist.scss
+//
+
+.ct-golden-section:before {
+    float: none;
+}
+
+.ct-chart {
+    max-height: 300px;
+    .ct-label {
+        fill: $gray-500;
+        color: $gray-500;
+        font-size: 12px;
+        line-height: 1;
+    }
+}
+
+.ct-chart.simple-pie-chart-chartist {
+    .ct-label {
+        color: $white;
+        fill: $white;
+        font-size: 16px;
+    }
+}
+
+.ct-grid {
+    stroke: rgba($dark, 0.1);
+}
+
+.ct-chart {
+    .ct-series {
+        &.ct-series-a {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $primary;
+            }
+        }
+        &.ct-series-b {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $warning;
+            }
+        }
+        &.ct-series-c {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $danger;
+            }
+        }
+        &.ct-series-d {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $info;
+            }
+        }
+        &.ct-series-e {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $success;
+            }
+        }
+        &.ct-series-f {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $dark;
+            }
+        }
+        &.ct-series-g {
+            .ct-bar,
+            .ct-line,
+            .ct-point,
+            .ct-slice-donut {
+                stroke: $purple;
+            }
+        }
+    }
+}
+
+
+.ct-series-a {
+    .ct-area,
+    .ct-slice-pie {
+        fill: $primary;
+    }
+}
+
+.ct-series-b {
+    .ct-area,
+    .ct-slice-pie {
+        fill: $success;
+    }
+}
+
+.ct-series-c {
+    .ct-area,
+    .ct-slice-pie {
+        fill: $warning;
+    }
+}
+
+.ct-series-d {
+    .ct-area,
+    .ct-slice-pie {
+        fill: $success;
+    }
+}
+
+.ct-area {
+    fill-opacity: .33;
+}
+
+.chartist-tooltip {
+    position: absolute;
+    display: inline-block;
+    opacity: 0;
+    min-width: 10px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    background: $dark;
+    color: $gray-300;
+    text-align: center;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .2s linear;
+    &.tooltip-show {
+        opacity: 1;
+    }
+}
+
+.ct-line {
+    stroke-width: 3px;
+}
+
+.ct-point {
+    stroke-width: 7px;
+}

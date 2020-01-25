@@ -1,0 +1,67 @@
+// 
+// nestable-list.scss
+//
+
+.dd-list {
+    .dd-item {
+        .dd-handle {
+            background: $gray-300;
+            border: none;
+            padding: 8px 16px;
+            color: $gray-600;
+            height: auto;
+            font-weight: $font-weight-medium;
+            border-radius: 3px;
+            &:hover {
+                color: $primary;
+            }
+        }
+        button {
+            height: 36px;
+            font-size: 17px;
+            margin: 0;
+            color: $gray-600;
+            width: 36px;
+        }
+    }
+    .dd3-item {
+        margin: 5px 0;
+
+        .dd-item button {
+            width: 36px;
+            height: 36px;
+        }
+    }
+    .dd3-handle {
+        margin: 0;
+        height: 36px !important;
+        float: left;
+    }
+    .dd3-content {
+        height: auto;
+        border: none;
+        padding: 8px 16px 8px 46px;
+        background: $gray-100;
+        font-weight: 600;
+        &:hover {
+            color: $primary;
+        }
+    }
+    .dd3-handle:before {
+        content: "\F35C";
+        font-family: "Material Design Icons";
+        color: $gray-500;
+    }
+}
+
+.dd-empty,
+.dd-placeholder {
+    background: rgba($gray-300,0.2);
+    border-color: $gray-300;
+}
+
+.dd-dragel {
+    .dd-handle {
+        box-shadow: $box-shadow;
+    }
+}

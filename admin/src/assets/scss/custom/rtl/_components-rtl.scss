@@ -1,0 +1,21 @@
+//
+// components-rtl.scss
+//
+
+
+// dropdown
+
+.dropdown-megamenu{
+  &.show{
+    left: 20px!important;
+  }
+}
+
+// Progress
+
+.progress-animate {
+  .progress-value {
+    right: auto;
+    left: -14px;
+  }
+}

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Email Read | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- Bootstrap Css -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-sidebar="dark">
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            @@include("partials/topbar.html")
+
+            @@include("partials/sidebar.html")
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-flex align-items-center justify-content-between">
+                                    <h4 class="mb-0 font-size-18">Email Read</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Email</a></li>
+                                            <li class="breadcrumb-item active">Email Read</li>
+                                        </ol>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title -->
+
+                        <div class="row mb-4">
+                            <div class="col-xl-3">
+                                <div class="card h-100">
+                                    <div class="card-body email-leftbar">
+                                        <a href="email-compose.html" class="btn btn-danger btn-block btn-rounded waves-effect waves-light"><i class="mdi mdi-plus mr-1"></i> Compose</a>
+
+                                        <div class="mail-list mt-4">
+                                            <a href="#" class="active"><i class="mdi mdi-inbox mr-2"></i> Inbox <span class="ml-1 float-right">(18)</span></a>
+                                            <a href="#"><i class="mdi mdi-star-outline mr-2"></i>Starred</a>
+                                            <a href="#"><i class="mdi mdi-diamond-stone mr-2"></i>Important</a>
+                                            <a href="#"><i class="mdi mdi-file-outline mr-2"></i>Draft</a>
+                                            <a href="#"><i class="mdi mdi-send-check-outline mr-2"></i>Sent Mail</a>
+                                            <a href="#"><i class="mdi mdi-trash-can-outline mr-2"></i>Trash</a>
+                                        </div>
+
+                                        <div>
+                                            <h6 class="mt-4">Labels</h6>
+        
+                                            <div class="mail-list mt-1">
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-info"></span>Theme Support</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-warning"></span>Freelance</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-primary"></span>Social</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-danger"></span>Friends</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-success"></span>Family</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-9">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="btn-toolbar" role="toolbar">
+                                            <div class="btn-group mr-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect"><i class="fa fa-inbox"></i></button>
+                                                <button type="button" class="btn btn-primary waves-light waves-effect"><i class="fa fa-exclamation-circle"></i></button>
+                                                <button type="button" class="btn btn-primary waves-light waves-effect"><i class="far fa-trash-alt"></i></button>
+                                            </div>
+                                            <div class="btn-group mr-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-folder"></i> <i class="mdi mdi-chevron-down ml-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Updates</a>
+                                                    <a class="dropdown-item" href="#">Social</a>
+                                                    <a class="dropdown-item" href="#">Team Manage</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="btn-toolbar justify-content-md-end" role="toolbar">
+                                            <div class="btn-group ml-md-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-tag"></i> <i class="mdi mdi-chevron-down ml-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Updates</a>
+                                                    <a class="dropdown-item" href="#">Social</a>
+                                                    <a class="dropdown-item" href="#">Team Manage</a>
+                                                </div>
+                                            </div>
+            
+                                            <div class="btn-group ml-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    More <i class="mdi mdi-dots-vertical ml-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Mark as Unread</a>
+                                                    <a class="dropdown-item" href="#">Mark as Important</a>
+                                                    <a class="dropdown-item" href="#">Add to Tasks</a>
+                                                    <a class="dropdown-item" href="#">Add Star</a>
+                                                    <a class="dropdown-item" href="#">Mute</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-0">
+                                    <div class="card-body">
+                                        <div class="media mb-4">
+                                            <img class="d-flex mr-3 rounded-circle avatar-sm" src="assets/images/users/avatar-1.jpg" alt="Generic placeholder image">
+                                            <div class="media-body">
+                                                <h4 class="font-size-16">Frankie Dyer</h4>
+                                                <p class="text-muted font-size-13">support@domain.com</p>
+                                            </div>
+                                        </div>
+                                        <h4 class="font-size-16">This Week's Top Stories</h4>
+        
+                                        <p>Dear Shane,</p>
+                                        <p>Praesent dui ex, dapibus eget mauris ut, finibus vestibulum enim. Quisque arcu leo, facilisis in fringilla id, luctus in tortor. Nunc vestibulum est quis orci varius viverra. Curabitur dictum volutpat massa vulputate molestie. In at felis ac velit maximus
+                                            convallis.</p>
+                                        <p>Sed elementum turpis eu lorem interdum, sed porttitor eros commodo. Nam eu venenatis tortor, id lacinia diam. Sed aliquam in dui et porta. Sed bibendum orci non tincidunt ultrices. Vivamus fringilla, mi lacinia dapibus condimentum, ipsum urna lacinia
+                                            lacus, vel tincidunt mi nibh sit amet lorem.</p>
+                                        <p>Sincerly,</p>
+                                        <hr/>
+
+                                        <div class="row">
+                                            <div class="col-xl-2 col-6">
+                                                <div class="card">
+                                                    <img class="card-img-top img-fluid" src="assets/images/small/img-3.jpg" alt="Card image cap">
+                                                    <div class="py-2 text-center">
+                                                        <a href="" class="font-weight-medium">Download</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-2 col-6">
+                                                <div class="card">
+                                                    <img class="card-img-top img-fluid" src="assets/images/small/img-4.jpg" alt="Card image cap">
+                                                    <div class="py-2 text-center">
+                                                        <a href="" class="font-weight-medium">Download</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <a href="email-compose.html" class="btn btn-secondary waves-effect mt-4"><i class="mdi mdi-reply"></i> Reply</a>
+                                    </div>
+                                </div>
+                                <!-- end card -->
+
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                @@include("partials/footer.html")
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        @@include("partials/right-sidebar.html")
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <script src="assets/js/app.js"></script>
+
+    </body>
+</html>
