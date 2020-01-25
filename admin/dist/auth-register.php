@@ -4,6 +4,7 @@
     alertify.alert("Info", "Your Admin id is "+ admin_id+"", function() {
       alertify.success("Ok");
       window.location = 'http://localhost/online-banking/admin/dist/auth-login.php';
+
     });
     return false;
   }
@@ -212,10 +213,13 @@
 
       if ($result)
       {
+        session_start();
+        $_SESSION['Admin_id'] = $admin_id;
         echo '<script type="text/JavaScript">  
         displayAdminId("'.$admin_id.'");
        </script>' 
         ;
+        
 
       }
       else

@@ -1,3 +1,37 @@
+
+<?php
+
+  include('connect.php');
+  session_start();
+  session_unset();
+  session_destroy();
+
+  
+  session_start();
+  
+  if(isset($_REQUEST['btn_submit']))
+  {
+    $Admin_id = $_REQUEST["txt_adminid"];
+    $Password = $_REQUEST["txt_password"];
+    $query = "SELECT admin_id, password FROM tbl_admin WHERE admin_id = '$Admin_id' AND  password='$Password' ";
+    $result1 = mysqli_query($con,$query);
+    $row = mysqli_fetch_assoc($result1);
+    
+    if(mysqli_num_rows($result1) > 0 )
+    {
+      $_SESSION['admin_id'] = $Admin_id;
+      header("location:https://localhost/online-banking/admin/dist/index.html");
+    }
+    else
+    {
+      echo 'The username or password are incorrect!';
+      echo "ERROR: Could not able to execute $row. " . mysqli_error($con);
+      header("location:https://localhost/online-banking/admin/dist/pages-404.html");
+    }
+  
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,7 +86,7 @@
                   <h5 class="mb-5 text-center">
                     Sign in to continue to Net Banking.
                   </h5>
-                  <form class="form-horizontal" action="index.html">
+                  <form class="form-horizontal">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group mb-4">
@@ -61,7 +95,11 @@
                             type="text"
                             class="form-control"
                             id="adminId"
+                            name='txt_adminid'
                             placeholder="Enter admin Id"
+                            value=""
+                            required
+
                           />
                         </div>
                         <div class="form-group mb-4">
@@ -70,7 +108,9 @@
                             type="password"
                             class="form-control"
                             id="userpassword"
+                            name="txt_password"
                             placeholder="Enter password"
+                            required
                           />
                         </div>
 
@@ -81,6 +121,7 @@
                                 type="checkbox"
                                 class="custom-control-input"
                                 id="customControlInline"
+                                
                               />
                               <label
                                 class="custom-control-label"
@@ -102,6 +143,7 @@
                           <button
                             class="btn btn-success btn-block waves-effect waves-light"
                             type="submit"
+                            name="btn_submit"
                           >
                             Log In
                           </button>
