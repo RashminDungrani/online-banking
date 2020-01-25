@@ -1,33 +1,16 @@
-<?php
-  include('connect.php');
-
-  if(isset($_REQUEST['btn_submit']))
+<script type="text/javascript">
+  function displayAdminId(admin_id)
   {
-
-    $full_name = $_REQUEST['txt_fullname'];
-    $mobile = $_REQUEST['txt_mobile'];
-    $email = $_REQUEST['txt_email'];
-    $password = $_REQUEST['txt_password'];
-
-    $query = "INSERT INTO tbl_admin (fullname, mobile, email, password) VALUES ('$full_name', $mobile, '$email','$password')";
-
-    $result = mysqli_query($con, $query);
-
-     
-     
-    if($result)
-    {
-     header('location:http://localhost/Online_Banking/admin/auth-login.php');
-    } 
-    else
-    {
-      echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
-    }
-}
-
-?>
+    alertify.alert("Info", "Your Admin id is "+ admin_id+"", function() {
+      alertify.success("Ok");
+      window.location = 'http://localhost/online-banking/admin/dist/auth-login.php';
+    });
+    return false;
+  }
+</script>
 
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -40,6 +23,12 @@
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
+
+   <!-- alertifyjs Css -->
+    <link href="assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link
@@ -72,7 +61,10 @@
           </div>
         </div>
         <!-- end row -->
-        <form action="">
+        <!-- action="auth-register.php?action=add" -->
+        <form name="add" id="add" method="get"  enctype="multipart/form-data">
+<!-- 
+        <form action=""> -->
           <div class="row justify-content-center">
             <div class="col-lg-5">
               <div class="card">
@@ -100,7 +92,7 @@
                               type="text"
                               class="form-control"
                               name="txt_mobile"
-                              placeholder="Enter Mobile"
+                                placeholder="Enter Mobile"
                               required
                             />
                           </div>
@@ -125,41 +117,26 @@
                             />
                           </div>
                           <div class="custom-control custom-checkbox">
-                            <input
-                              type="checkbox"
-                              class="custom-control-input"
-                              name="term-conditionCheck"
-                              required
-                            />
-                            <label
-                              class="custom-control-label font-weight-normal"
-                              for="term-conditionCheck"
-                              >I accept
-                              <a href="#" class="text-primary"
-                                >Terms and Conditions</a
-                              ></label
-                            >
+                                                    <input type="checkbox" class="custom-control-input" id="term-conditionCheck">
+                                                    <label class="custom-control-label font-weight-normal" for="term-conditionCheck">I accept <a href="#" class="text-primary">Terms and Conditions</a></label>
                           </div>
-                           <div class="row text-center">
-                                            <div class="col-sm-4">
-                                                <div class="my-4">
-                                                    <h5 class="mb-4">Alert</h5>
-
-                                                    <a href="javascript: void(0);"  id="alert" class="btn btn-primary waves-effect waves-light">Click me</a>
-                                                </div>
-                                            </div>
-</div>
+                          
+                          
+                         
+                            </div>
+                          </div>
                           <div class="mt-4">
-                            <button
-                              class="btn btn-success btn-block waves-effect waves-light"
-                              type="submit"
-                              name="btnSubmit"
+                            <input type="submit" 
+                            class="btn btn-success btn-block waves-effect waves-light" 
+                            
+                            value="Register"
+                            name="btnSubmit"
                             >
-                              Register
+                              
                             </button>
                           </div>
                           <div class="mt-4 text-center">
-                            <a href="auth-login.html" class="text-muted"
+                            <a href="auth-login.php" class="text-muted"
                               ><i class="mdi mdi-account-circle mr-1"></i>
                               Already have account?</a
                             >
@@ -172,7 +149,8 @@
               </div>
             </div>
           </div>
-        </form>
+    
+        
         <!-- end row -->
       </div>
     </div>
@@ -189,6 +167,69 @@
     <script src="assets/libs/alertifyjs/build/alertify.min.js"></script>
     <script src="assets/js/pages/alertifyjs.init.js"></script>
 
+  <!-- Showing Admin ID in alert after switch to Admin login page-->
+    <!-- <script>
+      $("#add").submit(function() {
+  alertify.alert("Alert Title", "Alert Message!", function() {
+    alertify.success("Ok");
+    window.location = '/auth-login.php';
+  });
+  return false;
+});
+
+    </script> -->
+    
+
     <script src="assets/js/app.js"></script>
   </body>
 </html>
+
+
+
+<?php
+  include('connect.php');
+
+  if(isset($_REQUEST['btnSubmit']))
+  {
+    $full_name = $_REQUEST['txt_fullname'];
+    $mobile = $_REQUEST['txt_mobile'];
+    $email = $_REQUEST['txt_email'];
+    $password = $_REQUEST['txt_password'];
+
+    $query = "INSERT INTO tbl_admin (full_name, mobile, email, password) VALUES ('$full_name', '$mobile', '$email','$password')";
+
+    $result = mysqli_query($con, $query);
+
+     
+     
+    if($result)
+    {
+      $query = "SELECT admin_id FROM tbl_admin WHERE mobile='$mobile'";
+      $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error());
+      $row = mysqli_fetch_assoc($result);
+      $admin_id = $row['admin_id'];
+
+
+      if ($result)
+      {
+        echo '<script type="text/JavaScript">  
+        displayAdminId("'.$admin_id.'");
+       </script>' 
+        ;
+
+      }
+      else
+      {
+        print($result);
+
+        echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
+      }
+    } 
+    else
+    {
+      echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
+    }
+    
+}
+
+?>
