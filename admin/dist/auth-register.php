@@ -197,7 +197,7 @@
     $email = $_REQUEST['txt_email'];
     $password = $_REQUEST['txt_password'];
 
-    $query = "INSERT INTO tbl_admin (full_name, mobile, email, password) VALUES ('$full_name', '$mobile', '$email','$password')";
+    $query = "INSERT INTO tbl_admin (full_name, mobile, email, password) VALUES ('$full_name', '$mobile', '$email', '$password')";
 
     $result = mysqli_query($con, $query);
 

@@ -1,3 +1,20 @@
+<?php
+    include('connect.php');
+    session_start();
+    $Username = $_SESSION["s_username"];
+    // if Session is getting username then user can access index.php else require login
+    if(isset($_SESSION["s_username"]))
+    {
+        $query_customer = "SELECT * FROM tbl_customer WHERE username='$Username'";
+        $result_customer = mysqli_query($con, $query_customer);
+        $row_customer = mysqli_fetch_array($result_customer);
+    } else {
+        header("location:http://localhost/online-banking/site/dist/auth_login.php");
+    }
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -225,7 +242,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-sm-inline-block ml-1">Shane</span>
+                                <span class="d-none d-sm-inline-block ml-1"><?php echo $row_customer['full_name'] ?></span>
                                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">

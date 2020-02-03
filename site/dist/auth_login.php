@@ -1,4 +1,3 @@
-
 <?php
 
   include('connect.php');
@@ -10,27 +9,29 @@
   session_start();
   
   if(isset($_REQUEST['btn_submit']))
-  {
-    $Admin_id = $_REQUEST["txt_adminid"];
-    $Password = $_REQUEST["txt_password"];
-    $query = "SELECT admin_id, password FROM tbl_admin WHERE admin_id = '$Admin_id' AND  password='$Password' ";
+  { 
+
+    $username = $_REQUEST["txt_username"];
+    $password = $_REQUEST["txt_password"];
+    $query = "SELECT username, password FROM tbl_account WHERE username = '$username' AND  password='$password' ";
     $result1 = mysqli_query($con,$query);
-    $row = mysqli_fetch_assoc($result1);
     
     if(mysqli_num_rows($result1) > 0 )
     {
-      $_SESSION['admin_id'] = $Admin_id;
-      header("location:https://localhost/online-banking/admin/dist/index.php");
+        $_SESSION["s_username"] = $username;
+        header("location:http://localhost/online-banking/site/dist/index.php");
+        
     }
     else
     {
-      echo 'The username or password are incorrect!';
-      echo "ERROR: Could not able to execute $row. " . mysqli_error($con);
-      header("location:https://localhost/online-banking/admin/dist/pages-404.html");
+        // todo : Showing Alertifi if username or password is incorrect
+        echo 'The username or password are incorrect!';
+        echo "ERROR: Could not able to execute". $result1."  . mysqli_error($con)";
     }
   
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,13 +91,13 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group mb-4">
-                          <label for="id">Admin ID</label>
+                          <label for="id">Username</label>
                           <input
                             type="text"
                             class="form-control"
                             id="adminId"
-                            name='txt_adminid'
-                            placeholder="Enter admin Id"
+                            name='txt_username'
+                            placeholder="Your Username"
                             value=""
                             required
 
@@ -149,7 +150,7 @@
                           </button>
                         </div>
                         <div class="mt-4 text-center">
-                          <a href="auth-register.php" class="text-muted"
+                          <a href="auth_register.php" class="text-muted"
                             ><i class="mdi mdi-account-circle mr-1"></i> Create
                             an account</a
                           >

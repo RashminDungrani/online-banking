@@ -1,9 +1,9 @@
 <script type="text/javascript">
-  function displayAdminId(admin_id)
+  function alertifySuccess()
   {
-    alertify.alert("Info", "Your Admin id is "+ admin_id+"", function() {
+    alertify.alert("Info", "Registration Success", function() {
       alertify.success("Ok");
-      window.location = 'http://localhost/online-banking/admin/dist/auth-login.php';
+      window.location = 'http://localhost/online-banking/site/dist/auth-login.php';
 
     });
     return false;
@@ -74,14 +74,14 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip01">First name</label>
-                                                <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="" required>
+                                                <input type="text" name="txt_fname" class="form-control" id="validationTooltip01" placeholder="First name" value="" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip02">Last name</label>
-                                                <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="" required>
+                                                <input type="text" name="txt_lname" class="form-control" id="validationTooltip02" placeholder="Last name" value="" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -94,11 +94,11 @@
                                                 <h5 class="font-size-14 mb-3">Gender</h5>
                                                     
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="custominlineRadio1" name="custominlineRadio" class="custom-control-input" checked>
+                                                        <input type="radio" name="txt_gender" id="custominlineRadio1" name="custominlineRadio" class="custom-control-input" checked>
                                                         <label class="custom-control-label" for="custominlineRadio1">Male</label>
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="custominlineRadio2" name="custominlineRadio" class="custom-control-input">
+                                                        <input type="radio" name="txt_gender" id="custominlineRadio2" name="custominlineRadio" class="custom-control-input">
                                                         <label class="custom-control-label" for="custominlineRadio2">Female</label>
                                                     </div>
                                                 </div>
@@ -106,7 +106,7 @@
                                              <div class="form-group mb-4">
                                                 <label>Birth Date</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" data-provide="datepicker" data-date-autoclose="true">
+                                                    <input type="text" name="txt_bdate" class="form-control" placeholder="mm/dd/yyyy" data-provide="datepicker" data-date-autoclose="true">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                                                     </div>
@@ -120,14 +120,14 @@
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip01">Mobile</label>
-                                                <input type="text" class="form-control" id="validationTooltip01" placeholder="Mobile" value="" required>
+                                                <input type="text" name="txt_mobile" class="form-control" id="validationTooltip01" placeholder="Mobile" value="" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip02">Email</label>
-                                                <input type="text" class="form-control" id="validationTooltip02" placeholder="Email Id" value="Otto" required>
+                                                <input type="text" name="txt_email" class="form-control" id="validationTooltip02" placeholder="Email Id" value="Otto" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
@@ -139,28 +139,28 @@
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                 <label for="validationTooltip03">Address</label>
-                                                <input type="text" class="form-control" id="validationTooltip03" placeholder="Address" required>
+                                                <input type="text" name="txt_address" class="form-control" id="validationTooltip03" placeholder="Address" required>
                                                 <div class="invalid-feedback">
                                                     Please provide a valid city.
                                                 </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                 <label for="validationTooltip03">City</label>
-                                                <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
+                                                <input type="text" name="txt_city" class="form-control" id="validationTooltip03" placeholder="City" required>
                                                 <div class="invalid-feedback">
                                                     Please provide a valid city.
                                                 </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
                                                 <label for="validationTooltip04">State</label>
-                                                <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
+                                                <input type="text" name="txt_state" class="form-control" id="validationTooltip04" placeholder="State" required>
                                                 <div class="invalid-feedback">
                                                     Please provide a valid state.
                                                 </div>
                                                 </div>
                                                 <div class="col-md-2 mb-3">
-                                                <label for="validationTooltip04">PinCode</label>
-                                                <input type="text" class="form-control" id="validationTooltip04" placeholder="PinCode" required>
+                                                <label for="validationTooltip04">Zip</label>
+                                                <input type="text" name="txt_zip" class="form-control" id="validationTooltip04" placeholder="Zip" required>
                                                 <div class="invalid-feedback">
                                                     Please provide a valid state.
                                                 </div>
@@ -173,35 +173,31 @@
                                                     <div class="input-group-prepend">
                                                     <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
                                                     </div>
-                                                    <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                                                    <input type="text" name="txt_username" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
                                                     <div class="invalid-feedback">
                                                     Please choose a unique and valid username.
                                                     </div>
                                                 </div>
                                                 </div>
-                                           <div class="col-md-4 mb-3">
-                                                <label for="validationTooltipUsername">Password</label>
-                                                <div class="input-group">
-                                                  
-                                                    <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Password" aria-describedby="validationTooltipUsernamePrepend" required>
-                                                    <div class="invalid-feedback">
-                                                    Please choose a unique and valid username.
-                                                    </div>
+
+
+
+                                            
+                                                <div class="col-md-4 mb-3">
+                                                  <label>Password</label>
+                                                    <input type="password" name="txt_password" id="pass2" class="form-control" required
+                                                            placeholder="Password"/>
                                                 </div>
-                                            </div>
-                                               
-                                               <div class="col-md-4 mb-3">
-                                                <label for="validationTooltipUsername">Confirm Password</label>
-                                                <div class="input-group">
-                                                    
-                                                    <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Confirm Password" aria-describedby="validationTooltipUsernamePrepend" required>
-                                                    <div class="invalid-feedback">
-                                                    Please choose a unique and valid username.
-                                                    </div>
+                                                <div class="col-md-4 mb-3">
+                                                  <label>Confirm Password</label>
+
+                                                    <input type="password" name="txt_repassword" class="form-control" required
+                                                            data-parsley-equalto="#pass2"
+                                                            placeholder="Re-Type Password"/>
                                                 </div>
                                             
-                                            
-                                            </div>
+                                                
+                                          
                                             </div>
                                             <div class="row">
                                                 <div class="custom-control custom-checkbox mt-3 col-md-12 mb-3">
@@ -212,7 +208,10 @@
                                             
                                             
                                             
-                                            <button class="btn btn-primary" type="submit">Register</button>
+                                            <button class="btn btn-primary" name="btnSubmit" type="submit">Register</button>
+                                            <div class="mt-4 text-right">
+                                                    <a href="auth_login.php" class="text-muted"><i class="mdi mdi-account-circle mr-1"></i> Already have an Account</a>
+                                                </div>
                                         </div>
                                         </form>
                                     </div>
@@ -221,97 +220,7 @@
                         </div>
 
 
-        <!-- action="auth-register.php?action=add" -->
-        <form name="add" id="add" method="get"  enctype="multipart/form-data">
-<!-- 
-        <form action=""> -->
-          <div class="row justify-content-center">
-            <div class="col-lg-5">
-              <div class="card">
-                <div class="card-body p-4">
-                  <div class="p-2">
-                    <h5 class="mb-5 text-center">
-                      Register Account to Central Bank.
-                    </h5>
-                    <form class="form-horizontal" action="auth-login.php">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group mb-4">
-                            <label for="fullname">Full name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="txt_fullname"
-                              placeholder="Enter full name"
-                              required
-                            />
-                          </div>
-                          <div class="form-group mb-4">
-                            <label for="mobile">Mobile</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="txt_mobile"
-                                placeholder="Enter Mobile"
-                              required
-                            />
-                          </div>
-                          <div class="form-group mb-4">
-                            <label for="email">Email</label>
-                            <input
-                              type="email"
-                              class="form-control"
-                              name="txt_email"
-                              placeholder="Enter email"
-                              required
-                            />
-                          </div>
-                          <div class="form-group mb-4">
-                            <label for="userpassword">Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              name="txt_password"
-                              placeholder="Enter password"
-                              required
-                            />
-                          </div>
-                          <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="term-conditionCheck">
-                                                    <label class="custom-control-label font-weight-normal" for="term-conditionCheck">I accept <a href="#" class="text-primary">Terms and Conditions</a></label>
-                          </div>
-                          
-                          
-                         
-                            </div>
-                          </div>
-                          <div class="mt-4">
-                            <input type="submit" 
-                            class="btn btn-success btn-block waves-effect waves-light" 
-                            
-                            value="Register"
-                            name="btnSubmit"
-                            >
-                              
-                            </button>
-                          </div>
-                          <div class="mt-4 text-center">
-                            <a href="auth-login.php" class="text-muted"
-                              ><i class="mdi mdi-account-circle mr-1"></i>
-                              Already have account?</a
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-        
-        <!-- end row -->
+   
       </div>
     </div>
     <!-- end Account pages -->
@@ -351,36 +260,47 @@
 
 
 <?php
-/*
+
   include('connect.php');
 
   if(isset($_REQUEST['btnSubmit']))
   {
-    $full_name = $_REQUEST['txt_fullname'];
+    $first_name = $_REQUEST['txt_fname'];
+    $last_name = $_REQUEST['txt_lname'];
+    $full_name = $first_name . " " . $last_name;
+
+    $gender = $_REQUEST['txt_gender'];
+    $birth_date = $_REQUEST['txt_bdate'];
+    $birth_date = date("Y-m-d", strtotime($birth_date) );
+
     $mobile = $_REQUEST['txt_mobile'];
     $email = $_REQUEST['txt_email'];
+    $address = $_REQUEST['txt_address'];
+    $city = $_REQUEST['txt_city'];
+    $state = $_REQUEST['txt_state'];
+    $zip = $_REQUEST['txt_zip'];
+    $username = $_REQUEST['txt_username'];
     $password = $_REQUEST['txt_password'];
 
-    $query = "INSERT INTO tbl_admin (full_name, mobile, email, password) VALUES ('$full_name', '$mobile', '$email','$password')";
-
-    $result = mysqli_query($con, $query);
-
-     
-     
-    if($result)
+    
+    // Query for inesrt record in tbl_account
+    $query = "INSERT INTO tbl_account (username, password) VALUES ('$username', '$password')";
+    
+    
+    $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error($con));
+    
+    if ($result)
     {
-      $query = "SELECT admin_id FROM tbl_admin WHERE mobile='$mobile'";
-      $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error());
-      $row = mysqli_fetch_assoc($result);
-      $admin_id = $row['admin_id'];
+      // query for insert record in tbl_customer
+      $query = "INSERT INTO tbl_customer (full_name, gender, birth_date, mobile, email) VALUES ('$full_name', '$gender', '$birth_date','$mobile', '$email')";
+  
+      $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error($con));
 
-
+      // After Successfully insert all records show alert Dialog Box that Register Successfully
       if ($result)
       {
-        session_start();
-        $_SESSION['Admin_id'] = $admin_id;
         echo '<script type="text/JavaScript">  
-        displayAdminId("'.$admin_id.'");
+        alertifySuccess();
        </script>' 
         ;
         
@@ -392,12 +312,11 @@
 
         echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
       }
-    } 
-    else
-    {
-      echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
+      
+    } else {
+      // todo : Show error -> username already exist
+      print("username already Exist");
     }
-    
-}
-*/
+     
+  }
 ?>
