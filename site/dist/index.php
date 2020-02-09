@@ -1,11 +1,12 @@
 <?php
     include('connect.php');
     session_start();
-    $Username = $_SESSION["s_username"];
-    // if Session is getting username then user can access index.php else require login
-    if(isset($_SESSION["s_username"]))
+    // if Session is getting account_no then user can access index.php else require login
+    if(isset($_SESSION["s_account_no"]))
     {
-        $query_customer = "SELECT * FROM tbl_customer WHERE username='$Username'";
+        $Account_no = $_SESSION["s_account_no"];
+        // get 
+        $query_customer = "SELECT * FROM tbl_customer WHERE account_no='$Account_no'";
         $result_customer = mysqli_query($con, $query_customer);
         $row_customer = mysqli_fetch_array($result_customer);
     } else {
@@ -20,7 +21,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Dashboard | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Net Banking</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -54,7 +55,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="index.php" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm-dark.png" alt="" height="22">
                                 </span>
@@ -63,7 +64,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="index.php" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm-light.png" alt="" height="22">
                                 </span>
@@ -252,7 +253,7 @@
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Settings</a>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item href="#"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
+                                <a class="dropdown-item" href="http://localhost/online-banking/site/dist/auth_login.php"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
                             </div>
                         </div>
                     </div>
@@ -266,8 +267,14 @@
                         <div class="collapse navbar-collapse" id="topnav-menu-content">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">
+                                    <a class="nav-link" href="index.php">
                                         <i class="mdi mdi-storefront mr-2"></i>Transactions
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="quick_transfer.php">
+                                        <i class="mdi mdi-bank-transfer mr-2"></i>Quick Transfer
                                     </a>
                                 </li>
 
