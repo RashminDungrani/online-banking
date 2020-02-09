@@ -2,8 +2,8 @@
   function alertifySuccess()
   {
     alertify.alert("Info", "Registration Success", function() {
+      window.location = 'http://localhost/online-banking/site/dist/auth_login.php';
       alertify.success("Ok");
-      window.location = 'http://localhost/online-banking/site/dist/auth-login.php';
 
     });
     return false;
@@ -48,14 +48,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="text-center mb-5">
+            <div class="text-center">
               <div clas="row">
-                <h5 class="font-size-20 text-white mb-4">
+                <h5 class="font-size-20 text-white mb-3">
                   <img src="assets/images/favicon.ico" height="24" alt="logo" />
                   Central Bank of India
                 </h5>
               </div>
-              <h5 class="font-size-16 text-white-50 mb-4">
+              <h5 class="font-size-16 text-white-50 mb-3">
                 A tradition of trust
               </h5>
             </div>
@@ -94,11 +94,11 @@
                                                 <h5 class="font-size-14 mb-3">Gender</h5>
                                                     
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="txt_gender" id="custominlineRadio1" name="custominlineRadio" class="custom-control-input" checked>
+                                                        <input type="radio" name="txt_gender" value="M" id="custominlineRadio1" name="custominlineRadio" class="custom-control-input" checked>
                                                         <label class="custom-control-label" for="custominlineRadio1">Male</label>
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" name="txt_gender" id="custominlineRadio2" name="custominlineRadio" class="custom-control-input">
+                                                        <input type="radio" name="txt_gender" value="F" id="custominlineRadio2" name="custominlineRadio" class="custom-control-input">
                                                         <label class="custom-control-label" for="custominlineRadio2">Female</label>
                                                     </div>
                                                 </div>
@@ -199,6 +199,15 @@
                                                 
                                           
                                             </div>
+                                            <div class="col-md-3 mb-3">
+                                                    <label>Account Type</label>
+                                                    <select name="txt_account_type" class="custom-select" required>
+                                                        <option value="">SELECT ACCOUNT TYPE</option>
+                                                        <option value="SAVING">SAVING</option>
+                                                        <option value="CURRENT">CURRENT</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">select account type</div>
+                                                </div>
                                             <div class="row">
                                                 <div class="custom-control custom-checkbox mt-3 col-md-12 mb-3">
                                                     <input type="checkbox" class="custom-control-input" id="term-conditionCheck" checked>
@@ -282,19 +291,32 @@
     $username = $_REQUEST['txt_username'];
     $password = $_REQUEST['txt_password'];
 
+    $account_type = $_REQUEST['txt_account_type'];
+
     
     // Query for inesrt record in tbl_account
     $query = "INSERT INTO tbl_account (username, password) VALUES ('$username', '$password')";
-    
-    
     $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error($con));
     
     if ($result)
     {
+      // get account_no from username
+      $query_account_no = "SELECT account_no FROM tbl_account WHERE username='$username'";
+      $result_account_no = mysqli_query($con, $query_account_no);
+      $account_no = mysqli_fetch_array($result_account_no)[0];  // ! [0] for the first value of array
+      
       // query for insert record in tbl_customer
-      $query = "INSERT INTO tbl_customer (full_name, gender, birth_date, mobile, email) VALUES ('$full_name', '$gender', '$birth_date','$mobile', '$email')";
-  
+      $query = "INSERT INTO tbl_customer (account_no, full_name, gender, birth_date, mobile, email) VALUES ($account_no,'$full_name', '$gender', '$birth_date','$mobile', '$email')";
+      
       $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error($con));
+      
+      // Query for tbl_account_type
+      $query_for_account_type = "INSERT INTO tbl_account_type (account_no,account_type) VALUES ($account_no, '$account_type')";
+      $result_of_account_type = mysqli_query($con, $query_for_account_type) or die('SQL Error :: '.mysqli_error($con));
+
+      // Query for tbl_account_bal
+      $query_for_account_bal = "INSERT INTO tbl_balance (account_no,account_type,balance) VALUES ($account_no, '$account_type',0)";
+      $result_of_account_bal = mysqli_query($con, $query_for_account_bal) or die('SQL Error :: '.mysqli_error($con));
 
       // After Successfully insert all records show alert Dialog Box that Register Successfully
       if ($result)
