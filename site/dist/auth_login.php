@@ -18,7 +18,12 @@
     
     if(mysqli_num_rows($result1) > 0 )
     {
-        $_SESSION["s_username"] = $username;
+        // get account number from userame
+        $query_account_no = "SELECT account_no FROM tbl_account WHERE username='$username'";
+        $result_account_no = mysqli_query($con, $query_account_no);
+        $account_no = mysqli_fetch_array($result_account_no)[0];
+        // echo $account_no;
+        $_SESSION["s_account_no"] = $account_no;
         header("location:http://localhost/online-banking/site/dist/index.php");
         
     }
