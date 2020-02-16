@@ -5,10 +5,45 @@
     if(isset($_SESSION["s_account_no"]))
     {
         $Account_no = $_SESSION["s_account_no"];
-        // get 
+        // For Getting Customer Details
         $query_customer = "SELECT * FROM tbl_customer WHERE account_no='$Account_no'";
         $result_customer = mysqli_query($con, $query_customer);
         $row_customer = mysqli_fetch_array($result_customer);
+
+        // For Getting Different Types of values in page
+        $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
+        $transaction_result = mysqli_query($con,$query_for_transactions);
+        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
+
+        // For getting Acount Balance
+        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
+        $result_account_bal = mysqli_query($con, $query_for_account_bal);
+        $account_bal = mysqli_fetch_array($result_account_bal)[0];
+
+        // For Sum of Credit Amount
+        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
+        $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        $total_credit = mysqli_fetch_assoc($query_credit_result);
+        if (!empty($total_credit['credit_sum'])) {
+            $credit_sum = $total_credit['credit_sum'];
+        }
+        else {
+            $credit_sum = 0;
+        }
+        
+        // For Sum of Debit Amount
+        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
+        $query_debit_result = mysqli_query($con,$query_for_debit_total);
+        $total_debit = mysqli_fetch_assoc($query_debit_result);
+        if (!empty($total_debit['debit_sum'])) {
+            $debit_sum = $total_debit['debit_sum'];
+        }
+        else {
+            $debit_sum = 0;
+        }
+        
+
+        
     } else {
         header("location:http://localhost/online-banking/site/dist/auth_login.php");
     }
@@ -506,7 +541,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">1,753</h4>
+                                        <h4 class="m-0 align-self-center"><?php echo $no_of_transaction?></h4>
             
                                     </div>
                                 </div>
@@ -525,7 +560,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">$45,253</h4>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $credit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -544,7 +579,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">$12.74</h4>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $debit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -556,14 +591,14 @@
                                         <div class="media">
                                             <div class="media-body">
                                                 <h5 class="font-size-14">Current Balance<br></h5>
-                                            </div>
+                                                </div>
                                             <div class="avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-primary">
                                                     <i class="dripicons-cart"></i>
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">20,781</h4>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $account_bal ?></h4>
             
                                     </div>
                                 </div>
@@ -572,8 +607,34 @@
                         </div>
                         <div class="row"><br></div>
                         <!-- end row -->
-            
-            
+                        <?php            
+
+                        
+
+                        // echo "<table>"; // start a table tag in the HTML
+                        // // For transactions in Home Page(index page)
+                        // $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
+                        // $transaction_result = mysqli_query($con,$query_for_transactions);
+
+                        // while($row = mysqli_fetch_array($transaction_result)) {
+                        // $to_account_no = $row['to_account'];
+                        // $query_for_ben_name = "SELECT full_name FROM tbl_customer WHERE account_no=$to_account_no";
+                        // $result_ben_name = mysqli_query($con, $query_for_ben_name);
+                        // $ben_name = mysqli_fetch_array($result_ben_name)[0];
+
+                        // echo "<tr><td>" . $row['trans_id'] . "</td><td>" .$ben_name . "</td><td>" . $row['trans_date'] . "</td><td>" . $row['purpose'] ."</td><td>" . $row['trans_type'] . "</td><td>" .  $row['amount'] . "</td><td>" . $row['account_bal'] . "</td></tr>";  //$row['index'] the index here is a field name
+                        // }
+
+                        // echo "</table>"; //Close the table in HTML
+                   
+                        
+                        // $result = mysql_query('SELECT SUM(value) AS value_sum FROM codes'); 
+                        // $row = mysql_fetch_assoc($result); 
+                        // $sum = $row['value_sum'];
+                    
+                        
+                        ?>
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">
@@ -602,7 +663,51 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+
+                                               
+                                                <?php
+                                                    // For transactions in Home Page(index page)
+                                                    $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
+                                                    $transaction_result = mysqli_query($con,$query_for_transactions);
+                                                    $no_of_transaction = mysqli_num_rows($transaction_result);
+
+                                                    while($row = mysqli_fetch_array($transaction_result)) {
+                                                        $to_account_no = $row['to_account'];
+                                                        $query_for_ben_name = "SELECT full_name FROM tbl_customer WHERE account_no=$to_account_no";
+                                                        $result_ben_name = mysqli_query($con, $query_for_ben_name);
+                                                        $ben_name = mysqli_fetch_array($result_ben_name)[0];
+                                                       echo 
+                                                       '<tr>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="customCheck1">
+                                                                    <label class="custom-control-label" for="customCheck1"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="avatar-xs">
+                                                                    <span class="avatar-title rounded-circle bg-soft-primary text-primary">
+                                                                        '.$ben_name[0].'
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="mb-1 font-size-12"># '.$row["trans_id"].'</p>
+                                                                <h5 class="font-size-15 mb-0">'.$ben_name.' </h5>
+                                                            </td>
+                                                            <td>'.$row["trans_date"].'</td>
+                                                            <td><br></td>
+                                                            <td>'.$row["purpose"].'<br></td>
+                                                            <td>'.$row["trans_type"].'</td>
+                                                            <td>₹ '.$row["amount"].'</td>
+                                                            <td>₹ '.$row["account_bal"].'<br></td>
+                                                    </tr>';
+                                                   } 
+                                                ?>
+
+
+                                                   <!--  <tr>
                                                         <td>
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input"
@@ -743,7 +848,7 @@
                                                         <td>
                                                             $ 740</td>
                                                         <td>$ 45,253</td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
