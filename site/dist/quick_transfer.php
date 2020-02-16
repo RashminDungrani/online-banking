@@ -18,10 +18,45 @@
     if(isset($_SESSION["s_account_no"]))
     {
         $Account_no = $_SESSION["s_account_no"];
-        // get 
+        // For Getting Customer Details
         $query_customer = "SELECT * FROM tbl_customer WHERE account_no='$Account_no'";
         $result_customer = mysqli_query($con, $query_customer);
         $row_customer = mysqli_fetch_array($result_customer);
+
+        // For Getting no_of_transaction
+        $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
+        $transaction_result = mysqli_query($con,$query_for_transactions);
+        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
+
+        // For getting Acount Balance
+        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
+        $result_account_bal = mysqli_query($con, $query_for_account_bal);
+        $account_bal = mysqli_fetch_array($result_account_bal)[0];
+
+        // For Sum of Credit Amount
+        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
+        $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        $total_credit = mysqli_fetch_assoc($query_credit_result);
+        if (!empty($total_credit['credit_sum'])) {
+            $credit_sum = $total_credit['credit_sum'];
+        }
+        else {
+            $credit_sum = 0;
+        }
+        
+        // For Sum of Debit Amount
+        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
+        $query_debit_result = mysqli_query($con,$query_for_debit_total);
+        $total_debit = mysqli_fetch_assoc($query_debit_result);
+        if (!empty($total_debit['debit_sum'])) {
+            $debit_sum = $total_debit['debit_sum'];
+        }
+        else {
+            $debit_sum = 0;
+        }
+        
+
+        
     } else {
         header("location:http://localhost/online-banking/site/dist/auth_login.php");
     }
@@ -34,7 +69,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Net Banking</title>
+        <title>Quick Transfer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -519,7 +554,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">1,753</h4>
+                                        <h4 class="m-0 align-self-center"><?php echo $no_of_transaction?></h4>
             
                                     </div>
                                 </div>
@@ -538,7 +573,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">$45,253</h4>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $credit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -557,7 +592,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">$12.74</h4>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $debit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -569,14 +604,14 @@
                                         <div class="media">
                                             <div class="media-body">
                                                 <h5 class="font-size-14">Current Balance<br></h5>
-                                            </div>
+                                                </div>
                                             <div class="avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-primary">
                                                     <i class="dripicons-cart"></i>
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">20,781</h4>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $account_bal ?></h4>
             
                                     </div>
                                 </div>
@@ -1056,6 +1091,23 @@
         $Amount = $_REQUEST['txt_amount'];
         $To_account = $_REQUEST['txt_ben_account_no'];
 
+        // Check To_account no. is in database or not
+        // $lectureName = mysql_real_escape_string($lectureName);  // SECURITY!
+        // $result = mysql_query("SELECT 1 FROM preditors_assigned WHERE lecture_name='$lectureName' LIMIT 1");
+        // if (mysql_fetch_row($result)) {
+            // return 'Assigned';
+        // } else {
+            // return 'Available';
+        // }
+
+
+        $query_for_check_To_Account_no = mysqli_query($con,"SELECT account_no FROM  tbl_account WHERE account_no=$To_account");
+        $result_to_account = mysqli_num_rows($query_for_check_To_Account_no);
+
+        
+        
+
+
         // if Account_bal is not Sufficient then Run This block Of code That disply You have not Sufficient bal or ben_account_no == logged_in usee then Display You can not set    Your Account Number
         // else Run  Below Code
         if ($Amount > $Acount_bal)
@@ -1066,6 +1118,12 @@
         {
             echo "Beneficial Account Number Should Be Different From Your Account Number";
         }
+        
+        elseif ($result_to_account != 1) 
+        {
+            echo "Account no" . $To_account . " not Available";
+        }
+
         else
         {
         
