@@ -1,9 +1,93 @@
+<?php
+    include('connect.php');
+    session_start();
+    // if Session is getting account_no then user can access index.php else require login
+    if(isset($_SESSION["s_admin_id"]))
+    {
+        $Admin_id = $_SESSION["s_admin_id"];
+        // For Getting Admin Details
+        $query_admin = "SELECT * FROM tbl_admin WHERE admin_id=$Admin_id";
+        $result_admin = mysqli_query($con, $query_admin);
+        $row_admin_detail = mysqli_fetch_array($result_admin);
+
+        // For Getting All Customers Details
+        // $query_for_customer_details = "SELECT * FROM tbl_customer";
+        // $customers_details = mysqli_query($con,$query_for_customer_details);
+        // $row_customer_detail = mysqli_fetch_array($customers_details);
+
+        // $no_of_customer
+        $query_for_no_of_customer = "SELECT * FROM tbl_customer";
+        $result_no_of_customer = mysqli_query($con,$query_for_no_of_customer);
+        $no_of_customer = mysqli_num_rows($result_no_of_customer); 
+
+        // $debit_count
+        $query_for_debit_count = "SELECT * FROM tbl_transaction where trans_type='DEBIT'";
+        $result_debit_count = mysqli_query($con,$query_for_debit_count);
+        $debit_count = mysqli_num_rows($result_debit_count);
+
+        // $credit_count
+        $query_for_credit_count = "SELECT * FROM tbl_transaction where trans_type='CREDIT'";
+        $result_credit_count = mysqli_query($con,$query_for_credit_count);
+        $credit_count = mysqli_num_rows($result_credit_count); 
+
+        // $total_bank_balance
+        $query_for_total_bank_balance = "SELECT SUM(balance) as bank_balance FROM tbl_balance"; // SUM of all account balance
+        $result_total_bank_balance = mysqli_query($con,$query_for_total_bank_balance);
+        $array_total_bank_balance = mysqli_fetch_assoc($result_total_bank_balance); # $no_of_transaction
+        $total_bank_balance = $array_total_bank_balance['bank_balance'];
+
+        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
+        $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        $total_credit = mysqli_fetch_assoc($query_credit_result);
+   
+        // TODO: Select All Customer and their Transaction from database and Print into Table
+        // For Getting All Customers Transaction Details
+        $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
+        $transaction_result = mysqli_query($con,$query_for_transactions);
+        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
+
+        // For getting Acount Balance
+        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
+        $result_account_bal = mysqli_query($con, $query_for_account_bal);
+        $account_bal = mysqli_fetch_array($result_account_bal)[0];
+
+        // For Sum of Credit Amount
+        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
+        $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        $total_credit = mysqli_fetch_assoc($query_credit_result);
+        if (!empty($total_credit['credit_sum'])) {
+            $credit_sum = $total_credit['credit_sum'];
+        }
+        else {
+            $credit_sum = 0;
+        }
+        
+        // For Sum of Debit Amount
+        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
+        $query_debit_result = mysqli_query($con,$query_for_debit_total);
+        $total_debit = mysqli_fetch_assoc($query_debit_result);
+        if (!empty($total_debit['debit_sum'])) {
+            $debit_sum = $total_debit['debit_sum'];
+        }
+        else {
+            $debit_sum = 0;
+        }
+        
+
+        
+    } else {
+        header("location:http://localhost/online-banking/admin/dist/auth-login.php");
+    }
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8" />
-        <title>Dashboard | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -36,7 +120,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="index.php" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm-dark.png" alt="" height="22">
                                 </span>
@@ -45,7 +129,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="index.php" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm-light.png" alt="" height="22">
                                 </span>
@@ -224,7 +308,8 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-sm-inline-block ml-1">Shane</span>
+                                     
+                                <span class="d-none d-sm-inline-block ml-1"><?php echo $row_admin_detail["full_name"]?></span>
                                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -234,7 +319,7 @@
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Settings</a>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
+                                <a class="dropdown-item" href="auth-login.php"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
                             </div>
                         </div>
             
@@ -254,16 +339,16 @@
                             <li class="menu-title">Menu</li>
 
                             <li>
-                                <a href="index.html" class="waves-effect">
+                                <a href="index.php" class="waves-effect">
                                     <i class="mdi mdi-view-dashboard"></i><span class="badge badge-pill badge-success float-right">3</span>
-                                    <span>Dashboard</span>
+                                    <span>Home</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="calendar.html" class=" waves-effect">
+                                <a href="transaction.php" class=" waves-effect">
                                     <i class="mdi mdi-calendar-month"></i>
-                                    <span>Calendar</span>
+                                    <span>Transactions</span>
                                 </a>
                             </li>
 
@@ -492,7 +577,7 @@
                                     <div class="card-body">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h5 class="font-size-14">Number of Sales</h5>
+                                                <h5 class="font-size-14">Number of Customer</h5>
                                             </div>
                                             <div class="avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-primary">
@@ -500,8 +585,8 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">1,753</h4>
-                                        <p class="mb-0 mt-3 text-muted"><span class="text-success">1.23 % <i class="mdi mdi-trending-up mr-1"></i></span> From previous period</p>
+                                        <h4 class="m-0 align-self-center"><?php echo $no_of_customer ?></h4>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -511,7 +596,7 @@
                                     <div class="card-body">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h5 class="font-size-14">Sales Revenue</h5>
+                                                <h5 class="font-size-14">Total Debit Transactions</h5>
                                             </div>
                                             <div class="avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-primary">
@@ -519,8 +604,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">$45,253</h4>
-                                        <p class="mb-0 mt-3 text-muted"><span class="text-success">2.73 % <i class="mdi mdi-trending-up mr-1"></i></span> From previous period</p>
+                                        <h4 class="m-0 align-self-center"><?php echo $debit_count?></h4>
                                     </div>
                                 </div>
                             </div>
@@ -530,7 +614,7 @@
                                     <div class="card-body">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h5 class="font-size-14">Average Price</h5>
+                                                <h5 class="font-size-14">Total Credit Transactions</h5>
                                             </div>
                                             <div class="avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-primary">
@@ -538,8 +622,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">$12.74</h4>
-                                        <p class="mb-0 mt-3 text-muted"><span class="text-danger">4.35 % <i class="mdi mdi-trending-down mr-1"></i></span> From previous period</p>
+                                        <h4 class="m-0 align-self-center"><?php echo $credit_count?></h4>
                                     </div>
                                 </div>
                             </div>
@@ -549,7 +632,7 @@
                                     <div class="card-body">
                                         <div class="media">
                                             <div class="media-body">
-                                                <h5 class="font-size-14">Product Sold</h5>
+                                                <h5 class="font-size-14">Total Bank Balance</h5>
                                             </div>
                                             <div class="avatar-xs">
                                                 <span class="avatar-title rounded-circle bg-primary">
@@ -557,273 +640,11 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">20,781</h4>
-                                        <p class="mb-0 mt-3 text-muted"><span class="text-success">7.21 % <i class="mdi mdi-trending-up mr-1"></i></span> From previous period</p>
+                                        <h4 class="m-0 align-self-center"><?php echo $total_bank_balance ?></h4>
                                     </div>
                                 </div>
                             </div>
     
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title mb-4">Sales Analytics</h4>
-                                        <div class="row justify-content-center">
-                                            <div class="col-sm-4">
-                                                <div class="text-center">
-                                                    <p>This Month</p>
-                                                    <h4>$ 46,543</h4>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="text-center">
-                                                    <p>This Week</p>
-                                                    <h4>$ 7,842</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="revenue-chart" class="apex-charts" dir="ltr"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title mb-4">Marketplaces Earning</h4>
-
-                                        <div dir="ltr">
-                                            
-                                            <div class="slick-slider slider-for hori-timeline-desc pt-0">
-                                                <div>
-                                                    <p class="font-size-16">Daily Earning</p>
-                                                    <h4 class="mb-4">$ 1,452</h4>
-                                                    <div id="earning-day-chart" class="apex-charts"></div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-size-16">Weekly Earning</p>
-                                                    <h4 class="mb-4">$ 6,536</h4>
-                                                    <div id="earning-weekly-chart" class="apex-charts"></div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-size-16">Monthly Earning</p>
-                                                    <h4 class="mb-4">$ 24,562</h4>
-                                                    <div id="earning-monthly-chart" class="apex-charts"></div>
-                                                </div>
-                                                <div>
-                                                    <p class="font-size-16">Yearly Earning</p>
-                                                    <h4 class="mb-4">$ 2,82,562</h4>
-                                                    <div id="earning-yearly-chart" class="apex-charts"></div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row justify-content-center mb-3">
-                                                <div class="col-lg-11">
-                                                    <div class="slick-slider slider-nav hori-timeline-nav">
-                                                        <div class="slider-nav-item">
-                                                            <h5 class="nav-title font-size-14 mb-0">Day</h5>
-                                                        </div>
-                                                        <div class="slider-nav-item">
-                                                            <h5 class="nav-title font-size-14 mb-0">Week</h5>
-                                                        </div>
-                                                        <div class="slider-nav-item">
-                                                            <h5 class="nav-title font-size-14 mb-0">Month</h5>
-                                                        </div>
-                                                        <div class="slider-nav-item">
-                                                            <h5 class="nav-title font-size-14 mb-0">Year</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-xl-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title">Social Source</h4>
-                                        <div id="social-source-chart" class="apex-charts" dir="ltr"></div>
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="text-center mt-2">
-                                                    <i class="mdi mdi-facebook h2 text-primary"></i>
-                                                    
-                                                    <p class="mt-3 mb-2">Facebook</p>
-                                                    <h5>1245</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="text-center mt-2">
-                                                    <i class="mdi mdi-twitter h2 text-info"></i>
-                                                    
-                                                    <p class="mt-3 mb-2">Twitter</p>
-                                                    <h5>852</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title mb-4">Clients Review</h4>
-
-                                        <ul class="verti-timeline list-unstyled mb-0" data-simplebar style="max-height: 393px;">
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            D
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">Danny Campbell</h5>
-                                                        <p class="text-muted mb-0 font-size-13">To an English person, it will seem like simplified.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            R
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">Ralph Merkel</h5>
-                                                        <p class="text-muted mb-0 font-size-13">At solmen va esser necessi far sommun paroles.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            M
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">Marcus Smith</h5>
-                                                        <p class="text-muted mb-0 font-size-13">Everyone realizes why a new common language.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            J
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">James Denson</h5>
-                                                        <p class="text-muted mb-0 font-size-13">For science, music, sport, etc, europe vocabulary.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            D
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">Danny Campbell</h5>
-                                                        <p class="text-muted mb-0 font-size-13">To an English person, it will seem like simplified.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            R
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">Ralph Merkel</h5>
-                                                        <p class="text-muted mb-0 font-size-13">At solmen va esser necessi far sommun paroles.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            M
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">Marcus Smith</h5>
-                                                        <p class="text-muted mb-0 font-size-13">Everyone realizes why a new common language.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="event-list">
-                                                <div class="media">
-                                                    <div class="avatar-xs mr-3">
-                                                        <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                                                            J
-                                                        </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <h5 class="font-size-14 mb-1">James Denson</h5>
-                                                        <p class="text-muted mb-0 font-size-13">For science, music, sport, etc, europe vocabulary.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title mb-4">Revenue by Location</h4>
-                                        <div id="usa" style="height: 200px"></div>
-
-                                        <div class="mt-5">
-                                            <div class="position-relative">
-                                                <div class="progress-label text-primary border-primary mb-2">California</div>
-                                                <div class="progress progress-sm progress-animate mb-4">
-                                                    <div class="progress-bar" role="progressbar" style="width: 86%" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-value">
-                                                            <h5 class="mb-1 text-dark font-size-14">86%</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="position-relative">
-                                                <div class="progress-label text-primary border-primary mb-2">Montana</div>
-                                                <div class="progress progress-sm progress-animate mb-4">
-                                                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-value">
-                                                            <h5 class="mb-1 text-dark font-size-14">72%</h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="text-center">
-                                            <a href="#" class="btn btn-primary btn-sm">View More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <!-- end row -->
                         
@@ -832,59 +653,66 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="header-title mb-4">Latest Transaction</h4>
+                                        <h4 class="header-title mb-4">All Customers</h4>
 
                                         <div class="table-responsive">
                                             <table class="table table-centered table-nowrap mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col"  style="width: 50px;">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheckall">
-                                                                <label class="custom-control-label" for="customCheckall"></label>
-                                                            </div>
-                                                        </th>
                                                         <th scope="col"  style="width: 60px;"></th>
-                                                        <th scope="col">ID & Name</th>
-                                                        <th scope="col">Date</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Amount</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col">Account no & Name</th>
+                                                        <th scope="col">Birth Date</th>
+                                                        <th scope="col">Gender</th>
+                                                        <th scope="col">Mobile</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Balance</th>
+                                                        <th scope="col">Account Type</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                                <label class="custom-control-label" for="customCheck1"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <img src="assets/images/users/avatar-2.jpg" alt="user" class="avatar-xs rounded-circle" />
-                                                        </td>
-                                                        <td>
-                                                            <p class="mb-1 font-size-12">#AP1234</p>
-                                                            <h5 class="font-size-15 mb-0">David Wiley</h5>
-                                                        </td>
-                                                        <td>02 Nov, 2019</td>
-                                                        <td>$ 1,234</td>
-                                                        <td>1</td>
-                                                        
-                                                        <td>
-                                                            $ 1,234
-                                                        </td>
-                                                        <td>
-                                                            <i class="mdi mdi-checkbox-blank-circle text-success mr-1"></i> Confirm
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-outline-success btn-sm">Edit</button>
-                                                            <button type="button" class="btn btn-outline-danger btn-sm">Cancel</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+
+                                                <?php
+
+                                                    // For Getting All Customers Details
+                                                    $query_for_customer_details = "SELECT * FROM tbl_customer";
+                                                    $customers_details = mysqli_query($con,$query_for_customer_details);
+                                                    $row_customer_detail = mysqli_fetch_array($customers_details);
+
+                                                    while($row = mysqli_fetch_array($customers_details)) {
+                                                        $account_no = $row["account_no"];
+
+                                                        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$account_no";
+                                                        $result_account_bal = mysqli_query($con, $query_for_account_bal);
+                                                        $account_bal = mysqli_fetch_array($result_account_bal)[0];
+
+                                                        $query_for_account_type = "SELECT account_type FROM tbl_account_type WHERE account_no=$account_no";
+                                                        $result_account_type = mysqli_query($con, $query_for_account_type);
+                                                        $account_type = mysqli_fetch_array($result_account_type)[0];
+                                                       echo 
+                                                       '<tr>
+                                                            <td>
+                                                                <div class="avatar-xs">
+                                                                    <span class="avatar-title rounded-circle bg-soft-primary text-primary">
+                                                                        '.$row["full_name"][0].'
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="mb-1 font-size-12"># '.$row["account_no"].'</p>
+                                                                <h5 class="font-size-15 mb-0">'.$row["full_name"].' </h5>
+                                                            </td>
+                                                            <td>'.$row["birth_date"].'</td>
+                                                            <td>'.$row["gender"].'<br></td>
+                                                            
+                                                            <td>'.$row["mobile"].'</td>
+                                                            <td> '.$row["email"].'</td>
+                                                            <td>₹ '.$account_bal.'<br></td>
+                                                            <td> '.$account_type.'</td>
+
+                                                    </tr>';
+                                                   } 
+                                                ?>    
+                                                    <!-- <tr>
                                                         <td>
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" id="customCheck2">
@@ -1007,7 +835,7 @@
                                                             <button type="button" class="btn btn-outline-success btn-sm">Edit</button>
                                                             <button type="button" class="btn btn-outline-danger btn-sm">Cancel</button>
                                                         </td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1020,22 +848,6 @@
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
-
-                
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                2019 © Apaxy.
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-right d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
             <!-- end main content-->
 
