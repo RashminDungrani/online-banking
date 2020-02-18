@@ -19,7 +19,7 @@
     
     if(mysqli_num_rows($result1) > 0 )
     {
-      $_SESSION['admin_id'] = $Admin_id;
+      $_SESSION['s_admin_id'] = $Admin_id;
       header("location:https://localhost/online-banking/admin/dist/index.php");
     }
     else
