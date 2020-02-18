@@ -306,9 +306,16 @@
       $account_no = mysqli_fetch_array($result_account_no)[0];  // ! [0] for the first value of array
       
       // query for insert record in tbl_customer
-      $query = "INSERT INTO tbl_customer (account_no, full_name, gender, birth_date, mobile, email) VALUES ($account_no,'$full_name', '$gender', '$birth_date','$mobile', '$email')";
+      $query_for_tbl_customer = "INSERT INTO tbl_customer (account_no, full_name, gender, birth_date, mobile, email) VALUES ($account_no,'$full_name', '$gender', '$birth_date','$mobile', '$email')";
       
-      $result = mysqli_query($con, $query) or die('SQL Error :: '.mysqli_error($con));
+      $result = mysqli_query($con, $query_for_tbl_customer) or die('SQL Error :: '.mysqli_error($con));
+
+      // insert record in tbl_address
+      $query_for_tbl_address = "INSERT INTO tbl_address (account_no, home_address, city, state, pincode) VALUES ($account_no,'$address','$city','$state',$zip)";
+
+      $result = mysqli_query($con, $query_for_tbl_address) or die('SQL Error :: '.mysqli_error($con));
+
+      
       
       // Query for tbl_account_type
       $query_for_account_type = "INSERT INTO tbl_account_type (account_no,account_type) VALUES ($account_no, '$account_type')";
