@@ -2,7 +2,7 @@
     include('connect.php');
     session_start();
     // if Session is getting account_no then user can access index.php else require login
-    if(isset($_SESSION["s_account_no"]))
+    if(isset($_SESSION["s_account_no"]) && isset($_SESSION['s_login']))
     {
         $Account_no = $_SESSION["s_account_no"];
         // For Getting Customer Details
@@ -288,7 +288,7 @@
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Settings</a>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="http://localhost/online-banking/site/dist/auth_login.php"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
+                                <a class="dropdown-item" href="http://localhost/online-banking/site/dist/auth_login.php"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i>Logout</a>
                             </div>
                         </div>
                     </div>
@@ -676,6 +676,13 @@
                                                         $query_for_ben_name = "SELECT full_name FROM tbl_customer WHERE account_no=$to_account_no";
                                                         $result_ben_name = mysqli_query($con, $query_for_ben_name);
                                                         $ben_name = mysqli_fetch_array($result_ben_name)[0];
+                                                   if($row["trans_type"] == "DEBIT") {
+                                                        $trans_light = '<i class="mdi mdi-checkbox-blank-circle text-danger mr-1"></i>';
+                                                   }
+                                                   else {
+                                                        $trans_light = '<i class="mdi mdi-checkbox-blank-circle text-success mr-1"></i>';
+
+                                                   }
                                                        echo 
                                                        '<tr>
                                                             <td>
@@ -699,14 +706,14 @@
                                                             <td>'.$row["trans_date"].'</td>
                                                             <td><br></td>
                                                             <td>'.$row["purpose"].'<br></td>
-                                                            <td>'.$row["trans_type"].'</td>
+                                                            
+                                                            <td>'.$trans_light.'
+                                                            '.$row["trans_type"].'</td>
                                                             <td>₹ '.$row["amount"].'</td>
                                                             <td>₹ '.$row["account_bal"].'<br></td>
                                                     </tr>';
                                                    } 
                                                 ?>
-
-
                                                    <!--  <tr>
                                                         <td>
                                                             <div class="custom-control custom-checkbox">
