@@ -620,12 +620,12 @@
                         </div>
                         <div class="row"><br></div>
                         <!-- end row -->
-            
-
+                        
                             <div class="row mb-3 align-items-center">
+                            <div class="col-8">
+
                                 <div class="card">
                                     <div class="card-body">
-        
                                         <h4 class="header-title">Quick Transfer</h4>
                                         <p class="card-title-desc">Parsley is a javascript form validation
                                             library. It helps you provide your users with feedback on their form
@@ -702,9 +702,12 @@
                                         </form>
         
                                     </div>
+                                    
                                 </div>
-                            </div> <!-- end col -->
+                                </div>
 
+                            </div> <!-- end col -->
+                        </div>
 
             
                         
