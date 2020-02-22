@@ -1,17 +1,98 @@
+
+<?php
+    include('connect.php');
+    session_start();
+    // if Session is getting account_no then user can access index.php else require login
+    if(isset($_SESSION["s_admin_id"]))
+    {
+        $Admin_id = $_SESSION["s_admin_id"];
+        // For Getting Admin Details
+        $query_admin = "SELECT * FROM tbl_admin WHERE admin_id=$Admin_id";
+        $result_admin = mysqli_query($con, $query_admin);
+        $row_admin_detail = mysqli_fetch_array($result_admin);
+
+        // For Getting All Customers Details
+        // $query_for_customer_details = "SELECT * FROM tbl_customer";
+        // $customers_details = mysqli_query($con,$query_for_customer_details);
+        // $row_customer_detail = mysqli_fetch_array($customers_details);
+
+        // $no_of_customer
+        $query_for_no_of_customer = "SELECT * FROM tbl_customer";
+        $result_no_of_customer = mysqli_query($con,$query_for_no_of_customer);
+        $no_of_customer = mysqli_num_rows($result_no_of_customer); 
+
+        // $debit_count
+        $query_for_debit_count = "SELECT * FROM tbl_transaction where trans_type='DEBIT'";
+        $result_debit_count = mysqli_query($con,$query_for_debit_count);
+        $debit_count = mysqli_num_rows($result_debit_count);
+
+        // $credit_count
+        $query_for_credit_count = "SELECT * FROM tbl_transaction where trans_type='CREDIT'";
+        $result_credit_count = mysqli_query($con,$query_for_credit_count);
+        $credit_count = mysqli_num_rows($result_credit_count); 
+
+        // $total_bank_balance
+        $query_for_total_bank_balance = "SELECT SUM(balance) as bank_balance FROM tbl_balance"; // SUM of all account balance
+        $result_total_bank_balance = mysqli_query($con,$query_for_total_bank_balance);
+        $array_total_bank_balance = mysqli_fetch_assoc($result_total_bank_balance); # $no_of_transaction
+        $total_bank_balance = $array_total_bank_balance['bank_balance'];
+
+        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where trans_type='CREDIT' ";
+        $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        $total_credit = mysqli_fetch_assoc($query_credit_result);
+   
+        // TODO: Select All Customer and their Transaction from database and Print into Table
+        // For Getting All Customers Transaction Details
+        $query_for_transactions = "SELECT * FROM tbl_transaction ORDER BY trans_date DESC ";
+        $transaction_result = mysqli_query($con,$query_for_transactions);
+        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
+
+
+        // For Sum of Credit Amount
+        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where trans_type='CREDIT' ";
+        $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        $total_credit = mysqli_fetch_assoc($query_credit_result);
+        if (!empty($total_credit['credit_sum'])) {
+            $credit_sum = $total_credit['credit_sum'];
+        }
+        else {
+            $credit_sum = 0;
+        }
+        
+        // For Sum of Debit Amount
+        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where trans_type='DEBIT' ";
+        $query_debit_result = mysqli_query($con,$query_for_debit_total);
+        $total_debit = mysqli_fetch_assoc($query_debit_result);
+        if (!empty($total_debit['debit_sum'])) {
+            $debit_sum = $total_debit['debit_sum'];
+        }
+        else {
+            $debit_sum = 0;
+        }
+        
+
+        
+    } else {
+        header("location:http://localhost/online-banking/admin/dist/auth-login.php");
+    }
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8" />
-        <title>Calendar | Apaxy - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Transactions</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-        <!-- Plugin css -->
-        <link href="assets/libs/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+        
 
         <!-- Bootstrap Css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -220,7 +301,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-sm-inline-block ml-1">Shane</span>
+                                <span class="d-none d-sm-inline-block ml-1"><?php echo $row_admin_detail["full_name"]?></span>
                                 <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -230,7 +311,7 @@
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Settings</a>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
+                                <a class="dropdown-item" href="auth-login.php"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
                             </div>
                         </div>
             
@@ -260,6 +341,13 @@
                                 <a href="transaction.php" class=" waves-effect">
                                     <i class="mdi mdi-calendar-month"></i>
                                     <span>Transaction</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="login_history.php" class="waves-effect">
+                                    <i class="mdi mdi-account-group"></i>
+                                    <span>Login History</span>
                                 </a>
                             </li>
 
@@ -468,12 +556,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Calendar</h4>
+                                    <h4 class="mb-0 font-size-18">Transactions</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
-                                            <li class="breadcrumb-item active">Calendar</li>
+                                            <li class="breadcrumb-item">Admin</li>
+                                            <li class="breadcrumb-item active">Transactions</li>
                                         </ol>
                                     </div>
                                     
@@ -482,66 +570,185 @@
                         </div>     
                         <!-- end page title -->
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-        
-                                        <div class="row">
-                                            <div class="col-xl-2 col-lg-3 col-md-4">
-        
-                                                <h4 class="font-size-14">Created Events</h4>
-                                                <form method="post" id="add_event_form" class="mb-4">
-                                                    <input type="text" class="form-control new-event-form" placeholder="Add new event..." />
-                                                </form>
-        
-                                                <div id='external-events'>
-                                                    <h4 class="font-size-14">Draggable Events</h4>
-                                                    <div class='fc-event'>My Event 1</div>
-                                                    <div class='fc-event'>My Event 2</div>
-                                                    <div class='fc-event'>My Event 3</div>
-                                                    <div class='fc-event'>My Event 4</div>
-                                                    <div class='fc-event'>My Event 5</div>
-                                                </div>
-        
-                                                <!-- checkbox -->
-                                                <div class="custom-control custom-checkbox mt-3">
-                                                    <input type="checkbox" class="custom-control-input" id="drop-remove" data-parsley-multiple="groups" data-parsley-mincheck="2">
-                                                    <label class="custom-control-label" for="drop-remove">Remove after drop</label>
-                                                </div>
-        
-                                            </div>
-        
-                                            <div id='calendar' class="col-xl-10 col-lg-9 col-md-8"></div>
-        
-                                        </div>
-                                        <!-- end row -->
-        
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
+                       
 
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
 
-                
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                2019 © Apaxy.
+                         <div class="row">
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h5 class="font-size-14">Number of Transactions<br></h5>
+                                            </div>
+                                            <div class="avatar-xs">
+                                                <span class="avatar-title rounded-circle bg-primary">
+                                                    <i class="dripicons-box"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h4 class="m-0 align-self-center"><?php echo $no_of_transaction?></h4>
+            
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="text-sm-right d-none d-sm-block">
-                                    Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
+            
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h5 class="font-size-14">Total Credit Amount<br></h5>
+                                            </div>
+                                            <div class="avatar-xs">
+                                                <span class="avatar-title rounded-circle bg-primary">
+                                                    <i class="dripicons-briefcase"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $credit_sum ?></h4>
+            
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h5 class="font-size-14">Total Debit Amount<br></h5>
+                                            </div>
+                                            <div class="avatar-xs">
+                                                <span class="avatar-title rounded-circle bg-primary">
+                                                    <i class="dripicons-tags"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $debit_sum ?></h4>
+            
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="col-sm-6 col-xl-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <h5 class="font-size-14">Total Bank Balance<br></h5>
+                                                </div>
+                                            <div class="avatar-xs">
+                                                <span class="avatar-title rounded-circle bg-primary">
+                                                    <i class="dripicons-cart"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h4 class="m-0 align-self-center">₹ <?php echo $total_bank_balance ?></h4>
+            
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                        <div class="row"><br></div>
+
+                        <!-- end row -->
+                        
+
+
+
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-4">All Transaction</h4>
+            
+                                        <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" style="width: 50px;">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="customCheckall">
+                                                                <label class="custom-control-label" for="customCheckall"></label>
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" style="width: 60px;"><br></th>
+                                                        <th scope="col">Transaction ID &amp; Name</th>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col"><br></th>
+                                                        <th scope="col">Purpose</th>
+                                                        <th scope="col">Transaction Type<br></th>
+                                                        <th scope="col">Amount</th>
+                                                        <th scope="col">Balance<br></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                               
+                                                <?php
+                                                    // For transactions in Home Page(index page)
+                                                    $query_for_transactions = "SELECT * FROM tbl_transaction ORDER BY trans_date DESC";
+                                                    $transaction_result = mysqli_query($con,$query_for_transactions);
+                                                    $no_of_transaction = mysqli_num_rows($transaction_result);
+
+                                                    while($row = mysqli_fetch_array($transaction_result)) {
+                                                        $to_account_no = $row['to_account'];
+                                                        $query_for_ben_name = "SELECT full_name FROM tbl_customer WHERE account_no=$to_account_no";
+                                                        $result_ben_name = mysqli_query($con, $query_for_ben_name);
+                                                        $ben_name = mysqli_fetch_array($result_ben_name)[0];
+                                                   if($row["trans_type"] == "DEBIT") {
+                                                        $trans_light = '<i class="mdi mdi-checkbox-blank-circle text-danger mr-1"></i>';
+                                                   }
+                                                   else {
+                                                        $trans_light = '<i class="mdi mdi-checkbox-blank-circle text-success mr-1"></i>';
+
+                                                   }
+                                                       echo 
+                                                       '<tr>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input"
+                                                                        id="customCheck1">
+                                                                    <label class="custom-control-label" for="customCheck1"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="avatar-xs">
+                                                                    <span class="avatar-title rounded-circle bg-soft-primary text-primary">
+                                                                        '.$ben_name[0].'
+                                                                    </span>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="mb-1 font-size-12"># '.$row["trans_id"].'</p>
+                                                                <h5 class="font-size-15 mb-0">'.$ben_name.' </h5>
+                                                            </td>
+                                                            <td>'.$row["trans_date"].'</td>
+                                                            <td><br></td>
+                                                            <td>'.$row["purpose"].'<br></td>
+                                                            
+                                                            <td>'.$trans_light.'
+                                                            '.$row["trans_type"].'</td>
+                                                            <td>₹ '.$row["amount"].'</td>
+                                                            <td>₹ '.$row["account_bal"].'<br></td>
+                                                    </tr>';
+                                                   } 
+                                                ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </footer>
-            </div>
+                        <!-- end row -->
             <!-- end main content-->
 
         </div>
@@ -873,9 +1080,6 @@
         <script src="assets/libs/moment/min/moment.min.js"></script>
         <script src="assets/libs/jquery-ui-dist/jquery-ui.min.js"></script>
         <script src="assets/libs/fullcalendar/fullcalendar.min.js"></script>
-
-        <!-- Calendar init -->
-        <script src="assets/js/pages/calendar.init.js"></script>
 
         <script src="assets/js/app.js"></script>
 

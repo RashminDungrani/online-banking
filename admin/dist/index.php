@@ -36,42 +36,42 @@
         $array_total_bank_balance = mysqli_fetch_assoc($result_total_bank_balance); # $no_of_transaction
         $total_bank_balance = $array_total_bank_balance['bank_balance'];
 
-        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
-        $query_credit_result = mysqli_query($con,$query_for_credit_total);
-        $total_credit = mysqli_fetch_assoc($query_credit_result);
+        // $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
+        // $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        // $total_credit = mysqli_fetch_assoc($query_credit_result);
    
-        // TODO: Select All Customer and their Transaction from database and Print into Table
-        // For Getting All Customers Transaction Details
-        $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
-        $transaction_result = mysqli_query($con,$query_for_transactions);
-        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
+        // // TODO: Select All Customer and their Transaction from database and Print into Table
+        // // For Getting All Customers Transaction Details
+        // $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
+        // $transaction_result = mysqli_query($con,$query_for_transactions);
+        // $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
 
-        // For getting Acount Balance
-        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
-        $result_account_bal = mysqli_query($con, $query_for_account_bal);
-        $account_bal = mysqli_fetch_array($result_account_bal)[0];
+        // // For getting Acount Balance
+        // $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
+        // $result_account_bal = mysqli_query($con, $query_for_account_bal);
+        // $account_bal = mysqli_fetch_array($result_account_bal)[0];
 
-        // For Sum of Credit Amount
-        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
-        $query_credit_result = mysqli_query($con,$query_for_credit_total);
-        $total_credit = mysqli_fetch_assoc($query_credit_result);
-        if (!empty($total_credit['credit_sum'])) {
-            $credit_sum = $total_credit['credit_sum'];
-        }
-        else {
-            $credit_sum = 0;
-        }
+        // // For Sum of Credit Amount
+        // $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
+        // $query_credit_result = mysqli_query($con,$query_for_credit_total);
+        // $total_credit = mysqli_fetch_assoc($query_credit_result);
+        // if (!empty($total_credit['credit_sum'])) {
+        //     $credit_sum = $total_credit['credit_sum'];
+        // }
+        // else {
+        //     $credit_sum = 0;
+        // }
         
-        // For Sum of Debit Amount
-        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
-        $query_debit_result = mysqli_query($con,$query_for_debit_total);
-        $total_debit = mysqli_fetch_assoc($query_debit_result);
-        if (!empty($total_debit['debit_sum'])) {
-            $debit_sum = $total_debit['debit_sum'];
-        }
-        else {
-            $debit_sum = 0;
-        }
+        // // For Sum of Debit Amount
+        // $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
+        // $query_debit_result = mysqli_query($con,$query_for_debit_total);
+        // $total_debit = mysqli_fetch_assoc($query_debit_result);
+        // if (!empty($total_debit['debit_sum'])) {
+        //     $debit_sum = $total_debit['debit_sum'];
+        // }
+        // else {
+        //     $debit_sum = 0;
+        // }
         
 
         
@@ -353,6 +353,13 @@
                             </li>
 
                             <li>
+                                <a href="login_history.php" class="waves-effect">
+                                    <i class="mdi mdi-account-group"></i>
+                                    <span>Login History</span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="mdi mdi-email-multiple-outline"></i>
                                     <span>Email</span>
@@ -561,7 +568,7 @@
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Admin</a></li>
                                             <li class="breadcrumb-item active">Dashboard</li>
                                         </ol>
                                     </div>
@@ -676,7 +683,7 @@
                                                     // For Getting All Customers Details
                                                     $query_for_customer_details = "SELECT * FROM tbl_customer";
                                                     $customers_details = mysqli_query($con,$query_for_customer_details);
-                                                    $row_customer_detail = mysqli_fetch_array($customers_details);
+                                                    // $row_customer_detail = mysqli_fetch_array($customers_details);
 
                                                     while($row = mysqli_fetch_array($customers_details)) {
                                                         $account_no = $row["account_no"];
