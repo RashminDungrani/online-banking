@@ -1,21 +1,8 @@
-<script type="text/javascript">
-  function alertifySuccess()
-  {
-    alertify.alert("Info", "Transaction Success", function() {
-    //   window.location = 'http://localhost/online-banking/site/dist/auth_login.php';
-      alertify.success("Ok");
-
-    });
-    return false;
-  }
-</script>
-
-
 <?php
     include('connect.php');
     session_start();
     // if Session is getting account_no then user can access index.php else require login
-    if(isset($_SESSION["s_account_no"]))
+    if(isset($_SESSION["s_account_no"]) && isset($_SESSION['s_login']))
     {
         $Account_no = $_SESSION["s_account_no"];
         // For Getting Customer Details
@@ -23,7 +10,7 @@
         $result_customer = mysqli_query($con, $query_customer);
         $row_customer = mysqli_fetch_array($result_customer);
 
-        // For Getting no_of_transaction
+        // For Getting Different Types of values in page
         $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
         $transaction_result = mysqli_query($con,$query_for_transactions);
         $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
@@ -60,28 +47,23 @@
     } else {
         header("location:http://localhost/online-banking/site/dist/auth_login.php");
     }
+
 ?>
-
-
 
 <!doctype html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8" />
-        <title>Quick Transfer</title>
+        <title>Request Money</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-        <!-- slick css -->
-        <link href="assets/libs/slick-slider/slick/slick.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/slick-slider/slick/slick-theme.css" rel="stylesheet" type="text/css" />
-
-        <!-- jvectormap -->
-        <link href="assets/libs/jqvmap/jqvmap.min.css" rel="stylesheet" />
+        <!-- Summernote css -->
+        <link href="assets/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -103,7 +85,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.php" class="logo logo-dark">
+                            <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm-dark.png" alt="" height="22">
                                 </span>
@@ -112,7 +94,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.php" class="logo logo-light">
+                            <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="assets/images/logo-sm-light.png" alt="" height="22">
                                 </span>
@@ -308,7 +290,7 @@
                 </div>
             </header>
 
-            <div class="topnav">
+             <div class="topnav">
                 <div class="container-fluid">
                     <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 
@@ -530,201 +512,157 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-            
+
                 <div class="page-content">
                     <div class="container-fluid">
-            
+
                         <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Transactions<br></h4>
-            
+                                    <h4 class="mb-0 font-size-18">Request Money</h4>
+
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item">Net Banking<br></li>
-                                            <li class="breadcrumb-item active">Transactions<br></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apaxy</a></li>
+                                            <li class="breadcrumb-item active">Request Money</li>
                                         </ol>
                                     </div>
-            
                                 </div>
                             </div>
-                        </div>
+                        </div>     
                         <!-- end page title -->
-            
-                        <div class="row">
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h5 class="font-size-14">Number of Transactions<br></h5>
-                                            </div>
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-primary">
-                                                    <i class="dripicons-box"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h4 class="m-0 align-self-center"><?php echo $no_of_transaction?></h4>
-            
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h5 class="font-size-14">Total Credit Amount<br></h5>
-                                            </div>
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-primary">
-                                                    <i class="dripicons-briefcase"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $credit_sum ?></h4>
-            
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h5 class="font-size-14">Total Debit Amount<br></h5>
-                                            </div>
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-primary">
-                                                    <i class="dripicons-tags"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $debit_sum ?></h4>
-            
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="col-sm-6 col-xl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <h5 class="font-size-14">Current Balance<br></h5>
-                                                </div>
-                                            <div class="avatar-xs">
-                                                <span class="avatar-title rounded-circle bg-primary">
-                                                    <i class="dripicons-cart"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $account_bal ?></h4>
-            
-                                    </div>
-                                </div>
-            
-                            </div>
-                        </div>
-                        <div class="row"><br></div>
-                        <!-- end row -->
-                        
-                            <div class="row mb-3 align-items-center">
-                            <div class="col-8">
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title">Quick Transfer</h4>
-                                        <p class="card-title-desc">Parsley is a javascript form validation
-                                            library. It helps you provide your users with feedback on their form
-                                            submission before sending it to your server.</p>
+                        <div class="row mb-4">
+                            <div class="col-xl-3">
+                                <div class="card h-100">
+                                    <div class="card-body email-leftbar">
+                                        <a href="email-compose.html" class="btn btn-danger btn-block btn-rounded waves-effect waves-light"><i class="mdi mdi-plus mr-1"></i> Compose</a>
+
+                                        <div class="mail-list mt-4">
+                                            <a href="#" class="active"><i class="mdi mdi-inbox mr-2"></i> Inbox <span class="ml-1 float-right">(18)</span></a>
+                                            <a href="#"><i class="mdi mdi-star-outline mr-2"></i>Starred</a>
+                                            <a href="#"><i class="mdi mdi-diamond-stone mr-2"></i>Important</a>
+                                            <a href="#"><i class="mdi mdi-file-outline mr-2"></i>Draft</a>
+                                            <a href="#"><i class="mdi mdi-send-check-outline mr-2"></i>Sent Mail</a>
+                                            <a href="#"><i class="mdi mdi-trash-can-outline mr-2"></i>Trash</a>
+                                        </div>
+
+                                        <div>
+                                            <h6 class="mt-4">Labels</h6>
         
-                                        <form class="custom-validation" action="#">
+                                            <div class="mail-list mt-1">
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-info"></span>Theme Support</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-warning"></span>Freelance</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-primary"></span>Social</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-danger"></span>Friends</a>
+                                                <a href="#"><span class="mdi mdi-circle-outline mr-2 text-success"></span>Family</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-9">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="btn-toolbar" role="toolbar">
+                                            <div class="btn-group mr-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect"><i class="fa fa-inbox"></i></button>
+                                                <button type="button" class="btn btn-primary waves-light waves-effect"><i class="fa fa-exclamation-circle"></i></button>
+                                                <button type="button" class="btn btn-primary waves-light waves-effect"><i class="far fa-trash-alt"></i></button>
+                                            </div>
+                                            <div class="btn-group mr-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-folder"></i> <i class="mdi mdi-chevron-down ml-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Updates</a>
+                                                    <a class="dropdown-item" href="#">Social</a>
+                                                    <a class="dropdown-item" href="#">Team Manage</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="btn-toolbar justify-content-md-end" role="toolbar">
+                                            <div class="btn-group ml-md-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-tag"></i> <i class="mdi mdi-chevron-down ml-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Updates</a>
+                                                    <a class="dropdown-item" href="#">Social</a>
+                                                    <a class="dropdown-item" href="#">Team Manage</a>
+                                                </div>
+                                            </div>
+            
+                                            <div class="btn-group ml-2 mb-3">
+                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    More <i class="mdi mdi-dots-vertical ml-1"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" href="#">Mark as Unread</a>
+                                                    <a class="dropdown-item" href="#">Mark as Important</a>
+                                                    <a class="dropdown-item" href="#">Add to Tasks</a>
+                                                    <a class="dropdown-item" href="#">Add Star</a>
+                                                    <a class="dropdown-item" href="#">Mute</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-0">
+                                    <div class="card-body">
+                                        <form>
                                             <div class="form-group">
-                                                
-                                                <label>Beneficial Person Name</label>
-                                                <input type="text" class="form-control" required placeholder="Name of Beneficial"/>
+                                                <label for="to-input">To</label>
+                                                <input type="email" class="form-control" id="to-input" placeholder="To">
                                             </div>
-
-                                           
-        
+    
                                             <div class="form-group">
-                                                <label>Beneficial Account Number</label>
-                                                <div>
-                                                    <input type="password" name="txt_ben_account_no" id="pass2" class="form-control" required
-                                                            data-parsley-minlength="9"
-                                                            placeholder="Account number"/>
-                                                </div>
-                                                <div class="mt-2">
-                                                    <input type="number" class="form-control" required
-                                                            data-parsley-minlength="9"
-                                                            data-parsley-equalto="#pass2"
-                                                            placeholder="Re-Type Account number"/>
+                                                <label for="subject-input">Subject</label>
+                                                <input type="text" class="form-control" id="subject-input" placeholder="Subject">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="summernote">
+                                                    <h6>Hello Summer note</h6>
+                                                    <ul>
+                                                        <li>
+                                                            Select a text to reveal the toolbar.
+                                                        </li>
+                                                        <li>
+                                                            Edit rich document on-the-fly, so elastic!
+                                                        </li>
+                                                    </ul>
+                                                    <p>
+                                                        End of air-mode area
+                                                    </p>
+    
                                                 </div>
                                             </div>
-
-                                             <div class="row mb-3 align-items-center">
-                                                <div class="col-lg-4 col-md-12 text-right">
-                                                    <span>Amount</span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-12">
-                                                    <div class="input-group">
-                                                        <input type="text" name="txt_amount" class="form-control" placeholder="10,000" aria-label="Recipient 's username"           aria-describedby="basic-addon2" required>
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text" id="basic-addon2">₹</span>
-                                                        </div>
-                                                    </div>
+    
+                                            <div class="btn-toolbar form-group mb-0">
+                                                <div class="">
+                                                    <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-save"></i></button>
+                                                    <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button>
+                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Send</span> <i class="fab fa-telegram-plane ml-1"></i> </button>
                                                 </div>
                                             </div>
-
-                                            <!-- Purpose to Transfer Money -->
-                                            <div class="row mb-4 align-items-center">
-                                                <div class="col-lg-4 col-md-12 text-right">
-                                                    <span>Purpose</span>
-                                                </div>
-                                                <div class="col-lg-4 col-md-12">
-								            				<select name="txt_purpose" class="select2 form-control custom-select" style="width: 100%;height:36px;" required>
-                                                        	<option value="">Select</option>
-                                                            <option value="Payment towords loan repayment">Payment towords loan repayment</option>
-                                                            <option value="Deposite / Investment">Deposite / Investment</option>
-                                                            <option value="Gift to relative / Friends">Gift to relative / Friends</option>
-                                                            <option value="Donation">Donation</option>
-                                                            <option value="Payment of Education Fee">Payment of Education Fee</option>
-                                                            <option value="Rent">Rent</option>
-                                                            <option value="Others">Others</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-        
-                                           
-                                            <div class="form-group mb-0">
-                                                <div>
-                                                    <button type="submit" name="btn_submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                                        Submit
-                                                    </button>
-                                                    <button type="reset" class="btn btn-secondary waves-effect">
-                                                        Cancel
-                                                    </button>
-                                                </div>
-                                            </div>
+    
                                         </form>
-        
                                     </div>
-                                    
                                 </div>
-                                </div>
+                                <!-- end card -->
 
-                            </div> <!-- end col -->
+                            </div>
                         </div>
+                        <!-- end row -->
 
-            
-                        
-                    </div>
-                </div><br>
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
             </div>
             <!-- end main content-->
 
@@ -1053,163 +991,13 @@
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
-       
+        <!-- Summernote js -->
+        <script src="assets/libs/summernote/summernote-bs4.min.js"></script>
 
-        <!-- Jq vector map -->
-        <script src="assets/libs/jqvmap/jquery.vmap.min.js"></script>
-        <script src="assets/libs/jqvmap/maps/jquery.vmap.usa.js"></script>
-
-        <script src="assets/js/pages/dashboard.init.js"></script>
+        <!-- email summernote init -->
+        <script src="assets/js/pages/email-summernote.init.js"></script>
 
         <script src="assets/js/app.js"></script>
 
-        <!-- parsleyjs -->
-        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
-        <!-- validation init -->
-        <script src="assets/js/pages/form-validation.init.js"></script>
-
-        <!-- alertifyjs js -->
-        <script src="assets/libs/alertifyjs/build/alertify.min.js"></script>
-        <script src="assets/js/pages/alertifyjs.init.js"></script>
-
     </body>
 </html>
-
-
-
-
-<?php
-
-    if(isset($_REQUEST['btn_submit']))
-    {
-        // Steps to do in quick transfer
-        // 1. Reduce amount in loggin in customer
-            // if account_bal is not sufficient then display message and stop exicution
-            // else Make All Exicution of code
-        // 2. add amount in to_account customer
-        // 3. insert transaction debit record for logged_in user in tbl_transaction
-        // 4. insert transaction credit record for to_account user in tbl_transaction
-
-
-
-        // $query_for_Account_no = "SELECT account_no FROM tbl_customer WHERE username='$Username'";
-        // $result = mysqli_query($con, $query_for_Account_no) or die('SQL Error :: '.mysqli_error());
-        // $row = mysqli_fetch_assoc($result);
-
-        // $Account_no = $row['account_no'];
-
-        $query_for_Account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
-        $result = mysqli_query($con, $query_for_Account_bal) or die('SQL Error :: '.mysqli_error());
-        $row = mysqli_fetch_assoc($result);
-
-        $Acount_bal = $row['balance'];
-        $Amount = $_REQUEST['txt_amount'];
-        $To_account = $_REQUEST['txt_ben_account_no'];
-
-        // Check To_account no. is in database or not
-        // $lectureName = mysql_real_escape_string($lectureName);  // SECURITY!
-        // $result = mysql_query("SELECT 1 FROM preditors_assigned WHERE lecture_name='$lectureName' LIMIT 1");
-        // if (mysql_fetch_row($result)) {
-            // return 'Assigned';
-        // } else {
-            // return 'Available';
-        // }
-
-
-        $query_for_check_To_Account_no = mysqli_query($con,"SELECT account_no FROM  tbl_account WHERE account_no=$To_account");
-        $result_to_account = mysqli_num_rows($query_for_check_To_Account_no);
-
-        
-        
-
-
-        // if Account_bal is not Sufficient then Run This block Of code That disply You have not Sufficient bal or ben_account_no == logged_in usee then Display You can not set    Your Account Number
-        // else Run  Below Code
-        if ($Amount > $Acount_bal)
-        {
-            echo "You Have Not Sufficient Balance To Transfer";
-        }
-        elseif ($To_account == $Account_no)
-        {
-            echo "Beneficial Account Number Should Be Different From Your Account Number";
-        }
-        
-        elseif ($result_to_account != 1) 
-        {
-            echo "Account no" . $To_account . " not Available";
-        }
-
-        else
-        {
-        
-            // 1. Reduce amount in login in customer
-            $Acount_bal = $Acount_bal - $Amount;
-            $query_for_update_from_Account_bal = "UPDATE tbl_balance SET balance=$Acount_bal WHERE  account_no=$Account_no";
-            $result = mysqli_query($con, $query_for_update_from_Account_bal) or die('SQL Error ::   '.mysqli_error());
-
-
-
-            // 2. add amount in to_account customer
-            $To_account = $_REQUEST['txt_ben_account_no'];
-            $query_for_Ben_Account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$To_account";
-            $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
-            $row = mysqli_fetch_assoc($result);
-            $Acount_bal = $row['balance'];
-            $Amount = $_REQUEST['txt_amount'];
-
-            $Account_bal = $Acount_bal + $Amount;
-            $query_for_update_Ben_Account_bal = "UPDATE tbl_balance SET balance=$Account_bal WHERE  account_no=$To_account";
-            $result = mysqli_query($con, $query_for_update_Ben_Account_bal) or die('SQL Error ::    '.mysqli_error());
-
-
-
-            $Trans_date = date("Y-m-d H:i:s");
-            $Amount = $_REQUEST['txt_amount'];
-            $Trans_type = "DEBIT";
-            $Purpose = $_REQUEST['txt_purpose'];
-            $To_account = $_REQUEST['txt_ben_account_no'];
-
-            // $query_for_Account_no = "SELECT account_no FROM tbl_customer WHERE username='$Username'";
-            // $result = mysqli_query($con, $query_for_Account_no) or die('SQL Error :: '.mysqli_error());
-            // $row = mysqli_fetch_assoc($result);
-            // $Account_no = $row['account_no'];
-
-            $query_for_Account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
-            $result = mysqli_query($con, $query_for_Account_bal) or die('SQL Error :: '.mysqli_error());
-            $row = mysqli_fetch_assoc($result);
-            $Acount_bal = $row['balance'];
-
-            // 3. insert transaction debit record for logged_in user in tbl_transaction
-            $query_debit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,   to_account,account_no,account_bal) 
-            VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $To_account, $Account_no,    $Acount_bal)";
-            $result = mysqli_query($con, $query_debit_record) or die('SQL Error :: '.mysqli_error());
-
-
-            $Trans_type = "CREDIT";
-            $query_for_Ben_Account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$To_account";
-            $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
-            $row = mysqli_fetch_assoc($result);
-            $Acount_bal = $row['balance'];
-
-            // 4. insert transaction credit record for to_account user in tbl_transaction
-            $query_credit_record = "INSERT INTO tbl_transaction (trans_date,amount,trans_type,purpose,  to_account,account_no,account_bal) 
-            VALUES ('$Trans_date', $Amount, '$Trans_type', '$Purpose', $Account_no, $To_account,    $Acount_bal)";
-            $result = mysqli_query($con, $query_credit_record) or die('SQL Error :: '.mysqli_error());
-
-
-            if ($result)
-            {
-              echo '<script type="text/JavaScript">  
-              alertifySuccess();
-             </script>' 
-              ;
-            }
-            else
-            {
-              print($result);
-            
-              echo "ERROR: Could not able to execute $query. " . mysqli_error($con);
-            }
-        }
-    }
-?>

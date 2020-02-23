@@ -56,7 +56,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Net Banking</title>
+        <title>Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -310,6 +310,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="quick_transfer.php">
                                         <i class="mdi mdi-bank-transfer mr-2"></i>Quick Transfer
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="request_money.php">
+                                        <i class="mdi mdi mdi-email-send-outline mr-2"></i>Request Money
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="feedback.php">
+                                        <i class="mdi mdi mdi mdi-heart-outline mr-2"></i>Feedback
                                     </a>
                                 </li>
 
