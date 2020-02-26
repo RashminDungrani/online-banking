@@ -1,3 +1,17 @@
+<script type="text/javascript">
+
+  function sweetAlertSuccess()
+  {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Message Sent",
+      showConfirmButton: !1,
+      timer: 1500
+    }); 
+  }
+</script>
+
 <?php
     include('connect.php');
     session_start();
@@ -9,41 +23,6 @@
         $query_customer = "SELECT * FROM tbl_customer WHERE account_no='$Account_no'";
         $result_customer = mysqli_query($con, $query_customer);
         $row_customer = mysqli_fetch_array($result_customer);
-
-        // For Getting Different Types of values in page
-        $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
-        $transaction_result = mysqli_query($con,$query_for_transactions);
-        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
-
-        // For getting Acount Balance
-        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
-        $result_account_bal = mysqli_query($con, $query_for_account_bal);
-        $account_bal = mysqli_fetch_array($result_account_bal)[0];
-
-        // For Sum of Credit Amount
-        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
-        $query_credit_result = mysqli_query($con,$query_for_credit_total);
-        $total_credit = mysqli_fetch_assoc($query_credit_result);
-        if (!empty($total_credit['credit_sum'])) {
-            $credit_sum = $total_credit['credit_sum'];
-        }
-        else {
-            $credit_sum = 0;
-        }
-        
-        // For Sum of Debit Amount
-        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
-        $query_debit_result = mysqli_query($con,$query_for_debit_total);
-        $total_debit = mysqli_fetch_assoc($query_debit_result);
-        if (!empty($total_debit['debit_sum'])) {
-            $debit_sum = $total_debit['debit_sum'];
-        }
-        else {
-            $debit_sum = 0;
-        }
-        
-
-        
     } else {
         header("location:http://localhost/online-banking/site/dist/auth_login.php");
     }
@@ -64,6 +43,9 @@
 
         <!-- Summernote css -->
         <link href="assets/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
+
+        <!-- Sweet Alert-->
+        <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -309,7 +291,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="request_money.php">
+                                    <a class="nav-link" href="inbox.php">
                                         <i class="mdi mdi mdi-email-send-outline mr-2"></i>Request Money
                                     </a>
                                 </li>
@@ -373,7 +355,7 @@
                                                 Email <div class="arrow-down"></div>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="topnav-email">
-                                                <a href="email-inbox.html" class="dropdown-item">Inbox</a>
+                                                <a href="inbox.html" class="dropdown-item">Inbox</a>
                                                 <a href="email-read.html" class="dropdown-item">Email Read</a>
                                                 <a href="email-compose.html" class="dropdown-item">Email Compose</a>
                                             </div>
@@ -537,15 +519,16 @@
                             <div class="col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body email-leftbar">
-                                        <a href="email-compose.html" class="btn btn-danger btn-block btn-rounded waves-effect waves-light"><i class="mdi mdi-plus mr-1"></i> Compose</a>
+                                        <a href="request_money.php" class="btn btn-danger btn-block btn-rounded waves-effect waves-light"><i class="mdi mdi-plus mr-1"></i> New Request</a>
 
                                         <div class="mail-list mt-4">
-                                            <a href="#" class="active"><i class="mdi mdi-inbox mr-2"></i> Inbox <span class="ml-1 float-right">(18)</span></a>
-                                            <a href="#"><i class="mdi mdi-star-outline mr-2"></i>Starred</a>
-                                            <a href="#"><i class="mdi mdi-diamond-stone mr-2"></i>Important</a>
-                                            <a href="#"><i class="mdi mdi-file-outline mr-2"></i>Draft</a>
-                                            <a href="#"><i class="mdi mdi-send-check-outline mr-2"></i>Sent Mail</a>
-                                            <a href="#"><i class="mdi mdi-trash-can-outline mr-2"></i>Trash</a>
+                                            <?php
+                                                $query_for_no_of_requests = "SELECT * FROM tbl_requests where to_account = $Account_no";
+                                                $no_of_requests_result = mysqli_query($con,$query_for_no_of_requests);
+                                                $no_of_requests = mysqli_num_rows($no_of_requests_result);
+                                            ?>
+                                            <a href="inbox.php"><i class="mdi mdi-inbox mr-2"></i> Inbox <span class="ml-1 float-right">(<?php echo $no_of_requests; ?>)</span></a>
+                                            <a href="send_requests.php"><i class="mdi mdi-send-check-outline mr-2"></i>Send Requests</a>
                                         </div>
 
                                         <div>
@@ -615,31 +598,24 @@
                                 
                                 <div class="card mb-0">
                                     <div class="card-body">
-                                        <form>
+                                        <form class="custom-validation" action="#">
                                             <div class="form-group">
-                                                <label for="to-input">To</label>
-                                                <input type="email" class="form-control" id="to-input" placeholder="To">
+                                                <label>Account Number</label>
+                                                <div>
+                                                    <input name="txt_to_account" data-parsley-type="digits" type="text" class="form-control" required placeholder="Account Number"/>
+                                                </div>
                                             </div>
     
                                             <div class="form-group">
-                                                <label for="subject-input">Subject</label>
-                                                <input type="text" class="form-control" id="subject-input" placeholder="Subject">
+                                                <label>Amount</label>
+                                                <div>
+                                                    <input name="txt_amount" data-parsley-type="digits" type="text" class="form-control" required placeholder="Amount"/>
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="summernote">
-                                                    <h6>Hello Summer note</h6>
-                                                    <ul>
-                                                        <li>
-                                                            Select a text to reveal the toolbar.
-                                                        </li>
-                                                        <li>
-                                                            Edit rich document on-the-fly, so elastic!
-                                                        </li>
-                                                    </ul>
-                                                    <p>
-                                                        End of air-mode area
-                                                    </p>
-    
+                                                <label for="subject-input">Your Message</label>
+                                                <div>
+                                                    <textarea name="txt_message" required class="form-control" rows="5" required>Hey There! i really need money for some time</textarea>
                                                 </div>
                                             </div>
     
@@ -647,7 +623,7 @@
                                                 <div class="">
                                                     <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-save"></i></button>
                                                     <button type="button" class="btn btn-success waves-effect waves-light mr-1"><i class="far fa-trash-alt"></i></button>
-                                                    <button class="btn btn-primary waves-effect waves-light"> <span>Send</span> <i class="fab fa-telegram-plane ml-1"></i> </button>
+                                                    <button name="btn_send" type="submit" class="btn btn-primary waves-effect waves-light"> <span>Send</span> <i class="fab fa-telegram-plane ml-1"></i> </button>
                                                 </div>
                                             </div>
     
@@ -997,7 +973,61 @@
         <!-- email summernote init -->
         <script src="assets/js/pages/email-summernote.init.js"></script>
 
+        <!-- Sweet Alerts js -->
+        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+        <!-- Sweet alert init js-->
+        <script src="assets/js/pages/sweet-alerts.init.js"></script>
+
+        <!-- parsleyjs -->
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+        <!-- validation init -->
+        <script src="assets/js/pages/form-validation.init.js"></script>
+
         <script src="assets/js/app.js"></script>
+
 
     </body>
 </html>
+
+
+
+
+<?php
+
+    if(isset($_REQUEST['btn_send']))
+    {
+        $Account_no = $_SESSION["s_account_no"];
+        $to_account = $_REQUEST['txt_to_account'];
+        $amount = $_REQUEST['txt_amount'];
+        $message = $_REQUEST['txt_message'];
+        $hasViewed = 0;
+        $status = 'ignore';
+        $Req_date = date("Y-m-d H:i:s");
+
+        //TODO: Check To_Account no is valid or not if not then JS Sweet Alert and if valid then Send Message and Show Success JS Alert
+        $query_for_check_To_Account_no = mysqli_query($con,"SELECT account_no FROM  tbl_account WHERE account_no=$to_account");
+        $result_to_account = mysqli_num_rows($query_for_check_To_Account_no);
+
+        if ($to_account == $Account_no)
+        {
+            echo "You can not send request to self";
+        }
+        
+        elseif ($result_to_account != 1) 
+        {
+            echo "Account no " . $to_account . " not Available";
+        }
+        else
+        {
+            $query_for_insert_request = "INSERT INTO tbl_requests (account_no, to_account, amount, message, hasViewed, status, request_date) VALUES ($Account_no, $to_account, $amount, '$message'
+            , $hasViewed, '$status','$Req_date')";
+            $result = mysqli_query($con, $query_for_insert_request) or die('SQL Error :: '.mysqli_error());
+
+            echo '<script type="text/JavaScript">  
+              sweetAlertSuccess();
+             </script>' 
+              ;
+        }
+        
+    }
