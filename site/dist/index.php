@@ -314,7 +314,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="request_money.php">
+                                    <a class="nav-link" href="inbox.php">
                                         <i class="mdi mdi mdi-email-send-outline mr-2"></i>Request Money
                                     </a>
                                 </li>
