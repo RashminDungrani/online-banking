@@ -6,7 +6,7 @@
   if(isset($_SESSION["s_login"]) && isset($_SESSION["s_account_no"]))
   {
     $logout_time = date("Y-m-d H:i:s");
-    $query_for_update_logout = "UPDATE tbl_login_history SET logout_time = '$logout_time' WHERE login_time = (select max(login_time) from tbl_login_history)";
+    $query_for_update_logout = "UPDATE tbl_login_history SET logout_time = '$logout_time' WHERE token_id = (select max(token_id) from tbl_login_history)";
     $result_for_update_logout = mysqli_query($con, $query_for_update_logout) or die('SQL Error :: '.mysqli_error($con));
 
 

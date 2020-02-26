@@ -699,7 +699,7 @@
                                                     $no_of_transaction = mysqli_num_rows($transaction_result);
 
                                                     while($row = mysqli_fetch_array($transaction_result)) {
-                                                        $to_account_no = $row['to_account'];
+                                                        $to_account_no = $row['account_no'];
                                                         $query_for_ben_name = "SELECT full_name FROM tbl_customer WHERE account_no=$to_account_no";
                                                         $result_ben_name = mysqli_query($con, $query_for_ben_name);
                                                         $ben_name = mysqli_fetch_array($result_ben_name)[0];
