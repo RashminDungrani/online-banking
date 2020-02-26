@@ -283,7 +283,7 @@
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings font-size-16 align-middle mr-1"></i> Settings</a>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle mr-1"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item href="#"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
+                                <a class="dropdown-item" href="auth_login.php"><i class="mdi mdi-logout font-size-16 align-middle mr-1"></i> Logout</a>
                             </div>
                         </div>
                     </div>
@@ -532,7 +532,7 @@
                             <div class="col-xl-3">
                                 <div class="card h-100">
                                     <div class="card-body email-leftbar">
-                                        <a href="email-compose.html" class="btn btn-danger btn-block btn-rounded waves-effect waves-light"><i class="mdi mdi-plus mr-1"></i> Compose</a>
+                                        <a href="request_money.php" class="btn btn-danger btn-block btn-rounded waves-effect waves-light"><i class="mdi mdi-plus mr-1"></i> New Request</a>
 
                                         <div class="mail-list mt-4">
                                             <a href="#" class="active"><i class="mdi mdi-inbox mr-2"></i> Inbox <span class="ml-1 float-right">(18)</span></a>
