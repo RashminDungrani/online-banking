@@ -8,7 +8,29 @@
     });
     return false;
   }
+
+  function sweetAlertSuccess()
+  {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Money Successfully Transferred",
+      showConfirmButton: !1,
+      timer: 1500
+    }); 
+  }
+
+//   t("#sa-position").click(function() {
+//         Swal.fire({
+//           position: "top-end",
+//           icon: "success",
+//           title: "Your work has been saved",
+//           showConfirmButton: !1,
+//           timer: 1500
+//         });
+//       }
 </script>
+
 
 
 <?php
@@ -60,6 +82,8 @@
     } else {
         header("location:http://localhost/online-banking/site/dist/auth_login.php");
     }
+
+    
 ?>
 
 
@@ -79,6 +103,15 @@
         <!-- slick css -->
         <link href="assets/libs/slick-slider/slick/slick.css" rel="stylesheet" type="text/css" />
         <link href="assets/libs/slick-slider/slick/slick-theme.css" rel="stylesheet" type="text/css" />
+
+         <!-- Sweet Alert-->
+        <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- alertifyjs Css -->
+    <link href="assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- alertifyjs default themes  Css -->
+    <link href="assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
 
         <!-- jvectormap -->
         <link href="assets/libs/jqvmap/jqvmap.min.css" rel="stylesheet" />
@@ -327,7 +360,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="request_money.php">
+                                    <a class="nav-link" href="inbox.php">
                                         <i class="mdi mdi mdi-email-send-outline mr-2"></i>Request Money
                                     </a>
                                 </li>
@@ -703,16 +736,15 @@
                                            
                                             <div class="form-group mb-0">
                                                 <div>
-                                                    <button type="submit" name="btn_submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                                        Submit
-                                                    </button>
+                                                    <button type="submit" name="btn_submit" class="btn btn-primary waves-effect waves-light mr-1" id="sa-position">Submit</button>
+                                                    
+
                                                     <button type="reset" class="btn btn-secondary waves-effect">
                                                         Cancel
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
-        
                                     </div>
                                     
                                 </div>
@@ -1068,9 +1100,15 @@
         <!-- validation init -->
         <script src="assets/js/pages/form-validation.init.js"></script>
 
-        <!-- alertifyjs js -->
-        <script src="assets/libs/alertifyjs/build/alertify.min.js"></script>
-        <script src="assets/js/pages/alertifyjs.init.js"></script>
+        <!-- Sweet Alerts js -->
+        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+
+        <!-- Sweet alert init js-->
+        <script src="assets/js/pages/sweet-alerts.init.js"></script>
+
+         <!-- alertifyjs js -->
+    <script src="assets/libs/alertifyjs/build/alertify.min.js"></script>
+    <script src="assets/js/pages/alertifyjs.init.js"></script>
 
     </body>
 </html>
@@ -1200,7 +1238,7 @@
             if ($result)
             {
               echo '<script type="text/JavaScript">  
-              alertifySuccess();
+              sweetAlertSuccess();
              </script>' 
               ;
             }
