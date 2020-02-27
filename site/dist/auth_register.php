@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip02">Email</label>
-                                                <input type="text" name="txt_email" class="form-control" id="validationTooltip02" placeholder="Email Id" value="Otto" required>
+                                                <input type="text" name="txt_email" class="form-control" id="validationTooltip02" placeholder="Email Id" value="" required>
                                                 <div class="valid-feedback">
                                                     Looks good!
                                                 </div>
