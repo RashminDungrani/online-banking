@@ -1,34 +1,14 @@
 <script type="text/javascript">
-  function alertifySuccess()
-  {
-    alertify.alert("Info", "Transaction Success", function() {
-    //   window.location = 'http://localhost/online-banking/site/dist/auth_login.php';
-      alertify.success("Ok");
-
-    });
-    return false;
-  }
-
   function sweetAlertSuccess()
   {
     Swal.fire({
       position: "center",
       icon: "success",
-      title: "Thanks for your feedback\nWe Appiciated that.",
+      title: "Your Profile is Updated",
       showConfirmButton: !1,
-      timer: 1600
+      timer: 1400
     }); 
   }
-
-//   t("#sa-position").click(function() {
-//         Swal.fire({
-//           position: "top-end",
-//           icon: "success",
-//           title: "Your work has been saved",
-//           showConfirmButton: !1,
-//           timer: 1500
-//         });
-//       }
 </script>
 
 <?php
@@ -43,52 +23,31 @@
         $result_customer = mysqli_query($con, $query_customer);
         $row_customer = mysqli_fetch_array($result_customer);
 
-        // For Getting Different Types of values in page
-        $query_for_transactions = "SELECT * FROM tbl_transaction where account_no = $Account_no ORDER BY trans_date DESC ";
-        $transaction_result = mysqli_query($con,$query_for_transactions);
-        $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
+        $first_name = strtok($row_customer['full_name'], " ");
+        $full_name_arr = explode(' ',trim($row_customer['full_name']));
+        $last_name = $full_name_arr[1];
 
-        // For getting Acount Balance
-        $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
-        $result_account_bal = mysqli_query($con, $query_for_account_bal);
-        $account_bal = mysqli_fetch_array($result_account_bal)[0];
+        // getting customer address details
+        $query_address = "SELECT * FROM tbl_address WHERE account_no = $Account_no";
+        $result_address = mysqli_query($con,$query_address);
+        $row_address = mysqli_fetch_array($result_address);
 
-        // For Sum of Credit Amount
-        $query_for_credit_total = "SELECT SUM(amount) as credit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' ";
-        $query_credit_result = mysqli_query($con,$query_for_credit_total);
-        $total_credit = mysqli_fetch_assoc($query_credit_result);
-        if (!empty($total_credit['credit_sum'])) {
-            $credit_sum = $total_credit['credit_sum'];
-        }
-        else {
-            $credit_sum = 0;
-        }
-        
-        // For Sum of Debit Amount
-        $query_for_debit_total = "SELECT SUM(amount) as debit_sum FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' ";
-        $query_debit_result = mysqli_query($con,$query_for_debit_total);
-        $total_debit = mysqli_fetch_assoc($query_debit_result);
-        if (!empty($total_debit['debit_sum'])) {
-            $debit_sum = $total_debit['debit_sum'];
-        }
-        else {
-            $debit_sum = 0;
-        }
-        
-
+        // Getting Account Password
+        $query_for_get_password = "SELECT password FROM tbl_account WHERE account_no = $Account_no";
+        $result_password = mysqli_query($con, $query_for_get_password);
+        $acc_password = mysqli_fetch_array($result_password)[0];
         
     } else {
         header("location:http://localhost/online-banking/site/dist/auth_login.php");
     }
 
 ?>
-
 <!doctype html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8" />
-        <title>Feedback</title>
+        <title>Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
@@ -409,12 +368,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Feedback</h4>
+                                    <h4 class="mb-0 font-size-18">Profile</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Net Banking</a></li>
-                                            <li class="breadcrumb-item active">Feedback</li>
+                                            <li class="breadcrumb-item active">Profile</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -441,47 +400,130 @@
                                                 
                                             </div>
             
-                                            <div class="btn-group ml-2 mb-3">
-                                                <button type="button" class="btn btn-primary waves-light waves-effect dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                    More <i class="mdi mdi-dots-vertical ml-1"></i>
-                                                </button>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="card mb-0">
+                                <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
                                     <div class="card-body">
-                                        <form>
-                                            
-                                            
-                                            <div class="mt-3">
-                                                <label>Your Feedback</label>
-                                                <textarea name="txt_feedback" id="textarea" class="form-control" maxlength="225" rows="5" placeholder="max 225 chars." required></textarea>
+                                        <h4 class="header-title">Update Your Profile</h4>
+                                      
+                                        
+                                        <form class="needs-validation" novalidate>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                <label for="validationTooltip01">First name</label>
+                                                <input type="text" name="txt_fname" class="form-control" id="validationTooltip01" placeholder="First name" value="<?php echo $first_name?>" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                <label for="validationTooltip02">Last name</label>
+                                                <input type="text" name="txt_lname" class="form-control" id="validationTooltip02" placeholder="Last name" value="<?php echo $last_name ?>" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                </div>
+                                                
                                             </div>
 
-                                            <div class="btn-toolbar justify-content-md-end" role="toolbar">
-                                            <div class="col-xl-3 col-md-4 col-sm-6">
-                                                <div class="p-4 text-center">
-                                                    <h5 class="font-size-15 mb-3">Heart Rating</h5>
-                                                    <input name="txt_heart_rate" type="hidden" class="rating" data-filled="mdi mdi-heart text-danger" data-empty="mdi mdi-heart-outline text-danger" required/>
+                                            
+                                               
+                                               
+                                            
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                <label for="validationTooltip01">Mobile</label>
+                                                <input type="text" name="txt_mobile" class="form-control" id="validationTooltip01" placeholder="Mobile" value="<?php echo $row_customer['mobile']?>" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                <label for="validationTooltip02">Email</label>
+                                                <input type="text" name="txt_email" class="form-control" id="validationTooltip02" placeholder="Email Id" value="<?php echo $row_customer['email']?>" required>
+                                                <div class="valid-feedback">
+                                                    Looks good!
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                <label for="validationTooltip03">Address</label>
+                                                <input type="text" name="txt_address" class="form-control" id="validationTooltip03" placeholder="Address" value="<?php echo $row_address['home_address']?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid city.
+                                                </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                <label for="validationTooltip03">City</label>
+                                                <input type="text" name="txt_city" class="form-control" id="validationTooltip03" placeholder="City" value="<?php echo $row_address['city']?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid city.
+                                                </div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                <label for="validationTooltip04">State</label>
+                                                <input type="text" name="txt_state" class="form-control" id="validationTooltip04" placeholder="State" value="<?php echo $row_address['state']?>"required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid state.
+                                                </div>
+                                                </div>
+                                                <div class="col-md-2 mb-3">
+                                                <label for="validationTooltip04">Zip</label>
+                                                <input type="text" name="txt_zip" class="form-control" id="validationTooltip04" placeholder="Zip" value="<?php echo $row_address['pincode']?>" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a valid state.
+                                                </div>
                                                 </div>
                                             </div>
+                                              <div class="row">
+                                                
+
+
+
+                                            
+                                                <div class="col-md-4 mb-3">
+                                                  <label>Password</label>
+                                                    <input type="password" name="txt_password" id="pass2" class="form-control" value="<?php echo $acc_password?>" required
+                                                            placeholder="Password"/>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                  <label>Confirm Password</label>
+
+                                                    <input type="password" name="txt_repassword" class="form-control" value="<?php echo $acc_password?>" required
+                                                            data-parsley-equalto="#pass2"
+                                                            placeholder="Re-Type Password"/>
+                                                </div>
+                                            
+                                                
+                                          
                                             </div>
                                             
-                                            <div class="btn-toolbar justify-content-md-end" role="toolbar">
-                                                <div class="btn-toolbar form-group mb-0 mr-3">
-                                                    <div class="">
-
-                                                        <button name="btn_submit" class="btn btn-primary waves-effect waves-light"> <span>Send</span> <i class="fab fa-telegram-plane ml-1"></i> </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-    
+                                            
+                                            
+                                            
+                                            
+                                            <button class="btn btn-primary" name="btn_update" type="submit">Update</button>
+                                            
+                                        </div>
                                         </form>
                                     </div>
                                 </div>
-                                <!-- end card -->
+                            </div>
+                        </div>
+
+
+   
+      </div>
 
                             </div>
                             <div class="col-xl-2">
@@ -837,6 +879,9 @@
 
         <!-- Sweet alert init js-->
         <script src="assets/js/pages/sweet-alerts.init.js"></script>
+
+        <!-- validation init -->
+        <script src="assets/js/pages/form-validation.init.js"></script>
         
 
         <!-- email summernote init -->
@@ -847,28 +892,31 @@
     </body>
 </html>
 <?php
-    if(isset($_REQUEST['btn_submit']))
+    if(isset($_REQUEST['btn_update']))
     {
-        $text_feedback = $_REQUEST['txt_feedback'];
-        $heart_rating = $_REQUEST['txt_heart_rate'];
-        
-        $current_time = date("Y-m-d H:i:s");
+        $first_name = $_REQUEST['txt_fname'];
+        $last_name = $_REQUEST['txt_lname'];
+        $full_name = $first_name . " " . $last_name;
+        $mobile = $_REQUEST['txt_mobile'];
+        $email = $_REQUEST['txt_email'];
+        $address = $_REQUEST['txt_address'];
+        $city = $_REQUEST['txt_city'];
+        $state = $_REQUEST['txt_state'];
+        $zip = $_REQUEST['txt_zip'];
+        $password = $_REQUEST['txt_password'];
+        // Update tbl_customer
+        $query_for_update_tbl_customer = "UPDATE tbl_customer SET full_name='$full_name', mobile='$mobile', email='$email' WHERE account_no= $Account_no";
+        $result_tbl_customer = mysqli_query($con,$query_for_update_tbl_customer) or die('SQL Error :: '.mysqli_error($con));
+        // Update tbl_address
+        $query_for_update_tbl_address = "UPDATE tbl_address SET home_address= '$address', city='$city', state= '$state', pincode=$zip  WHERE account_no= $Account_no";
+        $result_tbl_address = mysqli_query($con,$query_for_update_tbl_address) or die('SQL Error :: '.mysqli_error($con));
+        // update_tbl_account
+        $query_for_update_tbl_account = "UPDATE tbl_account SET password='$password' WHERE account_no= $Account_no";
+        $result_tbl_account = mysqli_query($con,$query_for_update_tbl_account)  or die('SQL Error :: '.mysqli_error($con));
 
-        if ($heart_rating == NULL)
-        {
-        $query_for_insert_feeback = "INSERT INTO tbl_feedback (account_no, feedback, time) VALUES ($Account_no, '$text_feedback', '$current_time')";
-
-        }
-        else
-        {
-            $query_for_insert_feeback = "INSERT INTO tbl_feedback (account_no, feedback, hearts, time) VALUES ($Account_no, '$text_feedback', $heart_rating, '$current_time')";
-        }
-        $result =  mysqli_query($con, $query_for_insert_feeback) or die('SQL Error :: '.mysqli_error());
-         echo '<script type="text/JavaScript">  
+        echo '<script type="text/JavaScript">  
               sweetAlertSuccess();
              </script>' 
               ;
-
-
     }
 ?>
