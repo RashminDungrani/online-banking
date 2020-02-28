@@ -332,11 +332,11 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="cheque_book.php">
                                         <i class="mdi mdi mdi mdi mdi-book-open mr-2"></i>Request Cheque Book
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="feedback.php">
@@ -352,7 +352,7 @@
 
                                 
 
-                                <li class="nav-item dropdown">
+                                <!-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-advancedui" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="mdi mdi-package-variant-closed mr-2"></i>Advanced UI <div class="arrow-down"></div>
@@ -366,7 +366,7 @@
                                         <a href="advanced-lightbox.html" class="dropdown-item">Lightbox</a>
                                         <a href="advanced-maps.html" class="dropdown-item">Maps</a>
                                     </div>
-                                </li>
+                                </li> -->
 
                             </ul>
                         </div>

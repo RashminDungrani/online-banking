@@ -1,6 +1,20 @@
-<?php
+<script type="text/javascript">
+  function wrongAuth()
+  {
+    Swal.fire({
+      title: "Login Failed",
+      text: "username or password is incorrect !",
+      icon: "error"
+    });
+  }
+  function rightAuth()
+  {
+    location.replace("http://localhost/online-banking/site/dist/index.php");
+  }
 
-  include('connect.php');
+</script>
+<?php
+include('connect.php');
   session_start();
   // if login session set then update logout_time record in tbl_login_history
   if(isset($_SESSION["s_login"]) && isset($_SESSION["s_account_no"]))
@@ -16,40 +30,6 @@
 
   
   session_start();
-  
-  if(isset($_REQUEST['btn_submit']))
-  { 
-
-    $username = $_REQUEST["txt_username"];
-    $password = $_REQUEST["txt_password"];
-    $query = "SELECT username, password FROM tbl_account WHERE username = '$username' AND  password='$password' ";
-    $result1 = mysqli_query($con,$query);
-    
-    if(mysqli_num_rows($result1) > 0 )
-    {
-        // get account number from userame
-        $query_account_no = "SELECT account_no FROM tbl_account WHERE username='$username'";
-        $result_account_no = mysqli_query($con, $query_account_no);
-        $account_no = mysqli_fetch_array($result_account_no)[0];
-        // echo $account_no;
-        $_SESSION["s_account_no"] = $account_no;
-        $_SESSION["s_login"] = date("Y-m-d H:i:s");
-        $Login_time = $_SESSION["s_login"];
-
-        // insert record of login time
-        $query_for_login_history = "INSERT INTO tbl_login_history (account_no, login_time) VALUES ($account_no,'$Login_time')";
-        $result_for_login_history = mysqli_query($con, $query_for_login_history) or die('SQL Error :: '.mysqli_error($con));
-        header("location:http://localhost/online-banking/site/dist/index.php");
-        
-    }
-    else
-    {
-        // todo : Showing Alertifi if username or password is incorrect
-        echo 'The username or password are incorrect!';
-        echo "ERROR: Could not able to execute". $result1."  . mysqli_error($con)";
-    }
-  
-}
 ?>
 
 
@@ -77,9 +57,16 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Sweet Alert-->
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
   </head>
 
   <body class="bg-primary bg-pattern">
+    <div class="home-btn d-none d-sm-block">
+            <a href="https://localhost/online-banking/admin/dist/auth-login.php"><i class="mdi mdi-home-variant h2 text-white"></i></a>
+        </div>
     <div class="account-pages my-5 pt-5">
       <div class="container">
         <div class="row">
@@ -88,7 +75,7 @@
               <div clas="row">
                 <h5 class="font-size-20 text-white mb-4">
                   <img src="assets/images/favicon.ico" height="24" alt="logo" />
-                  Central Bank of India
+                  Online Banking
                 </h5>
               </div>
               <h5 class="font-size-16 text-white-50 mb-4">
@@ -105,9 +92,9 @@
               <div class="card-body p-4">
                 <div class="p-2">
                   <h5 class="mb-5 text-center">
-                    Sign in to continue to Net Banking.
+                    Sign in to continue to Online Banking.
                   </h5>
-                  <form class="form-horizontal">
+                  <form class="form-horizontal" method="post">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group mb-4">
@@ -195,6 +182,46 @@
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
 
+    <!-- Sweet Alerts js -->
+      <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+      <!-- Sweet alert init js-->
+      <script src="assets/js/pages/sweet-alerts.init.js"></script>
+
     <script src="assets/js/app.js"></script>
   </body>
 </html>
+<?php
+  if(isset($_REQUEST['btn_submit']))
+  { 
+    $username = $_REQUEST["txt_username"];
+    $password = $_REQUEST["txt_password"];
+    $query = "SELECT username, password FROM tbl_account WHERE username = '$username' AND  password='$password' ";
+    $result1 = mysqli_query($con,$query);
+    if(mysqli_num_rows($result1) > 0 )
+    {
+        // get account number from userame
+        $query_account_no = "SELECT account_no FROM tbl_account WHERE username='$username'";
+        $result_account_no = mysqli_query($con, $query_account_no);
+        $account_no = mysqli_fetch_array($result_account_no)[0];
+        // echo $account_no;
+        $_SESSION["s_account_no"] = $account_no;
+        $_SESSION["s_login"] = date("Y-m-d H:i:s");
+        $Login_time = $_SESSION["s_login"];
+        // insert record of login time
+        $query_for_login_history = "INSERT INTO tbl_login_history (account_no, login_time) VALUES ($account_no,'$Login_time')";
+        $result_for_login_history = mysqli_query($con, $query_for_login_history) or die('SQL Error :: '.mysqli_error($con));
+        echo '<script type="text/JavaScript">  
+              rightAuth();
+             </script>' 
+              ;
+    }
+    else
+    {
+        echo '<script type="text/JavaScript">  
+              wrongAuth();
+             </script>' 
+              ;
+    }
+  
+}
+?>

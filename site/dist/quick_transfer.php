@@ -1,13 +1,4 @@
 <script type="text/javascript">
-  function alertifySuccess()
-  {
-    alertify.alert("Info", "Transaction Success", function() {
-    //   window.location = 'http://localhost/online-banking/site/dist/auth_login.php';
-      alertify.success("Ok");
-
-    });
-    return false;
-  }
 
   function sweetAlertSuccess()
   {
@@ -19,6 +10,50 @@
       timer: 1500
     }); 
   }
+
+  function wrongAccountNo()
+  {
+    Swal.fire({
+      title: "Transaction Failed",
+      text: "Account Number is Incorrect",
+      icon: "error"
+    });
+  }
+  function mismatchAccountNo()
+  {
+    Swal.fire({
+      title: "Transaction Failed",
+      text: "Account Number Not Matched",
+      icon: "error"
+    });
+  }
+  function lowBalance()
+  {
+    Swal.fire({
+      title: "Transaction Failed",
+      text: "You don't have sufficient balance for this Transaction.",
+      icon: "error"
+    });
+  }
+  function sameAccountNo()
+  {
+    Swal.fire({
+      title: "Transaction Failed",
+      text: "You can not provide your own account number.",
+      icon: "error"
+    });
+  }
+  function transferLimit()
+  {
+    Swal.fire({
+      title: "Transaction Failed",
+      text: "Limit of Quick Transfer is 500 to 20,000",
+      icon: "error"
+    });
+  }
+
+  
+
 </script>
 
 
@@ -97,8 +132,6 @@
          <!-- Sweet Alert-->
         <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
-        <!-- alertifyjs Css -->
-    <link href="assets/libs/alertifyjs/build/css/alertify.min.css" rel="stylesheet" type="text/css" />
 
     <!-- alertifyjs default themes  Css -->
     <link href="assets/libs/alertifyjs/build/css/themes/default.min.css" rel="stylesheet" type="text/css" />
@@ -361,11 +394,11 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="cheque_book.php">
                                         <i class="mdi mdi mdi mdi mdi-book-open mr-2"></i>Request Cheque Book
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="feedback.php">
@@ -378,9 +411,10 @@
                                         <i class="mdi mdi-book-open-variant mr-2"></i>FAQs
                                     </a>
                                 </li>
+
                                 
 
-                                <li class="nav-item dropdown">
+                                <!-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-advancedui" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="mdi mdi-package-variant-closed mr-2"></i>Advanced UI <div class="arrow-down"></div>
@@ -394,7 +428,7 @@
                                         <a href="advanced-lightbox.html" class="dropdown-item">Lightbox</a>
                                         <a href="advanced-maps.html" class="dropdown-item">Maps</a>
                                     </div>
-                                </li>
+                                </li> -->
 
                             </ul>
                         </div>
@@ -536,7 +570,7 @@
                                                             placeholder="Account number"/>
                                                 </div>
                                                 <div class="mt-2">
-                                                    <input type="number" class="form-control" required
+                                                    <input type="number" name="txt_ben_account_no_2" class="form-control" required
                                                             data-parsley-minlength="9"
                                                             data-parsley-equalto="#pass2"
                                                             placeholder="Re-Type Account number"/>
@@ -579,11 +613,11 @@
                                            
                                             <div class="form-group mb-0">
                                                 <div>
-                                                    <button type="submit" name="btn_submit" class="btn btn-primary waves-effect waves-light mr-1" id="sa-position">Submit</button>
+                                                    <button type="submit" name="btn_submit" class="btn btn-primary waves-effect waves-light mr-1" >Submit</button>
                                                     
 
                                                     <button type="reset" class="btn btn-secondary waves-effect">
-                                                        Cancel
+                                                        Reset
                                                     </button>
                                                 </div>
                                             </div>
@@ -949,9 +983,6 @@
         <!-- Sweet alert init js-->
         <script src="assets/js/pages/sweet-alerts.init.js"></script>
 
-         <!-- alertifyjs js -->
-    <script src="assets/libs/alertifyjs/build/alertify.min.js"></script>
-    <script src="assets/js/pages/alertifyjs.init.js"></script>
 
     </body>
 </html>
@@ -986,6 +1017,8 @@
         $Acount_bal = $row['balance'];
         $Amount = $_REQUEST['txt_amount'];
         $To_account = $_REQUEST['txt_ben_account_no'];
+        $To_account2 = $_REQUEST['txt_ben_account_no_2'];
+
 
         // Check To_account no. is in database or not
         // $lectureName = mysql_real_escape_string($lectureName);  // SECURITY!
@@ -1008,16 +1041,41 @@
         // else Run  Below Code
         if ($Amount > $Acount_bal)
         {
-            echo "You Have Not Sufficient Balance To Transfer";
+            echo '<script type="text/JavaScript">  
+              lowBalance();
+             </script>' 
+              ;
         }
         elseif ($To_account == $Account_no)
         {
-            echo "Beneficial Account Number Should Be Different From Your Account Number";
+            echo '<script type="text/JavaScript">  
+              sameAccountNo();
+             </script>' 
+              ;
         }
         
         elseif ($result_to_account != 1) 
         {
-            echo "Account no" . $To_account . " not Available";
+            echo '<script type="text/JavaScript">  
+              wrongAccountNo();
+             </script>' 
+              ;
+        }
+
+        elseif ($To_account != $To_account2)
+        {
+            echo '<script type="text/JavaScript">  
+              mismatchAccountNo();
+             </script>' 
+              ;
+        }
+
+        elseif ($Amount < 500 || $Amount > 20000)
+        {
+            echo '<script type="text/JavaScript">  
+              transferLimit();
+             </script>' 
+              ;
         }
 
         else

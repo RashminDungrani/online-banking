@@ -396,7 +396,7 @@
                                     <div class="card-body">
                                         <h4 class="header-title mb-4">Customers Review</h4>
 
-                                        <ul class="verti-timeline list-unstyled mb-0" data-simplebar style="max-height: 414px;">
+                                        <ul class="verti-timeline list-unstyled mb-0" data-simplebar style="max-height: 440px;">
                                             
                                             
 
@@ -419,7 +419,7 @@
                                                         else
                                                         {
                                                            $rating = '<div class="btn-toolbar justify-content-md-end" role="toolbar">
-                                                    <div class="btn-group ml-md-2 mb-3">
+                                                    <div class="btn-group ml-md-2 mb-3 mr-3">
                                                         <input type="hidden" class="rating" data-filled="mdi mdi-star text-primary" data-empty="mdi mdi-star-outline text-muted" data-readonly value="'.$row['hearts'].'"/>
                                                     </div>
                                                     </div>';
@@ -435,7 +435,7 @@
                                                     </div>
                                                     <div class="media-body">
                                                         <h5 class="font-size-14 mb-1">'.$full_name.'</h5>
-                                                        <p class="text-muted mb-0 font-size-13">Everyone realizes why a new common language.</p>
+                                                        <p class="text-muted mb-0 font-size-13">'.$row['feedback'].'</p>
                                                     </div>
 
                                                     '.$rating.'

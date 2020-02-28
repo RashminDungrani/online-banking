@@ -1,4 +1,18 @@
+<script type="text/javascript">
+  function wrongAuth()
+  {
+    Swal.fire({
+      title: "Login Failed",
+      text: "Admin Id or password is incorrect !",
+      icon: "error"
+    });
+  }
+  function rightAuth()
+  {
+    location.replace("http://localhost/online-banking/admin/dist/index.php");
+  }
 
+</script>
 <?php
 
   include('connect.php');
@@ -8,35 +22,13 @@
 
   
   session_start();
-  
-  if(isset($_REQUEST['btn_submit']))
-  {
-    $Admin_id = $_REQUEST["txt_adminid"];
-    $Password = $_REQUEST["txt_password"];
-    $query = "SELECT admin_id, password FROM tbl_admin WHERE admin_id = '$Admin_id' AND  password='$Password' ";
-    $result1 = mysqli_query($con,$query);
-    $row = mysqli_fetch_assoc($result1);
-    
-    if(mysqli_num_rows($result1) > 0 )
-    {
-      $_SESSION['s_admin_id'] = $Admin_id;
-      header("location:https://localhost/online-banking/admin/dist/index.php");
-    }
-    else
-    {
-      echo 'The username or password are incorrect!';
-      echo "ERROR: Could not able to execute $row. " . mysqli_error($con);
-      header("location:https://localhost/online-banking/admin/dist/pages-404.html");
-    }
-  
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Login</title>
+    <title>Admin Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       content="Premium Multipurpose Admin & Dashboard Template"
@@ -56,9 +48,14 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+     <!-- Sweet Alert-->
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body class="bg-primary bg-pattern">
+    <div class="home-btn d-none d-sm-block">
+            <a href="https://localhost/online-banking/site/dist/auth_login.php"><i class="mdi mdi-home-variant h2 text-white"></i></a>
+        </div>
     <div class="account-pages my-5 pt-5">
       <div class="container">
         <div class="row">
@@ -67,9 +64,10 @@
               <div clas="row">
                 <h5 class="font-size-20 text-white mb-4">
                   <img src="assets/images/favicon.ico" height="24" alt="logo" />
-                  Central Bank of India
+                  Online Banking
                 </h5>
               </div>
+              <h5 class="font-size-25 text-white mb-4">Only use for Admin</h5>
               <h5 class="font-size-16 text-white-50 mb-4">
                 A tradition of trust
               </h5>
@@ -84,9 +82,9 @@
               <div class="card-body p-4">
                 <div class="p-2">
                   <h5 class="mb-5 text-center">
-                    Sign in to continue to Net Banking.
+                    Sign in to continue to Online Banking.
                   </h5>
-                  <form class="form-horizontal">
+                  <form class="form-horizontal" method="post">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group mb-4">
@@ -174,6 +172,40 @@
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
 
+    <!-- Sweet Alerts js -->
+      <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+      <!-- Sweet alert init js-->
+      <script src="assets/js/pages/sweet-alerts.init.js"></script>
+
     <script src="assets/js/app.js"></script>
   </body>
 </html>
+
+<?php
+
+  if(isset($_REQUEST['btn_submit']))
+  {
+    $Admin_id = $_REQUEST["txt_adminid"];
+    $Password = $_REQUEST["txt_password"];
+    $query = "SELECT admin_id, password FROM tbl_admin WHERE admin_id = '$Admin_id' AND  password='$Password' ";
+    $result1 = mysqli_query($con,$query);
+    $row = mysqli_fetch_assoc($result1);
+
+    if(mysqli_num_rows($result1) > 0 )
+    {
+      $_SESSION['s_admin_id'] = $Admin_id;
+      header("location:https://localhost/online-banking/admin/dist/index.php");
+      echo '<script type="text/JavaScript">  
+              rightAuth();
+             </script>' 
+              ;
+    }
+    else
+    {
+      echo '<script type="text/JavaScript">  
+              wrongAuth();
+             </script>' 
+              ;
+    }
+  }
+?>
