@@ -315,8 +315,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.php">
-                                        <i class="mdi mdi-book-open-variant mr-2"></i>About
+                                    <a class="nav-link" href="FAQs.php">
+                                        <i class="mdi mdi-book-open-variant mr-2"></i>FAQs
                                     </a>
                                 </li>
 

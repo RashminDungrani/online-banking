@@ -32,10 +32,6 @@
    
     }
 
-    if(isset($_REQUEST['btn_send_money']))
-    {
-        print "Working";
-    }
     
     if(isset($_SESSION["s_account_no"]) && isset($_SESSION['s_login']))
     {
@@ -56,13 +52,6 @@
             $query_for_sender_details = "SELECT * FROM tbl_customer WHERE account_no = $sender_account_no";
             $result_sender_details = mysqli_query($con,$query_for_sender_details);
             $row_sender = mysqli_fetch_array($result_sender_details);
-
-            // update hasViewed in request_money to 1
-            if($row_request['hasViewed'] != 1)
-            {
-                $query_for_update_hasviewed = "UPDATE tbl_requests SET hasViewed = 1 WHERE request_id=$request_id";
-                $result_of_update = mysqli_query($con, $query_for_update_hasviewed) or die('SQL Error :: '.mysqli_error());
-            }
         }
         else {
             header('location: inbox.php');
@@ -356,8 +345,8 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.php">
-                                        <i class="mdi mdi-book-open-variant mr-2"></i>About
+                                    <a class="nav-link" href="FAQs.php">
+                                        <i class="mdi mdi-book-open-variant mr-2"></i>FAQs
                                     </a>
                                 </li>
 
