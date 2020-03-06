@@ -507,7 +507,7 @@
                                                             <a href="view_request_read.php?request_id='.$row['request_id'].'" class="title">'.$first_sender_name.' To '.$first_reciver_name.'</a>
                                                         </div>
                                                         <div class="col-mail col-mail-2">
-                                                            <a href="view_request_read.php?request_id='.$row['request_id'].'" class="subject"><span class="'.$badge_color.' badge mr-2">₹ '.$row['amount'].'</span>'.$row["message"].'
+                                                            <a href="view_request_read.php?request_id='.$row['request_id'].'" class="subject"><span class="'.$badge_color.' badge mr-2">&#x20b9; '.$row['amount'].'</span>'.$row["message"].'
                                                             </a>
                                                             <div class="date">'.$date_format.'</div>
                                                         </div>
@@ -565,7 +565,7 @@
                                                             <a href="view_request_read.php?request_id='.$row['request_id'].'" class="title">'.$first_sender_name.' To '.$first_reciver_name.'</a>
                                                         </div>
                                                         <div class="col-mail col-mail-2">
-                                                            <a href="view_request_read.php?request_id='.$row['request_id'].'" class="subject"><span class="'.$badge_color.' badge mr-2">₹ '.$row['amount'].'</span>'.$row["message"].'
+                                                            <a href="view_request_read.php?request_id='.$row['request_id'].'" class="subject"><span class="'.$badge_color.' badge mr-2">&#x20b9; '.$row['amount'].'</span>'.$row["message"].'
                                                             </a>
                                                             <div class="date">'.$date_format.'</div>
                                                         </div>

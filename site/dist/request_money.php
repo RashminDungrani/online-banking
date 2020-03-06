@@ -10,7 +10,26 @@
       timer: 1500
     }); 
   }
+
+  function accountSame()
+  {
+    Swal.fire({
+      title: "Can't Sent Request",
+      text: "username or password is incorrect !",
+      icon: "error"
+    });
+  }
+
+  function wrongAccount()
+  {
+    Swal.fire({
+      title: "Can't Sent Request",
+      text: "Account Number is not Registered",
+      icon: "error"
+    });
+  }
 </script>
+
 
 <?php
     include('connect.php');
@@ -53,6 +72,8 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <!-- Sweet Alert-->
+    <link href="assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
 
     </head>
 
@@ -452,7 +473,7 @@
                                 
                                 <div class="card mb-0">
                                     <div class="card-body">
-                                        <form class="custom-validation" action="#">
+                                        <form class="custom-validation" action="#" method="post">
                                             <div class="form-group">
                                                 <label>Account Number</label>
                                                 <div>
@@ -828,10 +849,11 @@
         <script src="assets/js/pages/email-summernote.init.js"></script>
 
         <!-- Sweet Alerts js -->
-        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+      <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+      <!-- Sweet alert init js-->
+      <script src="assets/js/pages/sweet-alerts.init.js"></script>
 
-        <!-- Sweet alert init js-->
-        <script src="assets/js/pages/sweet-alerts.init.js"></script>
+    <script src="assets/js/app.js"></script>
 
         <!-- parsleyjs -->
         <script src="assets/libs/parsleyjs/parsley.min.js"></script>
@@ -865,12 +887,20 @@
 
         if ($to_account == $Account_no)
         {
-            echo "You can not send request to self";
+            // echo "You can not send request to self";
+            echo '<script type="text/JavaScript">  
+              sameAccount();
+             </script>' 
+              ;
         }
         
         elseif ($result_to_account != 1) 
         {
-            echo "Account no " . $to_account . " not Available";
+            // echo "Account no " . $to_account . " not Available";
+            echo '<script type="text/JavaScript">  
+              wrongAccount();
+             </script>' 
+              ;
         }
         else
         {

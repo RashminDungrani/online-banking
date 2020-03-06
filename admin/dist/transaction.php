@@ -452,7 +452,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $credit_sum ?></h4>
+                                        <h4 class="m-0 align-self-center">&#x20b9; <?php echo $credit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -471,7 +471,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $debit_sum ?></h4>
+                                        <h4 class="m-0 align-self-center">&#x20b9; <?php echo $debit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -490,7 +490,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $total_bank_balance ?></h4>
+                                        <h4 class="m-0 align-self-center">&#x20b9; <?php echo $total_bank_balance ?></h4>
             
                                     </div>
                                 </div>
@@ -579,8 +579,8 @@
                                                             
                                                             <td>'.$trans_light.'
                                                             '.$row["trans_type"].'</td>
-                                                            <td>₹ '.$row["amount"].'</td>
-                                                            <td>₹ '.$row["account_bal"].'<br></td>
+                                                            <td>&#x20b9; '.$row["amount"].'</td>
+                                                            <td>&#x20b9; '.$row["account_bal"].'<br></td>
                                                     </tr>';
                                                    } 
                                                 ?>

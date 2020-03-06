@@ -453,7 +453,7 @@ if(isset($_REQUEST['btn_submit']))
                                         <div class="input-group">
                                             <input type="text" name="txt_amount" class="form-control" placeholder="10,000" aria-label="Recipient 's username" aria-describedby="basic-addon2" required>
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon2">₹</span>
+                                                <span class="input-group-text" id="basic-addon2">&#x20b9;</span>
                                             </div>
                                         </div>
                                     </div>

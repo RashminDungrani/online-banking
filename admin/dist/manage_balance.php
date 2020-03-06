@@ -769,7 +769,7 @@
                                                             </td>
                                                             <td>'.$row["gender"].'<br></td>
                                                             <td> '.$account_type.'</td>
-                                                            <td>₹ '.$account_bal.'<br></td>
+                                                            <td>&#x20b9; '.$account_bal.'<br></td>
                                                             <td></td>
                                                             <td>
                                                             <button type="button" name="btn_add" onclick="alertifyPromptAdd('.$account_no.');" class="btn btn-outline-success btn-sm">Add</button>

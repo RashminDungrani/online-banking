@@ -495,7 +495,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $credit_sum ?></h4>
+                                        <h4 class="m-0 align-self-center">&#x20b9; <?php echo $credit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -514,7 +514,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $debit_sum ?></h4>
+                                        <h4 class="m-0 align-self-center">&#x20b9; <?php echo $debit_sum ?></h4>
             
                                     </div>
                                 </div>
@@ -533,7 +533,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h4 class="m-0 align-self-center">₹ <?php echo $account_bal ?></h4>
+                                        <h4 class="m-0 align-self-center">&#x20b9; <?php echo $account_bal ?></h4>
             
                                     </div>
                                 </div>
@@ -585,7 +585,7 @@
                                                     <div class="input-group">
                                                         <input type="text" name="txt_amount" class="form-control" placeholder="10,000" aria-label="Recipient 's username"           aria-describedby="basic-addon2" required>
                                                         <div class="input-group-append">
-                                                            <span class="input-group-text" id="basic-addon2">₹</span>
+                                                            <span class="input-group-text" id="basic-addon2">&#x20b9;</span>
                                                         </div>
                                                     </div>
                                                 </div>

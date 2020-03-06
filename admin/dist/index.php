@@ -561,7 +561,7 @@
                                                             
                                                             <td>'.$row["mobile"].'</td>
                                                             <td> '.$row["email"].'</td>
-                                                            <td>₹ '.$account_bal.'<br></td>
+                                                            <td>&#x20b9; '.$account_bal.'<br></td>
                                                             <td> '.$account_type.'</td>
                                                     </tr>';
                                                    } 
