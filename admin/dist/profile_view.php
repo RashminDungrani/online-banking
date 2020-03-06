@@ -525,8 +525,10 @@
                                             
                                             
                                             
-                                            <button class="btn btn-primary" type="submit" name="btn_update" type="submit">Update</button>
-                                            <a href="index.php"><button class="btn btn-danger" type="button" name="btn_cancel" type="submit">Cancel</button></a>
+                                            <!-- <button class="btn btn-primary" type="submit" name="btn_update" type="submit">Update</button>
+                                            <a href="index.php"><button class="btn btn-danger" type="button" name="btn_cancel">Cancel</button></a> -->
+                                            <a href="index.php"><button class="btn btn-primary" type="button" name="btn_cancel" >Back</button></a>
+
 
                                             
                                         </div>

@@ -1,5 +1,14 @@
 <script type="text/javascript">
 
+function checkPurpose(val){
+    var element=document.getElementById('txt_purpose_hide');
+    if(val=='Select'||val=='Others')
+        element.style.display='block';
+    else  
+        element.style.display='none';
+}
+
+
   function sweetAlertSuccess()
   {
     Swal.fire({
@@ -145,6 +154,11 @@
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+
+        
+
+
 
     </head>
 
@@ -549,9 +563,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="header-title">Quick Transfer</h4>
-                                        <p class="card-title-desc">Parsley is a javascript form validation
-                                            library. It helps you provide your users with feedback on their form
-                                            submission before sending it to your server.</p>
+                                        <p class="card-title-desc"> </p>
         
                                         <form class="custom-validation">
                                             <div class="form-group">
@@ -597,7 +609,7 @@
                                                     <span>Purpose</span>
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
-								            				<select name="txt_purpose" class="select2 form-control custom-select" style="width: 100%;height:36px;" required>
+								            				<select name="txt_purpose" class="select2 form-control custom-select" style="width: 100%;height:36px;" onchange='checkPurpose(this.options[this.selectedIndex].value);' required>
                                                         	<option value="">Select</option>
                                                             <option value="Payment towords loan repayment">Payment towords loan repayment</option>
                                                             <option value="Deposite / Investment">Deposite / Investment</option>
@@ -607,6 +619,17 @@
                                                             <option value="Rent">Rent</option>
                                                             <option value="Others">Others</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3 align-items-center">
+                                                <div class="col-lg-4 col-md-12 text-right">
+                                                    <span style='display:none;'>Enter Purpose</span>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="input-group">
+                                                        <input type="text" id="txt_purpose_hide" name="txt_purpose" class="form-control" placeholder="Purpose of this transaction" aria-label="Recipient 's username"           aria-describedby="basic-addon2" style='display:none;'/>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
         

@@ -69,6 +69,15 @@
       timer: 1500
     }); 
   }
+  function notEnoughBal()
+  {
+    Swal.fire({
+      title: "Operation Failed",
+      text: "Not Have Enough Balance !",
+      icon: "error"
+    });
+  }
+  
 </script>
 <?php
     include('connect.php');
@@ -218,7 +227,10 @@
             // else Run  Below Code
             if ($Amount > $Acount_bal)
             {
-                echo "Cutomer Don't Have Sufficient Balance To Transfer";
+                echo '<script type="text/JavaScript">  
+              notEnoughBal();
+             </script>' 
+              ;
             }
             else
             {
@@ -231,13 +243,13 @@
             
             
                 // 2. add amount in Admin account
-                $query_for_Ben_Account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
+                $query_for_Ben_Account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$To_account";
                 $result = mysqli_query($con, $query_for_Ben_Account_bal) or die('SQL Error :: '.mysqli_error());
                 $row = mysqli_fetch_assoc($result);
                 $Acount_bal = $row['balance'];
             
                 $Account_bal = $Acount_bal + $Amount;
-                $query_for_update_Ben_Account_bal = "UPDATE tbl_balance SET balance=$Account_bal WHERE  account_no=$Account_no";
+                $query_for_update_Ben_Account_bal = "UPDATE tbl_balance SET balance=$Account_bal WHERE  account_no=$To_account";
                 $result = mysqli_query($con, $query_for_update_Ben_Account_bal) or die('SQL Error ::    '.mysqli_error());
             
             
