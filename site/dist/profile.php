@@ -413,6 +413,9 @@
                                       
                                         
                                         <form class="needs-validation" novalidate>
+                                        <div class="row col-md-6 mb-3 mt-3">
+                                            <h5>Account Number : <?php echo $Account_no; ?></h5>
+                                        </div>
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip01">First name</label>

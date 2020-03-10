@@ -84,6 +84,12 @@ function checkPurpose(val){
         $transaction_result = mysqli_query($con,$query_for_transactions);
         $no_of_transaction = mysqli_num_rows($transaction_result); # $no_of_transaction
 
+                // For Getting Different Types of values in page
+        $query_for_transactions_of_this_month = "SELECT * FROM tbl_transaction where account_no = $Account_no AND MONTH(trans_date) = MONTH(CURRENT_DATE()) AND YEAR(trans_date) = YEAR(CURRENT_DATE()) ";
+        $transaction_result_of_this_month = mysqli_query($con,$query_for_transactions_of_this_month);
+        $no_of_transaction_of_this_month = mysqli_num_rows($transaction_result_of_this_month); # $no_of_transaction
+
+
         // For getting Acount Balance
         $query_for_account_bal = "SELECT balance FROM tbl_balance WHERE account_no=$Account_no";
         $result_account_bal = mysqli_query($con, $query_for_account_bal);
@@ -109,6 +115,27 @@ function checkPurpose(val){
         }
         else {
             $debit_sum = 0;
+        }
+
+        
+        $query_credit_sum_this_month = "SELECT SUM(amount) as credit_sum_of_this_month FROM tbl_transaction where account_no = $Account_no and trans_type='CREDIT' and MONTH(trans_date) = MONTH(CURRENT_DATE()) AND YEAR(trans_date) = YEAR(CURRENT_DATE())";
+        $query_credit_sum_this_month_result = mysqli_query($con,$query_credit_sum_this_month);
+        $credit_sum_this_month = mysqli_fetch_assoc($query_credit_sum_this_month_result);
+        if (!empty($credit_sum_this_month['credit_sum_of_this_month'])) {
+            $credit_sum_of_this_month = $credit_sum_this_month['credit_sum_of_this_month'];
+        }
+        else {
+            $credit_sum_of_this_month = 0;
+        }
+
+        $query_debit_sum_this_month = "SELECT SUM(amount) as debit_sum_of_this_month FROM tbl_transaction where account_no = $Account_no and trans_type='DEBIT' and MONTH(trans_date) = MONTH(CURRENT_DATE()) AND YEAR(trans_date) = YEAR(CURRENT_DATE())";
+        $query_debit_sum_this_month_result = mysqli_query($con,$query_debit_sum_this_month);
+        $credit_sum_this_month = mysqli_fetch_assoc($query_debit_sum_this_month_result);
+        if (!empty($credit_sum_this_month['debit_sum_of_this_month'])) {
+            $debit_sum_of_this_month = $credit_sum_this_month['debit_sum_of_this_month'];
+        }
+        else {
+            $debit_sum_of_this_month = 0;
         }
         
 
@@ -491,7 +518,8 @@ function checkPurpose(val){
                                             </div>
                                         </div>
                                         <h4 class="m-0 align-self-center"><?php echo $no_of_transaction?></h4>
-            
+                                        
+                                        <p class="mb-0 mt-3 text-muted"><span class="text-dark"> <?php echo $no_of_transaction_of_this_month; ?> </span> Transaction From This Month</p>
                                     </div>
                                 </div>
                             </div>
@@ -510,7 +538,7 @@ function checkPurpose(val){
                                             </div>
                                         </div>
                                         <h4 class="m-0 align-self-center">&#x20b9; <?php echo $credit_sum ?></h4>
-            
+                                          <p class="mb-0 mt-3 text-muted"><span class="text-success">&#x20b9; <?php echo $credit_sum_of_this_month ?> <i class="mdi mdi-trending-up mr-1"></i></span> From This Month</p>
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +557,7 @@ function checkPurpose(val){
                                             </div>
                                         </div>
                                         <h4 class="m-0 align-self-center">&#x20b9; <?php echo $debit_sum ?></h4>
-            
+                                        <p class="mb-0 mt-3 text-muted"><span class="text-danger">&#x20b9; <?php echo $debit_sum_of_this_month ?> <i class="mdi mdi-trending-up mr-1"></i></span> From This Month</p>
                                     </div>
                                 </div>
                             </div>
@@ -548,7 +576,20 @@ function checkPurpose(val){
                                             </div>
                                         </div>
                                         <h4 class="m-0 align-self-center">&#x20b9; <?php echo $account_bal ?></h4>
-            
+                                        <?php 
+                                            $result_of_this_month = $credit_sum_of_this_month - $debit_sum_of_this_month;
+                                            if ($result_of_this_month < 0)
+                                            {
+                                                $echo_result_of_this_month =  '<p class="mb-0 mt-3 text-muted"><span class="text-danger">&#x20b9; '.$result_of_this_month.' <i class="mdi mdi-trending-up mr-1"></i></span> From This Month</p>';
+                                            }
+                                            else
+                                            {
+                                                $echo_result_of_this_month =  '<p class="mb-0 mt-3 text-muted"><span class="text-success">&#x20b9; '.$result_of_this_month.' <i class="mdi mdi-trending-up mr-1"></i></span> From This Month</p>';
+                                            }
+
+                                            echo $echo_result_of_this_month;
+                                        ?>
+                                        
                                     </div>
                                 </div>
             
@@ -627,7 +668,7 @@ function checkPurpose(val){
                                                 </div>
                                                 <div class="col-lg-4 col-md-12">
                                                     <div class="input-group">
-                                                        <input type="text" id="txt_purpose_hide" name="txt_purpose" class="form-control" placeholder="Purpose of this transaction" aria-label="Recipient 's username"           aria-describedby="basic-addon2" style='display:none;'/>
+                                                        <input type="text" id="txt_purpose_hide" name="txt_purpose_others" class="form-control" placeholder="Purpose of this transaction" aria-label="Recipient 's username"           aria-describedby="basic-addon2" style='display:none;'/>
                                                         
                                                     </div>
                                                 </div>
@@ -1129,6 +1170,13 @@ function checkPurpose(val){
             $Amount = $_REQUEST['txt_amount'];
             $Trans_type = "DEBIT";
             $Purpose = $_REQUEST['txt_purpose'];
+            if($Purpose == "" || $Purpose == "Others" ){
+                $Purpose = $_REQUEST['txt_purpose_others'];
+            }
+            else {
+                $Purpose = $_REQUEST['txt_purpose'];
+
+            }
             $To_account = $_REQUEST['txt_ben_account_no'];
 
             // $query_for_Account_no = "SELECT account_no FROM tbl_customer WHERE username='$Username'";

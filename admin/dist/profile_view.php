@@ -45,6 +45,11 @@
             $query_for_get_password = "SELECT password FROM tbl_account WHERE account_no = $Account_no";
             $result_password = mysqli_query($con, $query_for_get_password);
             $acc_password = mysqli_fetch_array($result_password)[0];
+
+            // Getting Account Username
+            $query_for_get_username = "SELECT username FROM tbl_account WHERE account_no = $Account_no";
+            $result_username = mysqli_query($con, $query_for_get_username);
+            $acc_username = mysqli_fetch_array($result_username)[0];
         }
         else
         {
@@ -426,6 +431,9 @@
                                       
                                         
                                         <form class="needs-validation" novalidate method="post">
+                                        <div class="row col-md-6 mb-3 mt-3">
+                                            <h5>Account Number : <?php echo $Account_no; ?></h5>
+                                        </div>
                                             <div class="row">
                                                 <div class="col-md-6 mb-3">
                                                 <label for="validationTooltip01">First name</label>
@@ -503,19 +511,23 @@
 
 
 
-                                            
                                                 <div class="col-md-4 mb-3">
-                                                  <label>Password</label>
-                                                    <input type="password" name="txt_password" id="pass2" class="form-control" value="<?php echo $acc_password?>" required
+                                                  <label>Username</label>
+                                                    <input type="text" name="txt_username" class="form-control" value="<?php echo $acc_username?>" required
                                                             placeholder="Password"/>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
+                                                  <label>Password</label>
+                                                    <input type="text" name="txt_password" id="pass2" class="form-control" value="<?php echo $acc_password?>" required
+                                                            placeholder="Password"/>
+                                                </div>
+                                                <!-- <div class="col-md-4 mb-3">
                                                   <label>Confirm Password</label>
 
                                                     <input type="password" name="txt_repassword" class="form-control" value="<?php echo $acc_password?>" required
                                                             data-parsley-equalto="#pass2"
                                                             placeholder="Re-Type Password"/>
-                                                </div>
+                                                </div> -->
                                             
                                                 
                                           
@@ -527,7 +539,7 @@
                                             
                                             <!-- <button class="btn btn-primary" type="submit" name="btn_update" type="submit">Update</button>
                                             <a href="index.php"><button class="btn btn-danger" type="button" name="btn_cancel">Cancel</button></a> -->
-                                            <a href="index.php"><button class="btn btn-primary" type="button" name="btn_cancel" >Back</button></a>
+                                            <a href="index.php"><button class="btn btn-primary" type="button" name="btn_cancel" >OK</button></a>
 
 
                                             
