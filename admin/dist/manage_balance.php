@@ -766,6 +766,16 @@
                                                         $query_for_account_type = "SELECT account_type FROM tbl_account_type WHERE account_no=$account_no";
                                                         $result_account_type = mysqli_query($con, $query_for_account_type);
                                                         $account_type = mysqli_fetch_array($result_account_type)[0];
+                                                        if ($account_no == 338509629)
+                                                        {
+                                                            $AddReduceBtn = '';
+                                                        }
+                                                        else
+                                                        {
+                                                            $AddReduceBtn = '<button type="button" name="btn_add" onclick="alertifyPromptAdd('.$account_no.');" class="btn btn-outline-success btn-sm">Add</button>
+                                                            <button type="button" onclick="alertifyPromptReduce('.$account_no.');" class="btn btn-outline-danger btn-sm">Reduce</button>
+                                                            <div class="col-sm-4">';
+                                                        }
                                                        echo 
                                                        '<tr>
                                                             <td>
@@ -784,9 +794,7 @@
                                                             <td>&#x20b9; '.$account_bal.'<br></td>
                                                             <td></td>
                                                             <td>
-                                                            <button type="button" name="btn_add" onclick="alertifyPromptAdd('.$account_no.');" class="btn btn-outline-success btn-sm">Add</button>
-                                                            <button type="button" onclick="alertifyPromptReduce('.$account_no.');" class="btn btn-outline-danger btn-sm">Reduce</button>
-                                                            <div class="col-sm-4">
+                                                            '.$AddReduceBtn.'
                                                 
                                             </div>
                                                         </td>

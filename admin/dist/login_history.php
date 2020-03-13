@@ -470,7 +470,7 @@
                                                 <?php
 
                                                     // For Getting All Customers Details
-                                                    $query_for_customer_details = "SELECT * FROM tbl_login_history";
+                                                    $query_for_customer_details = "SELECT * FROM tbl_login_history ORDER BY login_time DESC";
                                                     $customers_details = mysqli_query($con,$query_for_customer_details);
                                                     // $row_customer_detail = mysqli_fetch_array($customers_details);
 
