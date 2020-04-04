@@ -372,7 +372,12 @@
                                     <span>View All Requests</span>
                                 </a>
                             </li>
-
+                            <!-- <li>
+                                <a href="analysis.php" class="waves-effect">
+                                    <i class="mdi mdi-chart-areaspline-variant"></i>
+                                    <span>Analysis</span>
+                                </a>
+                            </li> -->
                             <!-- <li>
                                 <a href="manage_feedback.php" class="waves-effect">
                                     <i class="mdi mdi-heart-outline"></i>

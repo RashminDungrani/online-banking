@@ -141,7 +141,7 @@
                                                 <label for="validationTooltip03">Address</label>
                                                 <input type="text" name="txt_address" class="form-control" id="validationTooltip03" placeholder="Address" required>
                                                 <div class="invalid-feedback">
-                                                    Please provide a valid city.
+                                                    Please provide a valid Address.
                                                 </div>
                                                 </div>
                                                 <div class="col-md-3 mb-3">

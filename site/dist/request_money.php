@@ -28,6 +28,15 @@
       icon: "error"
     });
   }
+
+  function amountLimit()
+  {
+    Swal.fire({
+      title: "Can't Sent Request",
+      text: "Limit of Request money is 500 to 20,000",
+      icon: "error"
+    });
+  }
 </script>
 
 
@@ -899,6 +908,13 @@
             // echo "Account no " . $to_account . " not Available";
             echo '<script type="text/JavaScript">  
               wrongAccount();
+             </script>' 
+              ;
+        }
+        elseif($amount > 20000 || $amount < 500)
+        {
+            echo '<script type="text/JavaScript">  
+              amountLimit();
              </script>' 
               ;
         }

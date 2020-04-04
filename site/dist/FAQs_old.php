@@ -493,11 +493,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">What is online banking ?<br></h5>
-                                                                <p class="text-muted"><span class="js-about-item-abstr">Online banking, also known as internet
- banking or web banking, is an electronic payment system that enables 
-customers of a bank or other financial institution to conduct a range of
- financial transactions through the financial institution's website</span></p>
+                                                                <h5 class="font-size-15">What is Lorem Ipsum?</h5>
+                                                                <p class="text-muted">New common language will be more simple and regular than the existing European languages. It will be as simple as occidental.</p>
                                                             </div>
                                                         </div>
                                                         <div class="faq-box media mt-4">
@@ -507,10 +504,8 @@ customers of a bank or other financial institution to conduct a range of
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">How to transfer money ?<br></h5>
-                                                                <p class="text-muted">
-                                                                <ol><li class="text-muted">Log in to the account and go to Quick Transfer<br></li><li class="text-muted">Enter valid beneficial account number, money and purpose of transaction.<br></li><li class="text-muted">Remember you can send up to 20,000 per time and minimum transaction limit is 500.<br></li></ol>
-</p>
+                                                                <h5 class="font-size-15">Where does it come from?</h5>
+                                                                <p class="text-muted">Everyone realizes why a new common language would be desirable one could refuse to pay expensive translators.</p>
                                                             </div>
                                                         </div>
                                                         <div class="faq-box media mt-4">
@@ -520,8 +515,8 @@ customers of a bank or other financial institution to conduct a range of
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">How to update my profile ?<br></h5>
-                                                                <p><ol><li class="text-muted">Log in to the account and go to Profile<br></li><li class="text-muted">You can edit your information and hit update button to update profile<br></li></ol></p>
+                                                                <h5 class="font-size-15">Where can I get some?</h5>
+                                                                <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -533,11 +528,8 @@ customers of a bank or other financial institution to conduct a range of
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">How can i send money request to somebody ?</h5>
-                                                                <p>
-                                                                <ol><li class="text-muted">Log in to the account and go to Request Money<br></li><li class="text-muted">Click to new request and enter Ben. Account no. and amount and hit enter.<br></li><li class="text-muted">Remember you can send money request up to 20,000 per time and minimum transaction limit is 500.</li></ol>
-
-</p>
+                                                                <h5 class="font-size-15">Why do we use it?</h5>
+                                                                <p class="text-muted">Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
                                                             </div>
                                                         </div>
                                                         <div class="faq-box media mt-4">
@@ -547,10 +539,8 @@ customers of a bank or other financial institution to conduct a range of
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">How can i approve somebody's request ?</h5>
-                                                                <p>
-                                                                <ol><li class="text-muted">Log in to the account and go to Request Money<br></li><li class="text-muted">in Inbox you can see all request you receives<br></li><li class="text-muted">open request that you want to transfer and click to send button to approve request.<br></li></ol>
-</p>
+                                                                <h5 class="font-size-15">Where can I get some?</h5>
+                                                                <p class="text-muted">To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental</p>
                                                             </div>
                                                         </div>
                                                         <div class="faq-box media mt-4">
@@ -560,9 +550,8 @@ customers of a bank or other financial institution to conduct a range of
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">What is charge for Transfer money ?<br></h5>
-                                                                <p class="text-muted">There is no charge for any transaction online. Fast and easy
-Quickly pay friends, family or anyone.<br></p>
+                                                                <h5 class="font-size-15">Where can I get some?</h5>
+                                                                <p class="text-muted">If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages.</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -571,7 +560,16 @@ Quickly pay friends, family or anyone.<br></p>
                                             </div>
                                         </div>
 
-                                        
+                                        <div class="row justify-content-center">
+                                            <div class="col-lg-5">
+                                                <div class="text-center mt-5 mb-4">
+                                                    <h5>Can't find what you are looking for?</h5>
+                                                    <p class="text-muted mb-4">To achieve this, it would be necessary to have uniform grammar, pronunciation and more common words if several languages coalesce</p>
+                                                    <button type="button" class="btn btn-primary mt-1 mr-1 waves-effect waves-light">Email Us</button>
+                                                    <button type="button" class="btn btn-success mt-1 waves-effect waves-light">Send us a tweet</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- end row -->
 
                                         
@@ -594,7 +592,7 @@ Quickly pay friends, family or anyone.<br></p>
 
         <!-- Right Sidebar -->
         <div class="right-bar">
-            <div data-simplebar="init" class="h-100"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
+            <div data-simplebar class="h-100">
     
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-tabs-custom rightbar-nav-tab nav-justified" role="tablist">
@@ -602,12 +600,12 @@ Quickly pay friends, family or anyone.<br></p>
                         <a class="nav-link py-3 active" data-toggle="tab" href="#chat-tab" role="tab">
                             <i class="mdi mdi-message-text font-size-22"></i>
                         </a>
-                    <br></li>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link py-3" data-toggle="tab" href="#tasks-tab" role="tab">
                             <i class="mdi mdi-format-list-checkbox font-size-22"></i>
                         </a>
-                    <br></li>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link py-3" data-toggle="tab" href="#settings-tab" role="tab">
                             <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
@@ -657,7 +655,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-10.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-10.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status online"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -672,7 +670,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-1.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-1.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status away"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -687,7 +685,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-9.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-9.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status busy"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -706,7 +704,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-2.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-2.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status online"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -721,7 +719,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-4.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status away"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -736,7 +734,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-5.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status online"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -751,7 +749,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-6.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status online"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -766,7 +764,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-7.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status busy"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -781,7 +779,7 @@ Quickly pay friends, family or anyone.<br></p>
                             <a href="javascript: void(0);" class="text-reset notification-item">
                                 <div class="media">
                                     <div class="position-relative mr-3">
-                                        <img src="Feedback_files/avatar-8.jpg" class="rounded-circle avatar-xs" alt="user-pic">
+                                        <img src="assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="user-pic">
                                         <i class="mdi mdi-circle user-status away"></i>
                                     </div>
                                     <div class="media-body overflow-hidden">
@@ -858,13 +856,13 @@ Quickly pay friends, family or anyone.<br></p>
                         <div class="p-4">
                             <h6 class="font-weight-medium">Online Status</h6>
                             <div class="custom-control custom-switch mb-1">
-                                <input type="checkbox" class="custom-control-input" id="settings-check1" name="settings-check1" checked="checked">
+                                <input type="checkbox" class="custom-control-input" id="settings-check1" name="settings-check1" checked="">
                                 <label class="custom-control-label font-weight-normal" for="settings-check1">Show your status to all</label>
                             </div>
 
                             <h6 class="font-weight-medium mt-4">Auto Updates</h6>
                             <div class="custom-control custom-switch mb-1">
-                                <input type="checkbox" class="custom-control-input" id="settings-check2" name="settings-check2" checked="checked">
+                                <input type="checkbox" class="custom-control-input" id="settings-check2" name="settings-check2" checked="">
                                 <label class="custom-control-label font-weight-normal" for="settings-check2">Keep up to date</label>
                             </div>
 
@@ -881,7 +879,7 @@ Quickly pay friends, family or anyone.<br></p>
                         <div class="p-4">
                             <h6 class="font-weight-medium">Application Alerts</h6>
                             <div class="custom-control custom-switch mb-1">
-                                <input type="checkbox" class="custom-control-input" id="settings-check4" name="settings-check4" checked="checked">
+                                <input type="checkbox" class="custom-control-input" id="settings-check4" name="settings-check4" checked="">
                                 <label class="custom-control-label font-weight-normal" for="settings-check4">Email Notifications</label>
                             </div>
 
@@ -900,7 +898,7 @@ Quickly pay friends, family or anyone.<br></p>
                     </div>
                 </div>
 
-            </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 1039px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 736px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div> <!-- end slimscroll-menu-->
+            </div> <!-- end slimscroll-menu-->
         </div>
         <!-- /Right-bar -->
 
@@ -908,35 +906,60 @@ Quickly pay friends, family or anyone.<br></p>
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
-        <script src="Feedback_files/jquery.js"></script>
-        <script src="Feedback_files/bootstrap.js"></script>
-        <script src="Feedback_files/metisMenu.js"></script>
-        <script src="Feedback_files/simplebar.js"></script>
-        <script src="Feedback_files/waves.js"></script>
-        <script src="Feedback_files/bootstrap-maxlength.js"></script>
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
         <!-- Summernote js -->
-        <script src="Feedback_files/summernote-bs4.js"></script>
+        <script src="assets/libs/summernote/summernote-bs4.min.js"></script>
 
         <!-- Bootstrap rating js -->
-        <script src="Feedback_files/bootstrap-rating.js"></script>
+        <script src="assets/libs/bootstrap-rating/bootstrap-rating.min.js"></script>
 
-        <script src="Feedback_files/rating-init.js"></script>
+        <script src="assets/js/pages/rating-init.js"></script>
         <!-- form advanced init -->
-        <script src="Feedback_files/form-advanced.js"></script>
+        <script src="assets/js/pages/form-advanced.init.js"></script>
 
         <!-- Sweet Alerts js -->
-        <script src="Feedback_files/sweetalert2.js"></script>
+        <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
         <!-- Sweet alert init js-->
-        <script src="Feedback_files/sweet-alerts.js"></script>
+        <script src="assets/js/pages/sweet-alerts.init.js"></script>
         
 
         <!-- email summernote init -->
-        <script src="Feedback_files/email-summernote.js"></script>
+        <script src="assets/js/pages/email-summernote.init.js"></script>
 
-        <script src="Feedback_files/app.js"></script>
+        <script src="assets/js/app.js"></script>
 
-    
+    </body>
+</html>
+<?php
+    if(isset($_REQUEST['btn_submit']))
+    {
+        $text_feedback = $_REQUEST['txt_feedback'];
+        $heart_rating = $_REQUEST['txt_heart_rate'];
+        
+        $current_time = date("Y-m-d H:i:s");
 
-</body></html>
+        if ($heart_rating == NULL)
+        {
+        $query_for_insert_feeback = "INSERT INTO tbl_feedback (account_no, feedback, time) VALUES ($Account_no, '$text_feedback', '$current_time')";
+
+        }
+        else
+        {
+            $query_for_insert_feeback = "INSERT INTO tbl_feedback (account_no, feedback, hearts, time) VALUES ($Account_no, '$text_feedback', $heart_rating, '$current_time')";
+        }
+        $result =  mysqli_query($con, $query_for_insert_feeback) or die('SQL Error :: '.mysqli_error());
+         echo '<script type="text/JavaScript">  
+              sweetAlertSuccess();
+             </script>' 
+              ;
+
+
+    }
+?>
