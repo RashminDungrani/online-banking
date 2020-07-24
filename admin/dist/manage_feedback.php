@@ -10,7 +10,7 @@
         $result_admin = mysqli_query($con, $query_admin);
         $row_admin_detail = mysqli_fetch_array($result_admin);
 
-        // $no_of_customer
+        // $no_of_feedback
         $query_for_no_of_feedback = "SELECT * FROM tbl_feedback";
         $result_no_of_feedback = mysqli_query($con,$query_for_no_of_feedback);
         $no_of_feedback = mysqli_num_rows($result_no_of_feedback);
