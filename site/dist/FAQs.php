@@ -493,8 +493,8 @@
                                                                 </span>
                                                             </div>
                                                             <div class="media-body">
-                                                                <h5 class="font-size-15">What is online banking ?<br></h5>
-                                                                <p class="text-muted"><span class="js-about-item-abstr">Online banking, also known as internet
+                                                                <h5 class="font-size-15">What is DR BANK ?<br></h5>
+                                                                <p class="text-muted"><span class="js-about-item-abstr">DR BANK, also known as internet
  banking or web banking, is an electronic payment system that enables 
 customers of a bank or other financial institution to conduct a range of
  financial transactions through the financial institution's website</span></p>

@@ -52,7 +52,7 @@
               <div clas="row">
                 <h5 class="font-size-20 text-white mb-3">
                   <img src="assets/images/favicon.ico" height="24" alt="logo" />
-                  Central Bank of India
+                  DR BANK
                 </h5>
               </div>
               <h5 class="font-size-16 text-white-50 mb-3">

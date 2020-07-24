@@ -75,7 +75,7 @@ include('connect.php');
               <div clas="row">
                 <h5 class="font-size-20 text-white mb-4">
                   <img src="assets/images/favicon.ico" height="24" alt="logo" />
-                  Online Banking
+                  DR BANK
                 </h5>
               </div>
               <h5 class="font-size-16 text-white-50 mb-4">
@@ -92,7 +92,7 @@ include('connect.php');
               <div class="card-body p-4">
                 <div class="p-2">
                   <h5 class="mb-5 text-center">
-                    Sign in to continue to Online Banking.
+                    Sign in to continue to DR BANK.
                   </h5>
                   <form class="form-horizontal" method="post">
                     <div class="row">
