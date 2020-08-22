@@ -50,6 +50,6 @@ Customer site on : http://localhost/online-banking/admin/dist/
 
 ## 📄 Screenshot <a name = "screenshots"></a>
 
-- [screenshots](https://github.com/rashmindungrani/online-banking/screenshots)
+- [screenshots](https://github.com/RashminDungrani/online-banking/tree/master/screenshots)
 
 ### Show some 💗 and star the repo to support the project
