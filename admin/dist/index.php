@@ -10,10 +10,49 @@
         $result_admin = mysqli_query($con, $query_admin);
         $row_admin_detail = mysqli_fetch_array($result_admin);
 
-        // For Getting All Customers Details
-        // $query_for_customer_details = "SELECT * FROM tbl_customer";
-        // $customers_details = mysqli_query($con,$query_for_customer_details);
-        // $row_customer_detail = mysqli_fetch_array($customers_details);
+        // Initialize variables
+        $row_admin_detail = null;
+        $no_of_customer = 0;
+        $debit_count = 0;
+        $credit_count = 0;
+        $total_bank_balance = 0;
+
+        // Fetch admin details
+        $admin_query = "SELECT * FROM admin WHERE id = ?";
+        if ($stmt = $con->prepare($admin_query)) {
+            $stmt->bind_param("i", $admin_id); // Assume $admin_id is set earlier
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row_admin_detail = $result->fetch_assoc();
+            }
+            $stmt->close();
+        }
+
+        // Fetch customer count
+        $customer_query = "SELECT COUNT(*) as count FROM customers";
+        if ($result = $con->query($customer_query)) {
+            $row = $result->fetch_assoc();
+            $no_of_customer = $row['count'];
+        }
+
+        // Fetch debit and credit counts
+        $transaction_query = "SELECT 
+            SUM(CASE WHEN transaction_type = 'debit' THEN 1 ELSE 0 END) as debit_count,
+            SUM(CASE WHEN transaction_type = 'credit' THEN 1 ELSE 0 END) as credit_count
+            FROM transactions";
+        if ($result = $con->query($transaction_query)) {
+            $row = $result->fetch_assoc();
+            $debit_count = $row['debit_count'];
+            $credit_count = $row['credit_count'];
+        }
+
+        // Fetch total bank balance
+        $balance_query = "SELECT SUM(balance) as total_balance FROM accounts";
+        if ($result = $con->query($balance_query)) {
+            $row = $result->fetch_assoc();
+            $total_bank_balance = $row['total_balance'];
+        }
 
         // $no_of_customer
         $query_for_no_of_customer = "SELECT * FROM tbl_customer";
