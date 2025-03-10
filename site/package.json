@@ -64,7 +64,7 @@
         "gmaps": "^0.4.24",
         "inputmask": "^4.0.9",
         "ion-rangeslider": "^2.3.0",
-        "jquery": "3.4.1",
+        "jquery": "3.5.0",
         "jquery-countdown": "^2.2.0",
         "jquery-knob": "^1.2.11",
         "jquery-sparkline": "^2.4.0",
